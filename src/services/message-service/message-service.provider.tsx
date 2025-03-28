@@ -1,4 +1,4 @@
-import type { Centrifuge, PublicationContext, State, StateContext } from 'centrifuge';
+import type { Centrifuge, PublicationContext, StateContext } from 'centrifuge';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 export interface MessageServiceProviderProps {
@@ -22,6 +22,7 @@ export const MessageServiceProvider = (props: PropsWithChildren<MessageServicePr
   }, [centrifuge]);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (connectionState !== 'connected' || !channel) return;
     const subscription = centrifuge.newSubscription(channel);
     subscription.on('publication', handler);
