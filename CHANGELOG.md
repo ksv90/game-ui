@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.3](https://github.com/ksv90/keno-ui/compare/v0.0.2...v0.0.3) (2025-03-28)
+
+
+### Bug Fixes
+
+* deploy workflow added ([540e5ee](https://github.com/ksv90/keno-ui/commit/540e5ee5f233fb2329c8d3a7736479e7d4a009ec))
+* deploy workflow added ([13bb4ca](https://github.com/ksv90/keno-ui/commit/13bb4cafd08e5b1d6a1048633cba40d847ed991b))
+
 ## [0.0.2](https://github.com/ksv90/keno-ui/compare/v0.0.1...v0.0.2) (2025-03-28)
 
 
