@@ -1,0 +1,10 @@
+{
+  "extends": "./node_modules/@ksv90/tools/packs/typescript/tsconfig.json",
+  "include": ["."],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}

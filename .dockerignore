@@ -1,0 +1,5 @@
+.pnpm-store
+.vscode
+.git
+dist
+node_modules
