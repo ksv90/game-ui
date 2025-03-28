@@ -1,5 +1,5 @@
 import { parse } from '@valibot/valibot';
-import { Centrifuge, PublicationContext } from 'centrifuge';
+import type { Centrifuge, PublicationContext } from 'centrifuge';
 import { PropsWithChildren } from 'react';
 
 import { RoomMessage } from '../schemes';

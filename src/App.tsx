@@ -1,6 +1,6 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { type IEmitterLite } from '@ksv90/decorators';
-import { type Centrifuge } from 'centrifuge';
+import type { Centrifuge } from 'centrifuge';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { ColorModeProvider, ErrorBoundary, RoomMessagesProvider, UserMessagesProvider } from './providers';

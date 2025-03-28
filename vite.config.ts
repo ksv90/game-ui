@@ -4,15 +4,22 @@ import { defineConfig } from 'vite';
 import dtsPlugin from 'vite-plugin-dts';
 
 export default defineConfig({
+  build: {
+    modulePreload: false,
+    target: 'esnext',
+    minify: true,
+    cssCodeSplit: false,
+    rollupOptions: {
+      input: 'src/main.ts',
+    },
+  },
   server: {
     cors: {
       origin: '*',
     },
   },
   plugins: [
-    reactPlugin({
-      babel: { plugins: [['@babel/plugin-proposal-decorators', { loose: true, version: '2022-03' }]] },
-    }),
+    reactPlugin(),
     federationPlugin({
       name: 'keno-ui',
       filename: 'index.js',
@@ -24,10 +31,4 @@ export default defineConfig({
     }),
     dtsPlugin({outDir: './dist/types', entryRoot: 'src'}),
   ],
-  build: {
-    modulePreload: false,
-    target: 'esnext',
-    minify: false,
-    cssCodeSplit: false,
-  },
 });
