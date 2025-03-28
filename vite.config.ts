@@ -29,6 +29,6 @@ export default defineConfig({
       },
       shared: ['react'],
     }),
-    dtsPlugin({outDir: './dist/types', entryRoot: 'src'}),
+    dtsPlugin({ outDir: './dist/types', entryRoot: 'src' }),
   ],
 });
