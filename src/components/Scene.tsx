@@ -1,7 +1,7 @@
 import { Button, Flex } from '@chakra-ui/react';
 import { PropsWithChildren, useState } from 'react';
 
-import { Ball } from './Ball';
+import { Ball } from './ball';
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;

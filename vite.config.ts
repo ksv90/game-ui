@@ -18,11 +18,11 @@ export default defineConfig({
       filename: 'index.js',
       exposes: {
         './components': './src/components',
-        './app': './src/App',
+        './app': './src/app',
       },
       shared: ['react'],
     }),
-    dtsPlugin({ entryRoot: 'src', rollupTypes: true }),
+    dtsPlugin({outDir: './dist/types', entryRoot: 'src'}),
   ],
   build: {
     modulePreload: false,

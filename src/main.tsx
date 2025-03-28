@@ -2,7 +2,7 @@ import { Centrifuge } from 'centrifuge';
 import { createRoot } from 'react-dom/client';
 
 import { Connector, Keno } from './game/';
-import { App } from './App';
+import { App } from './app';
 import { Game } from './components';
 
 const ROOT_ID = 'root';
