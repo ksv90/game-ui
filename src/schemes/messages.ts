@@ -25,6 +25,12 @@ export type RoundStartMessage = InferOutput<typeof RoundStartMessage>;
 export const RoundCompleteMessage = object({
   type: literal('round-complete'),
   numbers: array(number()),
+  wins: array(
+    object({
+      userName: string(),
+      win: number(),
+    }),
+  ),
 });
 
 export type RoundCompleteMessage = InferOutput<typeof RoundCompleteMessage>;
@@ -58,6 +64,13 @@ export const BalanceUpdateMessage = object({
 
 export type BalanceUpdateMessage = InferOutput<typeof BalanceUpdateMessage>;
 
+export const WinMessage = object({
+  type: literal('win'),
+  win: number(),
+});
+
+export type WinMessage = InferOutput<typeof WinMessage>;
+
 export const RoomMessage = union([
   TicketCreateMessage,
   TicketCancelMessage,
@@ -69,6 +82,6 @@ export const RoomMessage = union([
 
 export type RoomMessage = InferOutput<typeof RoomMessage>;
 
-export const UserMessage = union([BetUpdateMessage, BalanceUpdateMessage]);
+export const UserMessage = union([BetUpdateMessage, BalanceUpdateMessage, WinMessage]);
 
 export type UserMessage = InferOutput<typeof UserMessage>;

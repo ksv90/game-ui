@@ -1,6 +1,5 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
-
-import { useBetService } from '../services';
+import { useBetService } from '@ui/providers';
 
 export function Bet() {
   const { bet, changeBet } = useBetService();

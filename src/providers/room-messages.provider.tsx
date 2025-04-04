@@ -1,11 +1,10 @@
+import { Ticket, ticketTransform } from '@ui/helpers';
 import { parse } from '@valibot/valibot';
 import type { Centrifuge, PublicationContext } from 'centrifuge';
 import { PropsWithChildren } from 'react';
 
 import { RoomMessage } from '../schemes';
-import { MessageServiceProvider } from '../services';
-import { ticketTransform } from '../transforms';
-import { Ticket } from '../types';
+import { MessageServiceProvider } from './message-service';
 
 export interface RoomMessagesProviderGame {
   addTickets(...tickets: Ticket[]): void;
@@ -51,8 +50,10 @@ export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProvid
       }
 
       case 'round-complete': {
-        const { numbers } = roomMessage;
+        const { numbers, wins } = roomMessage;
         game.roundComplete(numbers);
+        // eslint-disable-next-line no-console
+        console.log('win', wins);
         break;
       }
 

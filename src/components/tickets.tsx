@@ -1,7 +1,6 @@
 import { CloseButton, Flex, Text } from '@chakra-ui/react';
+import { Ticket } from '@ui/helpers';
 import { MouseEventHandler, PropsWithChildren } from 'react';
-
-import { Ticket } from '../types';
 
 export interface TicketsProps {
   readonly removeAvailable: boolean;

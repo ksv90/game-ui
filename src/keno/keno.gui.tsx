@@ -1,15 +1,17 @@
 import { Flex } from '@chakra-ui/react';
-import { PropsWithChildren } from 'react';
+import { Content, Scene } from '@ui/components';
+import { useBetService, useConnectorService, useStateService, useTicketService } from '@ui/providers';
+import { PropsWithChildren, useEffect } from 'react';
 
-import { useBetService, useConnectorService, useStateService, useTicketService } from '../services';
-import { Content } from './content';
-import { Scene } from './scene';
-
-export function Game(_props: PropsWithChildren) {
-  const { ticketCreate, ticketCancel } = useConnectorService();
+export function KenoGui(_props: PropsWithChildren) {
+  const { getSessionData, ticketCreate, ticketCancel } = useConnectorService();
   const { bet } = useBetService();
   const { removeTickets } = useTicketService();
   const { state } = useStateService();
+
+  useEffect(() => {
+    getSessionData();
+  }, [getSessionData]);
 
   const betHandler = (numbers: readonly number[]) => {
     ticketCreate(bet, numbers);

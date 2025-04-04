@@ -1,5 +1,5 @@
 {
-  "name": "@ksv90/keno-ui",
+  "name": "@ksv90/game-ui",
   "version": "0.0.1",
   "type": "module",
   "keywords": [],
@@ -8,6 +8,7 @@
   "files": [
     "/dist/types"
   ],
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "dev": "vite --host --mode dev --port ${PORT:-2173}",
     "build": "vite build",

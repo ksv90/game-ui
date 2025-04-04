@@ -1,4 +1,5 @@
-import { ServerTicket } from './schemes';
+import { ServerTicket } from '@ui/schemes';
+
 import { Ticket } from './types';
 
 export const ticketTransform = (serverTicket: ServerTicket): Ticket => ({

@@ -1,8 +1,7 @@
+import { Ticket, ticketTransform } from '@ui/helpers';
+import { ServerTicket } from '@ui/schemes';
 import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
-import { ServerTicket } from '../../schemes';
-import { ticketTransform } from '../../transforms';
-import { Ticket } from '../../types';
 import { TicketService, TicketServiceContext } from './ticket-service.context';
 import { ticketServiceReducer } from './ticket-service.reducer';
 

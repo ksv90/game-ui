@@ -5,6 +5,13 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ui/helpers": ["./src/helpers"],
+      "@ui/components": ["./src/components"],
+      "@ui/providers": ["./src/providers"],
+      "@ui/schemes": ["./src/schemes"]
+    }
   }
 }
