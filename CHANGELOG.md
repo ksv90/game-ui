@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.7](https://github.com/ksv90/keno-ui/compare/v0.0.6...v0.0.7) (2025-04-04)
+
+
+### Bug Fixes
+
+* structure changed ([40f46fb](https://github.com/ksv90/keno-ui/commit/40f46fb6ecbe3eaf280f8c037234c93c0ed99961))
+* structure changed ([f4d872f](https://github.com/ksv90/keno-ui/commit/f4d872f8f81c0b4318f74a3769ee14495b2029fb))
+* version ([53e3ec8](https://github.com/ksv90/keno-ui/commit/53e3ec871297b37dba5ba6dd5b2fcdab2f1db0b4))
+
 ## [0.0.6](https://github.com/ksv90/keno-ui/compare/v0.0.5...v0.0.6) (2025-03-29)
 
 
