@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
+import { useStateService, useTicketService } from '@ui/providers';
 import { PropsWithChildren } from 'react';
 
-import { useStateService, useTicketService } from '../services';
 import { Balance } from './balance';
 import { Bet } from './bet';
 import { Tickets } from './tickets';

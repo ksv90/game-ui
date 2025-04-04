@@ -1,9 +1,9 @@
+import { UserMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
 import type { Centrifuge, PublicationContext } from 'centrifuge';
 import { PropsWithChildren } from 'react';
 
-import { UserMessage } from '../schemes';
-import { MessageServiceProvider } from '../services';
+import { MessageServiceProvider } from './message-service';
 
 export interface UserMessagesProviderGame {
   changeBet(value: number): void;
@@ -31,6 +31,11 @@ export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProvid
         const { balance } = userMessage;
         game.updateBalance(balance);
         break;
+      }
+      case 'win': {
+        const { win } = userMessage;
+        // eslint-disable-next-line no-console
+        console.log('win', win);
       }
     }
   };

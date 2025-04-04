@@ -1,6 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-
-import { useBalanceService } from '../services';
+import { useBalanceService } from '@ui/providers';
 
 export function Balance() {
   const { balance } = useBalanceService();

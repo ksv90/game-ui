@@ -1,6 +1,5 @@
+import { Ticket } from '@ui/helpers';
 import { createContext, useContext } from 'react';
-
-import { Ticket } from '../../types';
 
 export interface TicketService {
   get tickets(): readonly Ticket[];

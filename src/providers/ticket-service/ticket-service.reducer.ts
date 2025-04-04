@@ -1,4 +1,4 @@
-import { Ticket } from '../../types';
+import { Ticket } from '@ui/helpers';
 
 export interface AddTicketAction {
   readonly type: 'add';
