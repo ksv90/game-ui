@@ -30,6 +30,10 @@ export default defineConfig({
     cors: {
       origin: '*',
     },
+    https: {
+      key: './certs/localhost.key',
+      cert: './certs/localhost.crt',
+    },
   },
   plugins: [
     reactPlugin(),
