@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.9](https://github.com/ksv90/game-ui/compare/v0.0.8...v0.0.9) (2025-04-22)
+
+
+### Bug Fixes
+
+* certs added ([f9ba52c](https://github.com/ksv90/game-ui/commit/f9ba52c7f85d354986bd08f415dc90801d3889ab))
+* gui changed ([452ab28](https://github.com/ksv90/game-ui/commit/452ab280b879061712976487e692f3210313541a))
+* local entities created ([f8f2bf8](https://github.com/ksv90/game-ui/commit/f8f2bf8e018dff97c36d872f66982d04da888463))
+
 ## [0.0.8](https://github.com/ksv90/game-ui/compare/v0.0.7...v0.0.8) (2025-04-04)
 
 
