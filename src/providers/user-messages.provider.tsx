@@ -1,6 +1,6 @@
+import { IReceiver, PublicationContext } from '@ui/helpers';
 import { UserMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
-import type { Centrifuge, PublicationContext } from 'centrifuge';
 import { PropsWithChildren } from 'react';
 
 import { MessageServiceProvider } from './message-service';
@@ -12,12 +12,12 @@ export interface UserMessagesProviderGame {
 
 export interface UserMessagesProviderProps {
   readonly game: UserMessagesProviderGame;
-  readonly centrifuge: Centrifuge;
+  readonly receiver: IReceiver;
   readonly channel?: string;
 }
 
 export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProviderProps>) => {
-  const { children, centrifuge, channel, game } = props;
+  const { children, receiver, channel, game } = props;
 
   const handler = ({ data }: PublicationContext) => {
     const userMessage = parse(UserMessage, data);
@@ -33,15 +33,15 @@ export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProvid
         break;
       }
       case 'win': {
-        const { win } = userMessage;
+        const { totalWin, ticketWins } = userMessage;
         // eslint-disable-next-line no-console
-        console.log('win', win);
+        console.log('total win', totalWin, ticketWins);
       }
     }
   };
 
   return (
-    <MessageServiceProvider centrifuge={centrifuge} channel={channel} handler={handler}>
+    <MessageServiceProvider receiver={receiver} channel={channel} handler={handler}>
       {children}
     </MessageServiceProvider>
   );

@@ -30,6 +30,7 @@ export const ServerTicket = object({
   bet: number(),
   numbers: array(number()),
   win: optional(number()),
+  coincidences: optional(array(number())),
 });
 
 export type ServerTicket = InferOutput<typeof ServerTicket>;
@@ -45,3 +46,18 @@ export const TicketListData = object({
 });
 
 export type TicketListData = InferOutput<typeof TicketListData>;
+
+export const WinData = object({
+  userName: string(),
+  win: number(),
+});
+
+export type WinData = InferOutput<typeof WinData>;
+
+export const TicketWinData = object({
+  ticketId: string(),
+  win: number(),
+  coincidences: array(number()),
+});
+
+export type TicketWinData = InferOutput<typeof TicketWinData>;

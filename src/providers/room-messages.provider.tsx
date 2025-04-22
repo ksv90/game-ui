@@ -1,6 +1,5 @@
-import { Ticket, ticketTransform } from '@ui/helpers';
+import { IReceiver, PublicationContext, Ticket, ticketTransform } from '@ui/helpers';
 import { parse } from '@valibot/valibot';
-import type { Centrifuge, PublicationContext } from 'centrifuge';
 import { PropsWithChildren } from 'react';
 
 import { RoomMessage } from '../schemes';
@@ -15,12 +14,12 @@ export interface RoomMessagesProviderGame {
 
 export interface RoomMessagesProviderProps {
   readonly game: RoomMessagesProviderGame;
-  readonly centrifuge: Centrifuge;
+  readonly receiver: IReceiver;
   readonly channel?: string;
 }
 
 export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>) => {
-  const { children, centrifuge, channel, game } = props;
+  const { children, receiver, channel, game } = props;
 
   const handler = ({ data }: PublicationContext) => {
     const roomMessage = parse(RoomMessage, data);
@@ -53,7 +52,7 @@ export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProvid
         const { numbers, wins } = roomMessage;
         game.roundComplete(numbers);
         // eslint-disable-next-line no-console
-        console.log('win', wins);
+        console.log('round win', wins);
         break;
       }
 
@@ -67,7 +66,7 @@ export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProvid
   };
 
   return (
-    <MessageServiceProvider centrifuge={centrifuge} channel={channel} handler={handler}>
+    <MessageServiceProvider receiver={receiver} channel={channel} handler={handler}>
       {children}
     </MessageServiceProvider>
   );

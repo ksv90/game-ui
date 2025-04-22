@@ -1,6 +1,6 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import type { IEmitterLite } from '@ksv90/decorators';
-import { Ticket } from '@ui/helpers';
+import { IReceiver, Ticket } from '@ui/helpers';
 import {
   BalanceServiceProvider,
   BetServiceProvider,
@@ -12,7 +12,6 @@ import {
   TicketServiceProvider,
   UserMessagesProvider,
 } from '@ui/providers';
-import type { Centrifuge } from 'centrifuge';
 import { JSX, useEffect, useState } from 'react';
 
 export interface GameEvents {
@@ -46,22 +45,24 @@ export interface KenoConnector {
 export interface KenoProps {
   readonly game: KenoGame;
   readonly connector: KenoConnector;
-  readonly centrifuge: Centrifuge;
+  readonly receiver: IReceiver;
   readonly ui?: JSX.Element;
   readonly rules?: JSX.Element;
 }
 
-export function KenoApp({ game, connector, centrifuge, ui, rules }: KenoProps) {
+export function KenoApp(props: KenoProps) {
+  const { game, connector, receiver, ui, rules } = props;
+
   const [userChannel, setUserChannel] = useState('');
   const [roomChannel, setRoomChannel] = useState('');
   const [rulesOpen] = useState(false);
 
   useEffect(() => {
-    centrifuge.connect();
+    receiver.connect();
     return () => {
-      centrifuge.disconnect();
+      receiver.disconnect();
     };
-  }, [centrifuge]);
+  }, [receiver]);
 
   const stateChangeHandler = (state: { room_channel: string; user_channel: string }) => {
     const { room_channel, user_channel } = state;
@@ -74,8 +75,8 @@ export function KenoApp({ game, connector, centrifuge, ui, rules }: KenoProps) {
       <ChakraProvider value={defaultSystem}>
         <ColorModeProvider>
           <ConnectorServiceProvider game={game} connector={connector} onStateChange={stateChangeHandler}>
-            <UserMessagesProvider game={game} centrifuge={centrifuge} channel={userChannel}>
-              <RoomMessagesProvider game={game} centrifuge={centrifuge} channel={roomChannel}>
+            <RoomMessagesProvider game={game} receiver={receiver} channel={roomChannel}>
+              <UserMessagesProvider game={game} receiver={receiver} channel={userChannel}>
                 <TicketServiceProvider game={game}>
                   <BalanceServiceProvider game={game}>
                     <BetServiceProvider game={game}>
@@ -86,8 +87,8 @@ export function KenoApp({ game, connector, centrifuge, ui, rules }: KenoProps) {
                     </BetServiceProvider>
                   </BalanceServiceProvider>
                 </TicketServiceProvider>
-              </RoomMessagesProvider>
-            </UserMessagesProvider>
+              </UserMessagesProvider>
+            </RoomMessagesProvider>
           </ConnectorServiceProvider>
         </ColorModeProvider>
       </ChakraProvider>
