@@ -1,18 +1,20 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import type { IEmitterLite } from '@ksv90/decorators';
-import { Ticket } from '@ui/helpers';
+import { IEmitterLite, IReceiver, Ticket } from '@ui/helpers';
 import {
   BalanceServiceProvider,
   BetServiceProvider,
   ColorModeProvider,
   ConnectorServiceProvider,
+  CountdownServiceProvider,
   ErrorBoundary,
   RoomMessagesProvider,
+  RoundNumbersServiceProvider,
   StateServiceProvider,
   TicketServiceProvider,
   UserMessagesProvider,
+  WinServiceProvider,
 } from '@ui/providers';
-import type { Centrifuge } from 'centrifuge';
+import { TicketWinData, WinData } from '@ui/schemes';
 import { JSX, useEffect, useState } from 'react';
 
 export interface GameEvents {
@@ -20,9 +22,13 @@ export interface GameEvents {
   totalBetChanged: [value: number];
   ticketAdded: [ticket: Ticket];
   ticketRemoved: [ticketId: string];
+  totalWin: [value: number];
   ticketsCleared: [];
-  roundStarted: [];
-  roundCompleted: [numbers: readonly number[]];
+  roundStarted: [{ users: number }];
+  roundCompleted: [{ roundNumbers: readonly number[]; wins: readonly WinData[] }];
+  countdown: [value: number];
+  roundNumberAdded: [value: number];
+  roundNumberCleared: [];
 }
 
 export interface KenoGame extends IEmitterLite<GameEvents> {
@@ -31,10 +37,15 @@ export interface KenoGame extends IEmitterLite<GameEvents> {
 
   addTickets(...tickets: Ticket[]): void;
   removeTickets(...ticketIds: string[]): void;
+  ticketWins(...ticketWins: TicketWinData[]): void;
   clearTickets(): void;
 
-  roundStart(): void;
-  roundComplete(numbers: readonly number[]): void;
+  roundStart(users: number): void;
+  roundComplete(roundNumbers: readonly number[], wins: readonly WinData[]): void;
+
+  setCountdown(countdown: number): void;
+  addRoundNumbers(...values: number[]): void;
+  setWin(value: number): void;
 }
 
 export interface KenoConnector {
@@ -46,22 +57,24 @@ export interface KenoConnector {
 export interface KenoProps {
   readonly game: KenoGame;
   readonly connector: KenoConnector;
-  readonly centrifuge: Centrifuge;
+  readonly receiver: IReceiver;
   readonly ui?: JSX.Element;
   readonly rules?: JSX.Element;
 }
 
-export function KenoApp({ game, connector, centrifuge, ui, rules }: KenoProps) {
+export function KenoApp(props: KenoProps) {
+  const { game, connector, receiver, ui, rules } = props;
+
   const [userChannel, setUserChannel] = useState('');
   const [roomChannel, setRoomChannel] = useState('');
   const [rulesOpen] = useState(false);
 
   useEffect(() => {
-    centrifuge.connect();
+    receiver.connect();
     return () => {
-      centrifuge.disconnect();
+      receiver.disconnect();
     };
-  }, [centrifuge]);
+  }, [receiver]);
 
   const stateChangeHandler = (state: { room_channel: string; user_channel: string }) => {
     const { room_channel, user_channel } = state;
@@ -74,20 +87,26 @@ export function KenoApp({ game, connector, centrifuge, ui, rules }: KenoProps) {
       <ChakraProvider value={defaultSystem}>
         <ColorModeProvider>
           <ConnectorServiceProvider game={game} connector={connector} onStateChange={stateChangeHandler}>
-            <UserMessagesProvider game={game} centrifuge={centrifuge} channel={userChannel}>
-              <RoomMessagesProvider game={game} centrifuge={centrifuge} channel={roomChannel}>
+            <RoomMessagesProvider game={game} receiver={receiver} channel={roomChannel}>
+              <UserMessagesProvider game={game} receiver={receiver} channel={userChannel}>
                 <TicketServiceProvider game={game}>
                   <BalanceServiceProvider game={game}>
                     <BetServiceProvider game={game}>
-                      <StateServiceProvider game={game} state="pending">
-                        {ui && <div>{ui}</div>}
-                        {rules && rulesOpen && <div>{rules}</div>}
-                      </StateServiceProvider>
+                      <WinServiceProvider game={game}>
+                        <CountdownServiceProvider game={game}>
+                          <RoundNumbersServiceProvider game={game}>
+                            <StateServiceProvider game={game} state="pending">
+                              {ui && <div>{ui}</div>}
+                              {rules && rulesOpen && <div>{rules}</div>}
+                            </StateServiceProvider>
+                          </RoundNumbersServiceProvider>
+                        </CountdownServiceProvider>
+                      </WinServiceProvider>
                     </BetServiceProvider>
                   </BalanceServiceProvider>
                 </TicketServiceProvider>
-              </RoomMessagesProvider>
-            </UserMessagesProvider>
+              </UserMessagesProvider>
+            </RoomMessagesProvider>
           </ConnectorServiceProvider>
         </ColorModeProvider>
       </ChakraProvider>

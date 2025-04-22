@@ -56,6 +56,7 @@ export default tsConfig(
       'import/first': 'error',
       'import/newline-after-import': 'error',
       'import/no-duplicates': 'error',
+      'require-await': 'error',
       '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
       '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'with-single-extends' }],
       '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],

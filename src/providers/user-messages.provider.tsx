@@ -1,6 +1,6 @@
-import { UserMessage } from '@ui/schemes';
+import { IReceiver, PublicationContext } from '@ui/helpers';
+import { TicketWinData, UserMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
-import type { Centrifuge, PublicationContext } from 'centrifuge';
 import { PropsWithChildren } from 'react';
 
 import { MessageServiceProvider } from './message-service';
@@ -8,16 +8,18 @@ import { MessageServiceProvider } from './message-service';
 export interface UserMessagesProviderGame {
   changeBet(value: number): void;
   updateBalance(value: number): void;
+  ticketWins(...ticketWins: TicketWinData[]): void;
+  setWin(value: number): void;
 }
 
 export interface UserMessagesProviderProps {
   readonly game: UserMessagesProviderGame;
-  readonly centrifuge: Centrifuge;
+  readonly receiver: IReceiver;
   readonly channel?: string;
 }
 
 export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProviderProps>) => {
-  const { children, centrifuge, channel, game } = props;
+  const { children, receiver, channel, game } = props;
 
   const handler = ({ data }: PublicationContext) => {
     const userMessage = parse(UserMessage, data);
@@ -33,15 +35,15 @@ export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProvid
         break;
       }
       case 'win': {
-        const { win } = userMessage;
-        // eslint-disable-next-line no-console
-        console.log('win', win);
+        const { totalWin, ticketWins } = userMessage;
+        game.ticketWins(...ticketWins);
+        game.setWin(totalWin);
       }
     }
   };
 
   return (
-    <MessageServiceProvider centrifuge={centrifuge} channel={channel} handler={handler}>
+    <MessageServiceProvider receiver={receiver} channel={channel} handler={handler}>
       {children}
     </MessageServiceProvider>
   );

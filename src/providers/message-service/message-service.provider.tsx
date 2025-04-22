@@ -1,30 +1,29 @@
-import type { Centrifuge, PublicationContext, StateContext } from 'centrifuge';
+import { IReceiver, PublicationContext, StateContext } from '@ui/helpers';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 export interface MessageServiceProviderProps {
-  readonly centrifuge: Centrifuge;
+  readonly receiver: IReceiver;
   readonly channel?: string;
   readonly handler: (ctx: PublicationContext) => void;
 }
 
 export const MessageServiceProvider = (props: PropsWithChildren<MessageServiceProviderProps>) => {
-  const { children, centrifuge, channel, handler } = props;
-  const [connectionState, setConnectionState] = useState(centrifuge.state);
+  const { children, receiver, channel, handler } = props;
+  const [connectionState, setConnectionState] = useState(receiver.state);
 
   useEffect(() => {
     const stateChangeHandler = ({ newState }: StateContext) => {
       setConnectionState(newState);
     };
-    centrifuge.on('state', stateChangeHandler);
+    receiver.on('state', stateChangeHandler);
     return () => {
-      centrifuge.off('state', stateChangeHandler);
+      receiver.off('state', stateChangeHandler);
     };
-  }, [centrifuge]);
+  }, [receiver]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (connectionState !== 'connected' || !channel) return;
-    const subscription = centrifuge.newSubscription(channel);
+    const subscription = receiver.newSubscription(channel);
     subscription.on('publication', handler);
 
     subscription.subscribe();
@@ -33,7 +32,7 @@ export const MessageServiceProvider = (props: PropsWithChildren<MessageServicePr
       subscription.off('publication', handler);
       subscription.unsubscribe();
     };
-  }, [centrifuge, channel, connectionState, handler]);
+  }, [receiver, channel, connectionState, handler]);
 
   return <>{children}</>;
 };

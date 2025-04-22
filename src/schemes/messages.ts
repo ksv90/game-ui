@@ -1,6 +1,6 @@
 import { array, InferOutput, literal, number, object, string, union } from '@valibot/valibot';
 
-import { ServerTicket } from './common';
+import { ServerTicket, TicketWinData, WinData } from './common';
 
 export const TicketCreateMessage = object({
   type: literal('ticket-create'),
@@ -18,6 +18,7 @@ export type TicketCancelMessage = InferOutput<typeof TicketCancelMessage>;
 
 export const RoundStartMessage = object({
   type: literal('round-start'),
+  users: number(),
 });
 
 export type RoundStartMessage = InferOutput<typeof RoundStartMessage>;
@@ -25,12 +26,7 @@ export type RoundStartMessage = InferOutput<typeof RoundStartMessage>;
 export const RoundCompleteMessage = object({
   type: literal('round-complete'),
   numbers: array(number()),
-  wins: array(
-    object({
-      userName: string(),
-      win: number(),
-    }),
-  ),
+  wins: array(WinData),
 });
 
 export type RoundCompleteMessage = InferOutput<typeof RoundCompleteMessage>;
@@ -50,12 +46,12 @@ export const RoundCountdownMessage = object({
 
 export type RoundCountdownMessage = InferOutput<typeof RoundCountdownMessage>;
 
-export const BetUpdateMessage = object({
+export const BetChangeMessage = object({
   type: literal('bet-change'),
   bet: number(),
 });
 
-export type BetUpdateMessage = InferOutput<typeof BetUpdateMessage>;
+export type BetChangeMessage = InferOutput<typeof BetChangeMessage>;
 
 export const BalanceUpdateMessage = object({
   type: literal('balance-update'),
@@ -66,7 +62,8 @@ export type BalanceUpdateMessage = InferOutput<typeof BalanceUpdateMessage>;
 
 export const WinMessage = object({
   type: literal('win'),
-  win: number(),
+  totalWin: number(),
+  ticketWins: array(TicketWinData),
 });
 
 export type WinMessage = InferOutput<typeof WinMessage>;
@@ -82,6 +79,6 @@ export const RoomMessage = union([
 
 export type RoomMessage = InferOutput<typeof RoomMessage>;
 
-export const UserMessage = union([BetUpdateMessage, BalanceUpdateMessage, WinMessage]);
+export const UserMessage = union([BetChangeMessage, BalanceUpdateMessage, WinMessage]);
 
 export type UserMessage = InferOutput<typeof UserMessage>;
