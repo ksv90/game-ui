@@ -114,8 +114,8 @@ class Messenger implements IReceiver {
     this.#sendMessage(ROOM_CHANNEL, { type: 'ticket-cancel', ticketId } satisfies TicketCancelMessage);
   }
 
-  sendRoundStart(): void {
-    this.#sendMessage(ROOM_CHANNEL, { type: 'round-start' } satisfies RoundStartMessage);
+  sendRoundStart(users: number): void {
+    this.#sendMessage(ROOM_CHANNEL, { type: 'round-start', users } satisfies RoundStartMessage);
   }
 
   sendRoundComplete(numbers: number[], wins: RoundCompleteMessage['wins']): void {

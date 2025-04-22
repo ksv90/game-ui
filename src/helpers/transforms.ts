@@ -7,4 +7,5 @@ export const ticketTransform = (serverTicket: ServerTicket): Ticket => ({
   bet: serverTicket.bet,
   numbers: serverTicket.numbers,
   win: serverTicket.win ?? 0,
+  coincidences: [],
 });

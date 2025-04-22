@@ -23,6 +23,10 @@ export const BetData = object({
   bet: number(),
 });
 
+export const RoundNumbers = object({
+  roundNumbers: array(number()),
+});
+
 export type BetData = InferOutput<typeof BetData>;
 
 export const ServerTicket = object({

@@ -2,14 +2,18 @@ import { IReceiver, PublicationContext, Ticket, ticketTransform } from '@ui/help
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
 
-import { RoomMessage } from '../schemes';
+import { RoomMessage, WinData } from '../schemes';
 import { MessageServiceProvider } from './message-service';
 
 export interface RoomMessagesProviderGame {
   addTickets(...tickets: Ticket[]): void;
   removeTickets(...ticketIds: string[]): void;
-  roundStart(): void;
-  roundComplete(numbers: readonly number[]): void;
+
+  roundStart(users: number): void;
+  roundComplete(numbers: readonly number[], wins: readonly WinData[]): void;
+
+  setCountdown(countdown: number): void;
+  addRoundNumbers(...values: number[]): void;
 }
 
 export interface RoomMessagesProviderProps {
@@ -37,29 +41,26 @@ export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProvid
       }
 
       case 'round-start': {
-        game.roundStart();
+        const { users } = roomMessage;
+        game.roundStart(users);
         break;
       }
 
       case 'round-process': {
-        const { added, numbers } = roomMessage;
-        // eslint-disable-next-line no-console
-        console.log('round-process', added, numbers);
+        const { numbers } = roomMessage;
+        game.addRoundNumbers(...numbers);
         break;
       }
 
       case 'round-complete': {
         const { numbers, wins } = roomMessage;
-        game.roundComplete(numbers);
-        // eslint-disable-next-line no-console
-        console.log('round win', wins);
+        game.roundComplete(numbers, wins);
         break;
       }
 
       case 'round-countdown': {
         const { countdown } = roomMessage;
-        // eslint-disable-next-line no-console
-        console.log('round-countdown', countdown);
+        game.setCountdown(countdown);
         break;
       }
     }

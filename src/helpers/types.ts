@@ -11,4 +11,5 @@ export interface Ticket {
   readonly bet: number;
   readonly numbers: readonly number[];
   readonly win: number;
+  readonly coincidences: readonly number[];
 }

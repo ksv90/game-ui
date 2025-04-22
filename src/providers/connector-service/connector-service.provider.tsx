@@ -16,6 +16,8 @@ export interface ConnectorServiceGame {
 
   addTickets(...tickets: Ticket[]): void;
   removeTickets(...ticketIds: string[]): void;
+
+  addRoundNumbers(...values: number[]): void;
 }
 
 export interface ConnectorServiceProviderProps {
@@ -34,10 +36,11 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
           .then(getJsonData)
           .then(validateData(SessionResponse))
           .then((sessionData) => {
-            const { bet, balance, tickets, room_channel, user_channel } = sessionData;
+            const { bet, balance, tickets, roundNumbers, room_channel, user_channel } = sessionData;
             game.updateBalance(balance);
             game.changeBet(bet);
             game.addTickets(...tickets.map(ticketTransform));
+            game.addRoundNumbers(...roundNumbers);
             onStateChange?.({ room_channel, user_channel });
           })
           .catch(errorHandler);

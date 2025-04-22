@@ -1,5 +1,6 @@
 import { Emitter, type IEmitter } from '@ksv90/decorators';
 import { Ticket } from '@ui/helpers';
+import { TicketWinData, WinData } from '@ui/schemes';
 
 export interface KenoEvents {
   balanceUpdated: [value: number];
@@ -7,8 +8,13 @@ export interface KenoEvents {
   ticketAdded: [ticket: Ticket];
   ticketRemoved: [ticketId: string];
   ticketsCleared: [];
-  roundStarted: [];
-  roundCompleted: [numbers: readonly number[]];
+  roundStarted: [{ users: number }];
+  roundCompleted: [{ roundNumbers: readonly number[]; wins: readonly WinData[] }];
+  countdown: [value: number];
+  roundNumberAdded: [value: number];
+  roundNumberCleared: [];
+  totalWin: [value: number];
+  ticketWin: [Ticket: Ticket];
 }
 
 export interface Keno extends IEmitter<KenoEvents> {}
@@ -19,7 +25,9 @@ class Keno {
   #store = {
     balance: 0,
     totalBet: 0,
+    countdown: 0,
     tickets: new Map<string, Ticket>(),
+    roundNumbers: new Set<number>(),
   };
 
   updateBalance(value: number): void {
@@ -51,12 +59,47 @@ class Keno {
     this.emit('ticketsCleared');
   }
 
-  roundStart(): void {
-    this.emit('roundStarted');
+  roundStart(users: number): void {
+    this.emit('roundStarted', { users });
   }
 
-  roundComplete(numbers: readonly number[]): void {
+  roundComplete(roundNumbers: readonly number[], wins: readonly WinData[]): void {
     this.clearTickets();
-    this.emit('roundCompleted', numbers);
+    this.clearRoundNumbers();
+    this.emit('roundCompleted', { roundNumbers, wins });
+  }
+
+  setCountdown(value: number): void {
+    this.#store.countdown = value;
+    this.emit('countdown', value);
+  }
+
+  addRoundNumbers(...values: number[]): void {
+    for (const value of values) {
+      if (this.#store.roundNumbers.has(value)) continue;
+      this.#store.roundNumbers.add(value);
+      this.emit('roundNumberAdded', value);
+    }
+  }
+
+  clearRoundNumbers(): void {
+    this.#store.roundNumbers.clear();
+    this.emit('roundNumberCleared');
+  }
+
+  ticketWins(...ticketWins: TicketWinData[]): void {
+    for (const { ticketId, win, coincidences } of ticketWins) {
+      const ticket = this.#store.tickets.get(ticketId);
+      if (!ticket) {
+        throw new Error(`Ticket ${ticketId} не найден`);
+      }
+      const winTicket = { ...ticket, win, coincidences } satisfies Ticket;
+      this.#store.tickets.set(ticketId, winTicket);
+      this.emit('ticketWin', winTicket);
+    }
+  }
+
+  setWin(value: number): void {
+    this.emit('totalWin', value);
   }
 }

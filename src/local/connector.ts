@@ -6,6 +6,7 @@ export interface ConnectorContext {
   get balance(): number;
   get bet(): number;
   get tickets(): Iterable<ServerTicket>;
+  get roundNumbers(): Iterable<number>;
   ticketCreate(bet: number, numbers: readonly number[]): ServerTicket;
   ticketCancel(ticketId: string): void;
 }
@@ -27,6 +28,7 @@ export class Connector {
       room_channel: ROOM_CHANNEL,
       user_channel: USER_CHANNEL,
       tickets: Array.from(this.#context.tickets),
+      roundNumbers: Array.from(this.#context.roundNumbers),
     });
 
     return Promise.resolve(response);

@@ -20,7 +20,7 @@ export class Context implements RoundMachineContext, ConnectorContext {
 
   #countdown = COUNTDOWN;
 
-  #numbers = new Set<number>();
+  #roundNumbers = new Set<number>();
 
   #ticketMap = new Map<string, ServerTicket>();
 
@@ -50,8 +50,8 @@ export class Context implements RoundMachineContext, ConnectorContext {
     return this.#ticketMap.values();
   }
 
-  get numbers(): Iterable<number> {
-    return this.#numbers.values();
+  get roundNumbers(): Iterable<number> {
+    return this.#roundNumbers.values();
   }
 
   countdownDecrement(): void {
@@ -61,21 +61,21 @@ export class Context implements RoundMachineContext, ConnectorContext {
     this.#countdown -= 1;
   }
 
-  addNumber(): number {
+  addRoundNumber(): number {
     if (!this.#roundStarted) {
       throw new Error('Нельзя добавить число в неактивный раунд');
     }
-    const currentSize = this.#numbers.size;
+    const currentSize = this.#roundNumbers.size;
     let value = -1;
-    while (this.#numbers.size === currentSize) {
+    while (this.#roundNumbers.size === currentSize) {
       value = Math.floor(Math.random() * TOP_NUMBER) + 1;
-      this.#numbers.add(value);
+      this.#roundNumbers.add(value);
     }
     return value;
   }
 
   isRoundReady(): boolean {
-    return this.#numbers.size === ROUND_NUMBERS;
+    return this.#roundNumbers.size === ROUND_NUMBERS;
   }
 
   winsCalculate(): { totalWin: number; ticketWins: TicketWinData[] } {
@@ -86,7 +86,7 @@ export class Context implements RoundMachineContext, ConnectorContext {
       const coincidences = new Array<number>();
       for (let index = 0, len = ticket.numbers.length; index < len; index += 1) {
         const value = ticket.numbers[index];
-        if (this.#numbers.has(value)) coincidences.push(value);
+        if (this.#roundNumbers.has(value)) coincidences.push(value);
       }
       const value = payoutList[coincidences.length];
       if (typeof value !== 'number') {
@@ -107,7 +107,7 @@ export class Context implements RoundMachineContext, ConnectorContext {
   roundClose(): void {
     this.#roundStarted = false;
     this.#countdown = COUNTDOWN;
-    this.#numbers.clear();
+    this.#roundNumbers.clear();
     this.#ticketMap.clear();
   }
 

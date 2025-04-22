@@ -1,5 +1,5 @@
 import { IReceiver, PublicationContext } from '@ui/helpers';
-import { UserMessage } from '@ui/schemes';
+import { TicketWinData, UserMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
 
@@ -8,6 +8,8 @@ import { MessageServiceProvider } from './message-service';
 export interface UserMessagesProviderGame {
   changeBet(value: number): void;
   updateBalance(value: number): void;
+  ticketWins(...ticketWins: TicketWinData[]): void;
+  setWin(value: number): void;
 }
 
 export interface UserMessagesProviderProps {
@@ -34,8 +36,8 @@ export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProvid
       }
       case 'win': {
         const { totalWin, ticketWins } = userMessage;
-        // eslint-disable-next-line no-console
-        console.log('total win', totalWin, ticketWins);
+        game.ticketWins(...ticketWins);
+        game.setWin(totalWin);
       }
     }
   };

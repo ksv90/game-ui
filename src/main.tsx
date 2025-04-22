@@ -29,9 +29,9 @@ const messenger = new Messenger();
 const connector = new Connector(messenger, context);
 const roundMachine = new StateMachine(createRoundMachineConfig(messenger, context));
 
-roundMachine.start();
-
 const gui = <KenoGui />;
 const rules = <KenoRules />;
 
 createRoot($root).render(<KenoApp game={keno} connector={connector} receiver={messenger} ui={gui} rules={rules} />);
+
+roundMachine.start();

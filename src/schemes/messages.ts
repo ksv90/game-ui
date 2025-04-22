@@ -18,6 +18,7 @@ export type TicketCancelMessage = InferOutput<typeof TicketCancelMessage>;
 
 export const RoundStartMessage = object({
   type: literal('round-start'),
+  users: number(),
 });
 
 export type RoundStartMessage = InferOutput<typeof RoundStartMessage>;
