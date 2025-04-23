@@ -8,7 +8,7 @@ export interface ConnectorContext {
   get tickets(): Iterable<ServerTicket>;
   get roundNumbers(): Iterable<number>;
   ticketCreate(bet: number, numbers: readonly number[]): ServerTicket;
-  ticketCancel(ticketId: string): void;
+  ticketCancel(ticketId: string): ServerTicket;
 }
 
 export class Connector {

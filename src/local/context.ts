@@ -129,11 +129,13 @@ export class Context implements RoundMachineContext, ConnectorContext {
     return ticket;
   }
 
-  ticketCancel(ticketId: string): void {
+  ticketCancel(ticketId: string): ServerTicket {
     const ticket = this.#ticketMap.get(ticketId);
     if (!ticket) {
       throw new Error('Ticket не найден');
     }
+    this.#ticketMap.delete(ticketId);
     this.#balance += ticket.bet;
+    return ticket;
   }
 }
