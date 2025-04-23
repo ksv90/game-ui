@@ -10,9 +10,9 @@
   ],
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "dev": "vite --host --mode dev --port ${PORT:-1173}",
+    "dev": "vite --host --mode dev --port 1173",
     "build": "vite build --mode prod",
-    "preview": "vite preview --port ${PORT:-2173} --host",
+    "preview": "vite preview --port 1173 --host",
     "lint": "eslint",
     "format": "prettier --write .",
     "test": "echo test",
