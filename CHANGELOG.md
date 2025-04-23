@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.10](https://github.com/ksv90/game-ui/compare/v0.0.9...v0.0.10) (2025-04-23)
+
+
+### Bug Fixes
+
+* ticket-bug ([c95c8c0](https://github.com/ksv90/game-ui/commit/c95c8c01644b98e98354035f79a768471b833490))
+* ticket-bug ([2fc1705](https://github.com/ksv90/game-ui/commit/2fc1705f333994f8325fbbf6540f7f8305f47fa1))
+* windows ([124b1c0](https://github.com/ksv90/game-ui/commit/124b1c0b6cf62ee8d014244ff0e965cb579d8292))
+* windows ([0518dd3](https://github.com/ksv90/game-ui/commit/0518dd3d0ca24ce12f7457938d65b5fdea758be5))
+
 ## [0.0.9](https://github.com/ksv90/game-ui/compare/v0.0.8...v0.0.9) (2025-04-22)
 
 
