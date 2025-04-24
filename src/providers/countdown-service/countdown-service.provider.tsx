@@ -15,7 +15,7 @@ export interface CountdownProviderProps {
 
 export const CountdownServiceProvider = (props: PropsWithChildren<CountdownProviderProps>) => {
   const { children, game } = props;
-  const [countdown, setCountdownValue] = useState(props.countdown ?? 0);
+  const [countdown, setCountdown] = useState(props.countdown ?? 0);
 
   const countdownService = useMemo<CountdownService>(
     () => ({
@@ -28,10 +28,15 @@ export const CountdownServiceProvider = (props: PropsWithChildren<CountdownProvi
   );
 
   useEffect(() => {
-    game.on('countdown', setCountdownValue);
+    if (props.countdown == null) return;
+    setCountdown(props.countdown);
+  }, [props.countdown]);
+
+  useEffect(() => {
+    game.on('countdown', setCountdown);
 
     return () => {
-      game.off('countdown', setCountdownValue);
+      game.off('countdown', setCountdown);
     };
   }, [game]);
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { act, render, screen } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -9,13 +9,17 @@ import { BalanceServiceGame, BalanceServiceProvider } from './balance-service.pr
 let mockGame: BalanceServiceGame;
 let listeners: Record<'balanceUpdated', Set<(value: number) => void>>;
 
-const Consumer = ({ effect }: { effect?: boolean }) => {
+const Consumer = () => {
+  const { balance } = useBalanceService();
+  return <div>Balance: {balance}</div>;
+};
+
+const ConsumerWithEffect = ({ value }: { value: number }) => {
   const { balance, updateBalance } = useBalanceService();
 
   useEffect(() => {
-    if (effect !== true) return;
-    updateBalance(200);
-  }, [effect, updateBalance]);
+    updateBalance(value);
+  }, [updateBalance, value]);
 
   return <div>Balance: {balance}</div>;
 };
@@ -44,29 +48,29 @@ beforeEach(() => {
 
 describe('BalanceServiceProvider', () => {
   it('должен установить начальное значение по пропсам', () => {
-    render(
+    const { getByText } = render(
       <BalanceServiceProvider game={mockGame} balance={100}>
         <Consumer />
       </BalanceServiceProvider>,
     );
 
-    expect(screen.getByText(/Balance: 100/)).toBeInTheDocument();
+    expect(getByText(/Balance: 100/)).toBeInTheDocument();
   });
 
   it('должен установить начальное значение в 0, если не передан пропс', () => {
-    render(
+    const { getByText } = render(
       <BalanceServiceProvider game={mockGame}>
         <Consumer />
       </BalanceServiceProvider>,
     );
 
-    expect(screen.getByText(/Balance: 0/)).toBeInTheDocument();
+    expect(getByText(/Balance: 0/)).toBeInTheDocument();
   });
 
   it('должен передавать значение через контекст', () => {
     render(
       <BalanceServiceProvider game={mockGame} balance={100}>
-        <Consumer effect={true} />
+        <ConsumerWithEffect value={200} />
       </BalanceServiceProvider>,
     );
 
@@ -74,7 +78,7 @@ describe('BalanceServiceProvider', () => {
   });
 
   it('должен реагировать на обновление значения', () => {
-    render(
+    const { getByText } = render(
       <BalanceServiceProvider game={mockGame} balance={100}>
         <Consumer />
       </BalanceServiceProvider>,
@@ -84,7 +88,7 @@ describe('BalanceServiceProvider', () => {
       mockGame.updateBalance(300);
     });
 
-    expect(screen.getByText(/Balance: 300/)).toBeInTheDocument();
+    expect(getByText(/Balance: 300/)).toBeInTheDocument();
   });
 
   it('должен отписаться от событий при размонтировании', () => {
@@ -147,7 +151,7 @@ describe('BalanceServiceProvider', () => {
   });
 
   it('не должен пересоздавать service при одинаковых пропсах', () => {
-    const renders: BalanceService[] = [];
+    const renders = new Array<BalanceService>();
 
     const Tracker = () => {
       const service = useBalanceService();
@@ -170,5 +174,21 @@ describe('BalanceServiceProvider', () => {
     );
 
     expect(renders.length).toBe(1);
+  });
+
+  it('должен обновить значение при новом пропсе', () => {
+    const { rerender, getByText } = render(
+      <BalanceServiceProvider game={mockGame} balance={500}>
+        <Consumer />
+      </BalanceServiceProvider>,
+    );
+
+    rerender(
+      <BalanceServiceProvider game={mockGame} balance={400}>
+        <Consumer />
+      </BalanceServiceProvider>,
+    );
+
+    expect(getByText(/Balance: 400/)).toBeInTheDocument();
   });
 });

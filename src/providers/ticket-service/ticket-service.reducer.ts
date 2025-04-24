@@ -18,6 +18,7 @@ export type TicketReducerState = readonly Ticket[];
 
 export type TicketReducerAction = AddTicketAction | RemoveTicketAction | ClearTicketsAction;
 
+// TODO: переделать action интерфейс на несколько тикетов
 export function ticketServiceReducer(tickets: TicketReducerState, action: TicketReducerAction): TicketReducerState {
   switch (action.type) {
     case 'add': {
