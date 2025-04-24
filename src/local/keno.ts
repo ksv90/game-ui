@@ -2,6 +2,8 @@ import { Emitter, type IEmitter } from '@ksv90/decorators';
 import { Ticket } from '@ui/helpers';
 import { TicketWinData, WinData } from '@ui/schemes';
 
+import { KenoGame } from '../keno';
+
 export interface KenoEvents {
   balanceUpdated: [value: number];
   totalBetChanged: [value: number];
@@ -21,7 +23,7 @@ export interface Keno extends IEmitter<KenoEvents> {}
 
 export
 @Emitter()
-class Keno {
+class Keno implements KenoGame {
   #store = {
     balance: 0,
     totalBet: 0,
@@ -29,6 +31,14 @@ class Keno {
     tickets: new Map<string, Ticket>(),
     roundNumbers: new Set<number>(),
   };
+
+  start(): void {
+    //
+  }
+
+  stop(): void {
+    //
+  }
 
   updateBalance(value: number): void {
     this.#store.balance = value;

@@ -32,6 +32,9 @@ export interface GameEvents {
 }
 
 export interface KenoGame extends IEmitterLite<GameEvents> {
+  start(): void;
+  stop(): void;
+
   updateBalance(value: number): void;
   changeBet(value: number): void;
 
@@ -70,6 +73,10 @@ export function KenoApp(props: KenoProps) {
   const [rulesOpen] = useState(false);
 
   useEffect(() => {
+    game.start();
+  }, [game]);
+
+  useEffect(() => {
     receiver.connect();
     return () => {
       receiver.disconnect();
@@ -82,8 +89,12 @@ export function KenoApp(props: KenoProps) {
     setUserChannel(user_channel);
   };
 
+  const errorHandler = () => {
+    game.stop();
+  };
+
   return (
-    <ErrorBoundary>
+    <ErrorBoundary onError={errorHandler}>
       <ChakraProvider value={defaultSystem}>
         <ColorModeProvider>
           <ConnectorServiceProvider game={game} connector={connector} onStateChange={stateChangeHandler}>
