@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.11](https://github.com/ksv90/game-ui/compare/v0.0.10...v0.0.11) (2025-04-25)
+
+
+### Bug Fixes
+
+* global errors ([f14e4d0](https://github.com/ksv90/game-ui/commit/f14e4d01b5a097289c34a7d3beec5505a6090928))
+* global errors ([0261bc4](https://github.com/ksv90/game-ui/commit/0261bc4fa5ab5def765ec988788a7bfc5e2eae79))
+* mocks ([ea6c6aa](https://github.com/ksv90/game-ui/commit/ea6c6aa8c6701f53bd9bb6d31058d366f3b12b5b))
+* props bug fixed ([ac95952](https://github.com/ksv90/game-ui/commit/ac95952a2270cad54c58d5a181665b2524cee4ed))
+* tests added ([f7e2b70](https://github.com/ksv90/game-ui/commit/f7e2b708d659934c9910b914828d784235c4774d))
+* tests added ([02f6177](https://github.com/ksv90/game-ui/commit/02f61773c190828208e18de212585037dc3b1d2d))
+* todo work completed ([40314ac](https://github.com/ksv90/game-ui/commit/40314acad059bd762283bb9f16db3aa4e32de920))
+* todo work completed ([b98f1d3](https://github.com/ksv90/game-ui/commit/b98f1d3a3490d58a6d0755bfdf93cce221fc7435))
+
 ## [0.0.10](https://github.com/ksv90/game-ui/compare/v0.0.9...v0.0.10) (2025-04-23)
 
 
