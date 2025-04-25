@@ -24,6 +24,10 @@ export const StateServiceProvider = (props: PropsWithChildren<StateServiceProvid
   );
 
   useEffect(() => {
+    setState(props.state);
+  }, [props.state]);
+
+  useEffect(() => {
     const roundStartHandler = () => {
       setState('process');
     };

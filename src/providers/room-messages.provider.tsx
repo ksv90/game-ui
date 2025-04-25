@@ -22,6 +22,7 @@ export interface RoomMessagesProviderProps {
   readonly channel?: string;
 }
 
+// TODO: переделать switch на map
 export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>) => {
   const { children, receiver, channel, game } = props;
 

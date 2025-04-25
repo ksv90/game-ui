@@ -28,6 +28,11 @@ export const BalanceServiceProvider = (props: PropsWithChildren<BalanceProviderP
   );
 
   useEffect(() => {
+    if (props.balance == null) return;
+    setBalance(props.balance);
+  }, [props.balance]);
+
+  useEffect(() => {
     game.on('balanceUpdated', setBalance);
 
     return () => {

@@ -28,6 +28,11 @@ export const WinServiceProvider = (props: PropsWithChildren<WinProviderProps>) =
   );
 
   useEffect(() => {
+    if (props.win == null) return;
+    setWin(props.win);
+  }, [props.win]);
+
+  useEffect(() => {
     game.on('totalWin', setWin);
 
     return () => {

@@ -28,6 +28,11 @@ export const BetServiceProvider = (props: PropsWithChildren<BetProviderProps>) =
   );
 
   useEffect(() => {
+    if (props.bet == null) return;
+    setBet(props.bet);
+  }, [props.bet]);
+
+  useEffect(() => {
     game.on('totalBetChanged', setBet);
 
     return () => {
