@@ -14,28 +14,28 @@ import {
   WinMessage,
 } from '@ui/schemes';
 
-import { Subscription, UnsubscribedContext } from './subscription';
+import { SubscriptionMock, UnsubscribedContextMock } from './subscription';
 
 export const ROOM_CHANNEL = 'room-channel';
 
 export const USER_CHANNEL = 'user-channel';
 
-export interface MessengerBroadcastEvents {
+export interface MessengerMockBroadcastEvents {
   balanceUpdated: number;
   totalBetChanged: number;
 }
 
-export interface Messenger extends IEmitter<ReceiverEvents>, IBroadcaster<MessengerBroadcastEvents> {}
+export interface MessengerMock extends IEmitter<ReceiverEvents>, IBroadcaster<MessengerMockBroadcastEvents> {}
 
 export
 @Emitter()
 @Broadcaster('messenger')
-class Messenger implements IReceiver {
+class MessengerMock implements IReceiver {
   #state: ReceiverState = 'disconnected';
 
-  #subscriptionMap = new Map<string, Subscription>();
+  #subscriptionMap = new Map<string, SubscriptionMock>();
 
-  #unsubscribeHandler = (context: UnsubscribedContext) => {
+  #unsubscribeHandler = (context: UnsubscribedContextMock) => {
     const subscription = this.#subscriptionMap.get(context.channel);
     if (subscription) {
       this.removeSubscription(subscription);
@@ -83,13 +83,13 @@ class Messenger implements IReceiver {
   }
 
   newSubscription(channel: string): ISubscription {
-    const subscription = new Subscription(channel);
+    const subscription = new SubscriptionMock(channel);
     this.#subscriptionMap.set(channel, subscription);
     subscription.once('unsubscribed', this.#unsubscribeHandler);
     return subscription;
   }
 
-  removeSubscription(subscription: Subscription): void {
+  removeSubscription(subscription: SubscriptionMock): void {
     subscription.off('unsubscribed', this.#unsubscribeHandler);
     this.#subscriptionMap.delete(subscription.channel);
   }

@@ -1,26 +1,26 @@
 import { Emitter, IEmitter } from '@ksv90/decorators';
-import { ISubscription, SubscriptionEvents as SubscriptionEventsBase } from '@ui/helpers';
+import { ISubscription, SubscriptionEvents } from '@ui/helpers';
 
-export type PublishResult = object;
+export type PublishResultMock = object;
 
-export interface SubscribedContext {
+export interface SubscribedContextMock {
   channel: string;
 }
 
-export interface UnsubscribedContext {
+export interface UnsubscribedContextMock {
   channel: string;
 }
 
-export interface SubscriptionEvents extends SubscriptionEventsBase {
-  subscribed: [ctx: SubscribedContext];
-  unsubscribed: [ctx: UnsubscribedContext];
+export interface SubscriptionMockEvents extends SubscriptionEvents {
+  subscribed: [ctx: SubscribedContextMock];
+  unsubscribed: [ctx: UnsubscribedContextMock];
 }
 
-export interface Subscription extends IEmitter<SubscriptionEvents> {}
+export interface SubscriptionMock extends IEmitter<SubscriptionMockEvents> {}
 
 export
 @Emitter()
-class Subscription implements ISubscription {
+class SubscriptionMock implements ISubscription {
   #unsubscribed = false;
 
   #channel: string;
@@ -45,7 +45,7 @@ class Subscription implements ISubscription {
     this.emit('unsubscribed', { channel: this.#channel });
   }
 
-  async publish(data: unknown): Promise<PublishResult> {
+  async publish(data: unknown): Promise<PublishResultMock> {
     await Promise.resolve();
     setTimeout(() => {
       this.emit('publication', { channel: this.#channel, data });

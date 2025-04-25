@@ -1,7 +1,4 @@
 import { IReceiver, PublicationContext, Ticket, ticketTransform } from '@ui/helpers';
-import { parse } from '@valibot/valibot';
-import { PropsWithChildren } from 'react';
-
 import {
   RoomMessage,
   RoundCompleteMessage,
@@ -11,7 +8,10 @@ import {
   TicketCancelMessage,
   TicketCreateMessage,
   WinData,
-} from '../schemes';
+} from '@ui/schemes';
+import { parse } from '@valibot/valibot';
+import { PropsWithChildren } from 'react';
+
 import { PublicationServiceProvider } from './publication-service';
 
 export interface RoomMessagesProviderGame {

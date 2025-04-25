@@ -17,21 +17,21 @@ import {
 import { TicketWinData, WinData } from '@ui/schemes';
 import { JSX, useEffect, useState } from 'react';
 
-export interface GameEvents {
+export interface KenoGameEvents {
   balanceUpdated: [value: number];
   totalBetChanged: [value: number];
   ticketAdded: [ticket: Ticket];
   ticketRemoved: [ticketId: string];
-  totalWin: [value: number];
   ticketsCleared: [];
   roundStarted: [{ users: number }];
   roundCompleted: [{ roundNumbers: readonly number[]; wins: readonly WinData[] }];
   countdown: [value: number];
   roundNumberAdded: [value: number];
   roundNumberCleared: [];
+  totalWin: [value: number];
 }
 
-export interface KenoGame extends IEmitterLite<GameEvents> {
+export interface KenoGame extends IEmitterLite<KenoGameEvents> {
   start(): void;
   stop(): void;
 
