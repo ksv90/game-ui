@@ -8,6 +8,7 @@
     "noEmit": true,
     "baseUrl": ".",
     "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "skipLibCheck": true,
     "paths": {
       "@ui/helpers": ["./src/helpers"],
       "@ui/components": ["./src/components"],

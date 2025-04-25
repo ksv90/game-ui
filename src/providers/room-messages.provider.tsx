@@ -2,8 +2,17 @@ import { IReceiver, PublicationContext, Ticket, ticketTransform } from '@ui/help
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
 
-import { RoomMessage, WinData } from '../schemes';
-import { MessageServiceProvider } from './message-service';
+import {
+  RoomMessage,
+  RoundCompleteMessage,
+  RoundCountdownMessage,
+  RoundProcessMessage,
+  RoundStartMessage,
+  TicketCancelMessage,
+  TicketCreateMessage,
+  WinData,
+} from '../schemes';
+import { PublicationServiceProvider } from './publication-service';
 
 export interface RoomMessagesProviderGame {
   addTickets(...tickets: Ticket[]): void;
@@ -22,54 +31,53 @@ export interface RoomMessagesProviderProps {
   readonly channel?: string;
 }
 
-// TODO: переделать switch на map
+interface RoomMessageMap {
+  'ticket-create': TicketCreateMessage;
+  'ticket-cancel': TicketCancelMessage;
+  'round-start': RoundStartMessage;
+  'round-process': RoundProcessMessage;
+  'round-complete': RoundCompleteMessage;
+  'round-countdown': RoundCountdownMessage;
+}
+
+const messageHandlerMap: {
+  [K in RoomMessage['type']]: (game: RoomMessagesProviderGame, message: RoomMessageMap[K]) => void;
+} = {
+  'ticket-create': (game, message) => {
+    game.addTickets(ticketTransform(message.ticket));
+  },
+  'ticket-cancel': (game, message) => {
+    game.removeTickets(message.ticketId);
+  },
+  'round-start': (game, message) => {
+    game.roundStart(message.users);
+  },
+  'round-process': (game, message) => {
+    game.addRoundNumbers(...message.numbers);
+  },
+  'round-complete': (game, message) => {
+    game.roundComplete(message.numbers, message.wins);
+  },
+  'round-countdown': (game, message) => {
+    game.setCountdown(message.countdown);
+  },
+};
+
+function messageHandler<T extends RoomMessage['type']>(type: T, message: RoomMessageMap[T], game: RoomMessagesProviderGame) {
+  messageHandlerMap[type](game, message);
+}
+
 export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>) => {
   const { children, receiver, channel, game } = props;
 
-  const handler = ({ data }: PublicationContext) => {
-    const roomMessage = parse(RoomMessage, data);
-    switch (roomMessage.type) {
-      case 'ticket-create': {
-        const { ticket } = roomMessage;
-        game.addTickets(ticketTransform(ticket));
-        break;
-      }
-
-      case 'ticket-cancel': {
-        const { ticketId } = roomMessage;
-        game.removeTickets(ticketId);
-        break;
-      }
-
-      case 'round-start': {
-        const { users } = roomMessage;
-        game.roundStart(users);
-        break;
-      }
-
-      case 'round-process': {
-        const { numbers } = roomMessage;
-        game.addRoundNumbers(...numbers);
-        break;
-      }
-
-      case 'round-complete': {
-        const { numbers, wins } = roomMessage;
-        game.roundComplete(numbers, wins);
-        break;
-      }
-
-      case 'round-countdown': {
-        const { countdown } = roomMessage;
-        game.setCountdown(countdown);
-        break;
-      }
-    }
+  const publicationHandler = ({ data }: PublicationContext) => {
+    const message = parse(RoomMessage, data);
+    messageHandler(message.type, message, game);
   };
 
   return (
-    <MessageServiceProvider receiver={receiver} channel={channel} handler={handler}>
+    <PublicationServiceProvider receiver={receiver} channel={channel} onPublication={publicationHandler}>
       {children}
-    </MessageServiceProvider>
+    </PublicationServiceProvider>
   );
 };

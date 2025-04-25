@@ -45,13 +45,9 @@ export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProv
     [game, tickets],
   );
 
-  // TODO: проверить реализацию
   useEffect(() => {
-    if (props.tickets == null) return;
-    dispatchTickets({ type: 'clear' });
-    for (const ticket of props.tickets) {
-      dispatchTickets({ type: 'add', payload: { ticket: ticketTransform(ticket) } });
-    }
+    if (!props.tickets) return;
+    dispatchTickets({ type: 'update', payload: { tickets: props.tickets.map(ticketTransform) } });
   }, [props.tickets]);
 
   useEffect(() => {
@@ -64,7 +60,7 @@ export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProv
     };
 
     const ticketClearHandler = () => {
-      dispatchTickets({ type: 'clear' });
+      dispatchTickets({ type: 'update', payload: { tickets: [] } });
     };
 
     game.on('ticketAdded', ticketAddHandler);

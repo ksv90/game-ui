@@ -5,12 +5,13 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
-import { config as tsConfig, configs as tsRules } from 'typescript-eslint';
+import { config as tsConfig, configs as tsRules, parser } from 'typescript-eslint';
 
 export default tsConfig(
   {
     languageOptions: {
       parserOptions: {
+        parser,
         project: './tsconfig.lint.json',
         tsconfigRootDir: import.meta.dirname,
       },
