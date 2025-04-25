@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.12](https://github.com/ksv90/game-ui/compare/v0.0.11...v0.0.12) (2025-04-25)
+
+
+### Bug Fixes
+
+* revert package file ([9009d6b](https://github.com/ksv90/game-ui/commit/9009d6b6f7f943ada910f03aa4a74db191e74c04))
+* revert package file ([4bcd7bc](https://github.com/ksv90/game-ui/commit/4bcd7bc8bb47e074a93362e0707e9e11c1a88939))
+
 ## [0.0.11](https://github.com/ksv90/game-ui/compare/v0.0.10...v0.0.11) (2025-04-25)
 
 
