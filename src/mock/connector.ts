@@ -1,8 +1,8 @@
 import { ServerTicket, SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 
-import { Messenger, ROOM_CHANNEL, USER_CHANNEL } from './messenger';
+import { MessengerMock, ROOM_CHANNEL, USER_CHANNEL } from './messenger';
 
-export interface ConnectorContext {
+export interface ConnectorMockServer {
   get balance(): number;
   get bet(): number;
   get tickets(): Iterable<ServerTicket>;
@@ -11,33 +11,33 @@ export interface ConnectorContext {
   ticketCancel(ticketId: string): ServerTicket;
 }
 
-export class Connector {
-  #messenger: Messenger;
+export class ConnectorMock {
+  #messenger: MessengerMock;
 
-  #context: ConnectorContext;
+  #server: ConnectorMockServer;
 
-  constructor(messenger: Messenger, context: ConnectorContext) {
+  constructor(messenger: MessengerMock, server: ConnectorMockServer) {
     this.#messenger = messenger;
-    this.#context = context;
+    this.#server = server;
   }
 
   getSessionData(): Promise<Response> {
     const response = this.#createResponse({
-      balance: this.#context.balance,
-      bet: this.#context.bet,
+      balance: this.#server.balance,
+      bet: this.#server.bet,
       room_channel: ROOM_CHANNEL,
       user_channel: USER_CHANNEL,
-      tickets: Array.from(this.#context.tickets),
-      roundNumbers: Array.from(this.#context.roundNumbers),
+      tickets: Array.from(this.#server.tickets),
+      roundNumbers: Array.from(this.#server.roundNumbers),
     });
 
     return Promise.resolve(response);
   }
 
   ticketCreate(bet: number, numbers: readonly number[]): Promise<Response> {
-    const ticket = this.#context.ticketCreate(bet, numbers);
+    const ticket = this.#server.ticketCreate(bet, numbers);
 
-    const { balance } = this.#context;
+    const { balance } = this.#server;
 
     this.#messenger.sendCreatedTicket(ticket);
     this.#messenger.sendBalanceUpdate(balance);
@@ -49,9 +49,9 @@ export class Connector {
   }
 
   ticketCancel(ticketId: string): Promise<Response> {
-    this.#context.ticketCancel(ticketId);
+    this.#server.ticketCancel(ticketId);
 
-    const { balance } = this.#context;
+    const { balance } = this.#server;
 
     this.#messenger.sendCancelledTicket(ticketId);
     this.#messenger.sendBalanceUpdate(balance);

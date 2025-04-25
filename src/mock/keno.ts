@@ -2,28 +2,17 @@ import { Emitter, type IEmitter } from '@ksv90/decorators';
 import { Ticket } from '@ui/helpers';
 import { TicketWinData, WinData } from '@ui/schemes';
 
-import { KenoGame } from '../keno';
+import { KenoGame, KenoGameEvents } from '../keno';
 
-export interface KenoEvents {
-  balanceUpdated: [value: number];
-  totalBetChanged: [value: number];
-  ticketAdded: [ticket: Ticket];
-  ticketRemoved: [ticketId: string];
-  ticketsCleared: [];
-  roundStarted: [{ users: number }];
-  roundCompleted: [{ roundNumbers: readonly number[]; wins: readonly WinData[] }];
-  countdown: [value: number];
-  roundNumberAdded: [value: number];
-  roundNumberCleared: [];
-  totalWin: [value: number];
+export interface KenoEvents extends KenoGameEvents {
   ticketWin: [Ticket: Ticket];
 }
 
-export interface Keno extends IEmitter<KenoEvents> {}
+export interface KenoMock extends IEmitter<KenoEvents> {}
 
 export
 @Emitter()
-class Keno implements KenoGame {
+class KenoMock implements KenoGame {
   #store = {
     balance: 0,
     totalBet: 0,

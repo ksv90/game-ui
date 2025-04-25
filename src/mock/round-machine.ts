@@ -1,7 +1,7 @@
 import { StateMachineConfig } from '@ksv90/fsm';
 import { TicketWinData } from '@ui/schemes';
 
-import { Messenger } from './messenger';
+import { MessengerMock } from './messenger';
 
 export type RoundMachineStateName = 'init' | 'countdown' | 'roundStart' | 'roundProcess' | 'roundClose';
 
@@ -35,7 +35,7 @@ async function sec(): Promise<void> {
 }
 
 export const createRoundMachineConfig = <TContext extends RoundMachineContext>(
-  messenger: Messenger,
+  messenger: MessengerMock,
   context: TContext,
 ): StateMachineConfig<RoundMachineStateName, RoundMachineEventType, TContext> => {
   return {

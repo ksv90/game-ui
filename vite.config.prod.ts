@@ -10,7 +10,7 @@ export const config = defineConfig({
     minify: true,
     cssCodeSplit: false,
     rollupOptions: {
-      input: ['src/keno/index.ts'],
+      input: ['src/mock/index.ts', 'src/keno/index.ts'],
     },
   },
   server: {
@@ -23,15 +23,22 @@ export const config = defineConfig({
     },
   },
   plugins: [
-    reactPlugin(),
+    reactPlugin({
+      babel: { plugins: [['@babel/plugin-proposal-decorators', { loose: true, version: '2022-03' }]] },
+    }),
     federationPlugin({
       name: 'game-ui',
       filename: 'index.js',
       exposes: {
+        './mock': './src/mock',
         './keno': './src/keno',
       },
       shared: ['react'],
     }),
-    dtsPlugin({ outDir: './dist/types', rollupTypes: true }),
+    dtsPlugin({
+      outDir: './dist/types',
+      rollupTypes: false,
+      copyDtsFiles: true,
+    }),
   ],
 });
