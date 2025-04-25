@@ -10,15 +10,15 @@ export interface RemoveTicketAction {
   readonly payload: { readonly ticketId: string };
 }
 
-export interface ClearTicketsAction {
-  readonly type: 'clear';
+export interface UpdateTicketsAction {
+  readonly type: 'update';
+  readonly payload: { readonly tickets: readonly Ticket[] };
 }
 
 export type TicketReducerState = readonly Ticket[];
 
-export type TicketReducerAction = AddTicketAction | RemoveTicketAction | ClearTicketsAction;
+export type TicketReducerAction = AddTicketAction | RemoveTicketAction | UpdateTicketsAction;
 
-// TODO: переделать action интерфейс на несколько тикетов
 export function ticketServiceReducer(tickets: TicketReducerState, action: TicketReducerAction): TicketReducerState {
   switch (action.type) {
     case 'add': {
@@ -29,8 +29,9 @@ export function ticketServiceReducer(tickets: TicketReducerState, action: Ticket
       const { ticketId } = action.payload;
       return tickets.filter((ticket) => ticket.ticketId !== ticketId);
     }
-    case 'clear': {
-      return [];
+    case 'update': {
+      const { tickets } = action.payload;
+      return tickets;
     }
   }
 }

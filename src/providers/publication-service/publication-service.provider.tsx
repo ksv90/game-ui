@@ -1,14 +1,14 @@
 import { IReceiver, PublicationContext, StateContext } from '@ui/helpers';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
-export interface MessageServiceProviderProps {
+export interface PublicationServiceProviderProps {
   readonly receiver: IReceiver;
   readonly channel?: string;
-  readonly handler: (ctx: PublicationContext) => void;
+  readonly onPublication: (ctx: PublicationContext) => void;
 }
 
-export const MessageServiceProvider = (props: PropsWithChildren<MessageServiceProviderProps>) => {
-  const { children, receiver, channel, handler } = props;
+export const PublicationServiceProvider = (props: PropsWithChildren<PublicationServiceProviderProps>) => {
+  const { children, receiver, channel, onPublication: handler } = props;
   const [connectionState, setConnectionState] = useState(receiver.state);
 
   useEffect(() => {

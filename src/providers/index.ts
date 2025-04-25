@@ -4,7 +4,7 @@ export * from './color-mode.provider';
 export * from './connector-service';
 export * from './countdown-service';
 export * from './error-boundary';
-export * from './message-service';
+export * from './publication-service';
 export * from './room-messages.provider';
 export * from './round-numbers-service';
 export * from './state-service';

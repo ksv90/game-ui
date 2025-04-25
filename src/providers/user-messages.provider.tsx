@@ -1,9 +1,9 @@
 import { IReceiver, PublicationContext } from '@ui/helpers';
-import { TicketWinData, UserMessage } from '@ui/schemes';
+import { BalanceUpdateMessage, BetChangeMessage, TicketWinData, UserMessage, WinMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
 
-import { MessageServiceProvider } from './message-service';
+import { PublicationServiceProvider } from './publication-service';
 
 export interface UserMessagesProviderGame {
   changeBet(value: number): void;
@@ -18,33 +18,43 @@ export interface UserMessagesProviderProps {
   readonly channel?: string;
 }
 
+interface UserMessageMap {
+  ['bet-change']: BetChangeMessage;
+  ['balance-update']: BalanceUpdateMessage;
+  ['win']: WinMessage;
+}
+
+const messageHandlerMap: {
+  [K in UserMessage['type']]: (game: UserMessagesProviderGame, message: UserMessageMap[K]) => void;
+} = {
+  'bet-change': (game, message) => {
+    game.changeBet(message.bet);
+  },
+  'balance-update': (game, message) => {
+    game.updateBalance(message.balance);
+  },
+  win: (game, message) => {
+    const { totalWin, ticketWins } = message;
+    game.ticketWins(...ticketWins);
+    game.setWin(totalWin);
+  },
+};
+
+function messageHandler<T extends UserMessage['type']>(type: T, message: UserMessageMap[T], game: UserMessagesProviderGame) {
+  messageHandlerMap[type](game, message);
+}
+
 export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProviderProps>) => {
   const { children, receiver, channel, game } = props;
 
-  const handler = ({ data }: PublicationContext) => {
-    const userMessage = parse(UserMessage, data);
-    switch (userMessage.type) {
-      case 'bet-change': {
-        const { bet } = userMessage;
-        game.changeBet(bet);
-        break;
-      }
-      case 'balance-update': {
-        const { balance } = userMessage;
-        game.updateBalance(balance);
-        break;
-      }
-      case 'win': {
-        const { totalWin, ticketWins } = userMessage;
-        game.ticketWins(...ticketWins);
-        game.setWin(totalWin);
-      }
-    }
+  const publicationHandler = ({ data }: PublicationContext) => {
+    const message = parse(UserMessage, data);
+    messageHandler(message.type, message, game);
   };
 
   return (
-    <MessageServiceProvider receiver={receiver} channel={channel} handler={handler}>
+    <PublicationServiceProvider receiver={receiver} channel={channel} onPublication={publicationHandler}>
       {children}
-    </MessageServiceProvider>
+    </PublicationServiceProvider>
   );
 };

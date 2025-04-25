@@ -13,7 +13,7 @@
     "dev": "vite --host --mode dev --port 1173",
     "build": "vite build --mode prod",
     "preview": "vite preview --port 1173 --host",
-    "lint": "eslint",
+    "lint": "eslint && pnpm tsc --noEmit",
     "format": "prettier --write .",
     "test": "pnpm test:unit & pnpm test:type",
     "test:unit": "vitest --run",
