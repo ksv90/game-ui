@@ -8,11 +8,18 @@
   "files": [
     "/dist/types"
   ],
-  "types": "dist/types/index.d.ts",
+  "exports": {
+    "./mock": {
+      "types": "./dist/types/mock/index.d.ts"
+    },
+    "./keno": {
+      "types": "./dist/types/keno/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite --host --mode dev --port 1173",
     "build": "vite build --mode prod",
-    "preview": "vite preview --port 1173 --host",
+    "preview": "vite preview --mode prod --port 1173 --host",
     "lint": "eslint && pnpm tsc --noEmit",
     "format": "prettier --write .",
     "test": "pnpm test:unit & pnpm test:type",
