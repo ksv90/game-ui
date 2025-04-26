@@ -1,17 +1,15 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { useBalanceService } from '@ui/providers';
 
+import styles from './balance.module.css';
+
 export function Balance() {
   const { balance } = useBalanceService();
 
   return (
     <Flex marginBottom="20px">
-      <Text flexBasis="100px" display="flex" alignItems="center" marginLeft={50}>
-        Balance
-      </Text>
-      <Text flexBasis="100px" display="flex" alignItems="center" width={200}>
-        {balance}
-      </Text>
+      <Text className={styles['balance-text']}>Balance</Text>
+      <Text className={styles['balance-text-down']}>{balance}</Text>
     </Flex>
   );
 }

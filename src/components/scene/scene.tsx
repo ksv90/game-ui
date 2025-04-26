@@ -1,7 +1,8 @@
 import { Button, Flex } from '@chakra-ui/react';
 import { PropsWithChildren, useState } from 'react';
 
-import { Ball } from './ball';
+import { Ball } from '../ball';
+import styles from './scene.module.css';
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -59,15 +60,15 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
           return <Flex key={column}>{...ballList}</Flex>;
         })}
       </Flex>
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" className={styles['buttons-wrapper']}>
         <Flex>
           <Button onClick={clearClickHandler} marginRight={1}>
-            Очистить
+            Clear
           </Button>
-          <Button onClick={randomClickHandler}>Рандом</Button>
+          <Button onClick={randomClickHandler}>Random</Button>
         </Flex>
         <Button disabled={!betAvailable || checkedIdList.length < 4} onClick={spinHandler}>
-          Ставка
+          Play
         </Button>
       </Flex>
     </Flex>
