@@ -30,7 +30,7 @@ export function Tickets(props: PropsWithChildren<TicketsProps>) {
             {numbers.map((number, index, { length }) => {
               return (
                 <Span key={number} margin={1}>
-                  <Span color={roundNumbers.includes(number) ? 'green' : '#5CACF2'}>{number}</Span>
+                  <Span color={roundNumbers.includes(number) ? '#008000' : '#5CACF2'}>{number}</Span>
                   {index + 1 !== length && <Span>,</Span>}
                 </Span>
               );

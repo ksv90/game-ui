@@ -68,7 +68,7 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
           <Button onClick={randomClickHandler}>Random</Button>
         </Flex>
         <Button disabled={!betAvailable || checkedIdList.length < 4} onClick={spinHandler}>
-          Play
+          Make bet
         </Button>
       </Flex>
     </Flex>
