@@ -5,7 +5,7 @@ import { PropsWithChildren, useMemo } from 'react';
 import { Balance } from './balance';
 import { Bet } from './bet';
 import { Countdown } from './countdown';
-import { TicketData, TicketList } from './tickets';
+import { TicketComponentData, TicketList } from './tickets';
 import { Win } from './win';
 
 export interface ContentProps {
@@ -18,7 +18,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
   const { roundNumbers } = useRoundNumbersService();
 
   const ticketDataList = useMemo(() => {
-    return tickets.map<TicketData>(({ ticketId, bet, numbers }) => ({
+    return tickets.map<TicketComponentData>(({ ticketId, bet, numbers }) => ({
       id: ticketId,
       totalBet: `${String(bet)} EUR`,
       variant: state === 'pending' ? 'default' : 'disabled',

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { Ticket, TicketData } from './ticket';
+import { TicketComponent, TicketComponentData } from './ticket';
 import { ticketContainerClass } from './tickets.css';
 
 export interface TicketListProps {
-  readonly tickets: readonly TicketData[];
+  readonly tickets: readonly TicketComponentData[];
   readonly onClick?: (id: string) => void;
 }
 
@@ -18,7 +18,7 @@ export const TicketList: FC<TicketListProps> = (props) => {
   return (
     <div className={ticketContainerClass}>
       {tickets.map((ticket) => (
-        <Ticket key={ticket.id} {...ticket} onClick={clickHandler} />
+        <TicketComponent key={ticket.id} {...ticket} onClick={clickHandler} />
       ))}
     </div>
   );
