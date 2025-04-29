@@ -33,37 +33,43 @@ export const spotBase = style({
 
 export const spotVariants = styleVariants({
   default: {
-    backgroundColor: '#1e2a38',
+    backgroundColor: '#284662',
     borderColor: '#0f1116',
     color: '#ffffff',
+    border: '2px solid #000000',
     selectors: {
       '&:hover': {
-        borderColor: '#4169e1',
+        background: '#1F3450',
+        border: '2px solid #275290',
       },
     },
   },
+
   picked: {
-    backgroundColor: '#2c3e50',
-    borderColor: '#0f1116',
-    color: '#6495ed',
+    backgroundColor: '#284662',
+    color: '#78B7FF',
+    border: '2px solid rgb(0, 0, 0)',
     selectors: {
       '&:hover': {
-        borderColor: '#4169e1',
+        background: '#1F3450',
+        color: '#78B7FF',
+        border: '2px solid #275290',
       },
     },
   },
   disabled: {
     backgroundColor: '#1e2a38',
     borderColor: '#0f1116',
-    color: '#7a8ca5',
+    color: '#C4CDD7',
     opacity: 0.6,
     cursor: 'not-allowed',
     pointerEvents: 'none',
+    background: '#1F2F3E',
   },
   drawn: {
-    backgroundColor: '#1e2a38',
+    backgroundColor: '#1F2F3E',
     borderColor: '#0f1116',
-    color: '#ffffff',
+    color: '#FFFEFF',
     cursor: 'not-allowed',
     pointerEvents: 'none',
     selectors: {
@@ -73,7 +79,7 @@ export const spotVariants = styleVariants({
         width: '32px',
         height: '32px',
         borderRadius: '50%',
-        backgroundColor: '#4169e1',
+        backgroundColor: '#0E5BA4',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
