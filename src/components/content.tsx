@@ -5,7 +5,6 @@ import { PropsWithChildren } from 'react';
 import { Balance } from './balance';
 import { Bet } from './bet';
 import { Countdown } from './countdown';
-import { DrawnNumbers } from './drawn-numbers';
 import { Tickets } from './tickets';
 import { Win } from './win';
 
@@ -26,7 +25,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
         <Win />
         <Balance />
       </Flex>
-      <Flex justifyContent="center">{state === 'pending' ? <Countdown /> : <DrawnNumbers />}</Flex>
+      <Flex justifyContent="center">{state === 'pending' ? <Countdown /> : <p>process</p>}</Flex>
       <Tickets removeAvailable={state !== 'pending'} tickets={tickets} onRemove={onRemove} />
     </>
   );

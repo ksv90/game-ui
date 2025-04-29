@@ -1,4 +1,5 @@
 import federationPlugin from '@originjs/vite-plugin-federation';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import reactPlugin from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dtsPlugin from 'vite-plugin-dts';
@@ -26,6 +27,7 @@ export const config = defineConfig({
     reactPlugin({
       babel: { plugins: [['@babel/plugin-proposal-decorators', { loose: true, version: '2022-03' }]] },
     }),
+    vanillaExtractPlugin(),
     federationPlugin({
       name: 'game-ui',
       filename: 'index.js',
