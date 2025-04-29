@@ -15,7 +15,7 @@ export function Bet() {
 
   return (
     <Flex marginBottom="20px">
-      <Text display="flex" width={200} alignItems="center">
+      <Text display="flex" width={200} bg="#1F2F3E" alignItems="center">
         Total bet
       </Text>
       <Text display="flex" flexBasis="50px" alignItems="center">

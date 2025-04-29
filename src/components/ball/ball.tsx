@@ -1,6 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
 
+import styles from './ball.module.css';
+
 export interface BallProps {
   readonly id: number;
   readonly checked: boolean;
@@ -15,8 +17,17 @@ export function Ball(props: PropsWithChildren<BallProps>) {
   };
 
   return (
-    <Button onClick={clickHandler} width={50} height={50} margin={0.5} bgColor={checked ? '#1462A6' : '#2F5171'} color="white">
-      {id}
+    <Button
+      onClick={clickHandler}
+      width="50px"
+      height="50px"
+      margin="0.5"
+      padding="0"
+      bg="#2F5171"
+      color="white"
+      className={styles['numbers-windows']}
+    >
+      <div className={`${styles.inner} ${checked ? styles.checked : ''}`}>{id}</div>
     </Button>
   );
 }
