@@ -34,6 +34,10 @@ async function sec(): Promise<void> {
   await wait(1_000);
 }
 
+async function nextNumber(index: number) {
+  await wait(500 + (250 / 100) * (index * 10));
+}
+
 export const createRoundMachineConfig = <TContext extends RoundMachineContext>(
   messenger: MessengerMock,
   context: TContext,
@@ -79,8 +83,9 @@ export const createRoundMachineConfig = <TContext extends RoundMachineContext>(
         entry: [log],
         job: async (ctx) => {
           const value = ctx.addRoundNumber();
-          messenger.sendRoundProcess(value, Array.from(ctx.roundNumbers));
-          await sec();
+          const roundNumbers = Array.from(ctx.roundNumbers);
+          messenger.sendRoundProcess(value, roundNumbers);
+          await nextNumber(roundNumbers.length);
         },
         on: {
           COMPLETE: [{ target: 'roundClose', cond: (ctx) => ctx.isRoundReady() }, { target: 'roundProcess' }],

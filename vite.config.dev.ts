@@ -1,3 +1,4 @@
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import reactPlugin from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
@@ -6,5 +7,6 @@ export const config = defineConfig({
     reactPlugin({
       babel: { plugins: [['@babel/plugin-proposal-decorators', { loose: true, version: '2022-03' }]] },
     }),
+    vanillaExtractPlugin(),
   ],
 });

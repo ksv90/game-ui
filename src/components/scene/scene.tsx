@@ -1,8 +1,12 @@
 import { Button, Flex } from '@chakra-ui/react';
-import { PropsWithChildren, useState } from 'react';
+import { useRoundNumbersService, useStateService } from '@ui/providers';
+import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
-import { Ball } from '../ball';
-import styles from './scene.module.css';
+import { SpotData, SpotsGrid } from '../spots-grid';
+
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P];
+};
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -20,13 +24,31 @@ export interface SceneProps {
 export function Scene(props: PropsWithChildren<SceneProps>) {
   const { betAvailable, bet } = props;
   const [checkedIdList, setCheckedIdList] = useState(new Array<number>());
+  const { state } = useStateService();
+  const { roundNumbers } = useRoundNumbersService();
 
-  const ballClickHandler = (id: number) => {
-    if (checkedIdList.includes(id)) {
-      setCheckedIdList((prevList) => prevList.filter((prevId) => prevId !== id));
+  const spots = useMemo(
+    () =>
+      Array.from({ length: 80 }, (_, index) => {
+        const spotData: Writable<SpotData> = { number: index + 1, state: 'default' };
+        if (roundNumbers.includes(spotData.number)) spotData.state = 'drawn';
+        else if (state === 'process') spotData.state = 'disabled';
+        else if (checkedIdList.includes(spotData.number)) spotData.state = 'picked';
+        return spotData;
+      }),
+    [checkedIdList, roundNumbers, state],
+  );
+
+  useEffect(() => {
+    setCheckedIdList([]);
+  }, [state]);
+
+  const ballClickHandler = (number: number) => {
+    if (checkedIdList.includes(number)) {
+      setCheckedIdList((prevList) => prevList.filter((prevId) => prevId !== number));
     } else {
       if (checkedIdList.length >= 10) return;
-      setCheckedIdList((prevList) => [...prevList, id]);
+      setCheckedIdList((prevList) => [...prevList, number]);
     }
   };
 
@@ -51,16 +73,8 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
 
   return (
     <Flex direction="column" margin={10} display="inline-flex">
-      <Flex direction="column" marginBottom={10}>
-        {Array.from({ length: 8 }).map((_, column) => {
-          const ballList = Array.from({ length: 10 }).map((_, row, { length }) => {
-            const id = column * length + row + 1;
-            return <Ball key={id} id={id} checked={checkedIdList.includes(id)} onClick={ballClickHandler} />;
-          });
-          return <Flex key={column}>{...ballList}</Flex>;
-        })}
-      </Flex>
-      <Flex justifyContent="space-between" className={styles['buttons-wrapper']}>
+      <SpotsGrid spots={spots} onClick={ballClickHandler} />
+      <Flex justifyContent="space-between">
         <Flex>
           <Button onClick={clearClickHandler} marginRight={1}>
             Clear
