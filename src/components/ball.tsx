@@ -15,7 +15,7 @@ export function Ball(props: PropsWithChildren<BallProps>) {
   };
 
   return (
-    <Button onClick={clickHandler} width={50} margin={0.5} bgColor={checked ? '#724db4' : 'white'}>
+    <Button onClick={clickHandler} width={50} height={50} margin={0.5} bgColor={checked ? '#1462A6' : '#2F5171'} color="white">
       {id}
     </Button>
   );

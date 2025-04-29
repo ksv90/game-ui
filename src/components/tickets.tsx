@@ -24,13 +24,13 @@ export function Tickets(props: PropsWithChildren<TicketsProps>) {
   return (
     <Flex direction="column">
       {tickets.map(({ ticketId, bet, numbers }) => (
-        <Flex key={ticketId} margin={1}>
+        <Flex key={ticketId} margin={1} color="#5CACF2">
           <Text marginRight={2}>{`${String(bet)}:`}</Text>
           <Text>
             {numbers.map((number, index, { length }) => {
               return (
                 <Span key={number} margin={1}>
-                  <Span color={roundNumbers.includes(number) ? 'green' : 'white'}>{number}</Span>
+                  <Span color={roundNumbers.includes(number) ? '#008000' : '#5CACF2'}>{number}</Span>
                   {index + 1 !== length && <Span>,</Span>}
                 </Span>
               );
