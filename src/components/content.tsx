@@ -1,11 +1,11 @@
 import { Flex } from '@chakra-ui/react';
-import { useStateService, useTicketService } from '@ui/providers';
-import { PropsWithChildren } from 'react';
+import { useRoundNumbersService, useStateService, useTicketService } from '@ui/providers';
+import { PropsWithChildren, useMemo } from 'react';
 
 import { Balance } from './balance';
 import { Bet } from './bet';
 import { Countdown } from './countdown';
-import { Tickets } from './tickets';
+import { TicketComponentData, TicketList } from './tickets';
 import { Win } from './win';
 
 export interface ContentProps {
@@ -15,6 +15,16 @@ export interface ContentProps {
 export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
   const { tickets } = useTicketService();
   const { state } = useStateService();
+  const { roundNumbers } = useRoundNumbersService();
+
+  const ticketDataList = useMemo(() => {
+    return tickets.map<TicketComponentData>(({ ticketId, bet, numbers }) => ({
+      id: ticketId,
+      totalBet: `${String(bet)} EUR`,
+      variant: state === 'pending' ? 'default' : 'disabled',
+      spots: numbers.map((number) => ({ number, state: roundNumbers.includes(number) ? 'drawn' : 'default' })),
+    }));
+  }, [roundNumbers, state, tickets]);
 
   return (
     <>
@@ -26,7 +36,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
         <Balance />
       </Flex>
       <Flex justifyContent="center">{state === 'pending' ? <Countdown /> : <p>process</p>}</Flex>
-      <Tickets removeAvailable={state !== 'pending'} tickets={tickets} onRemove={onRemove} />
+      <TicketList tickets={ticketDataList} onClick={onRemove} />
     </>
   );
 }
