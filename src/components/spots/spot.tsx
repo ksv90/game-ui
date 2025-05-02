@@ -1,4 +1,4 @@
-import { spotBase, spotSpan, spotVariants } from './spot.css.ts';
+import { spotSpan, spotVariants } from './spot.css.ts';
 
 export type SpotVariant = keyof typeof spotVariants;
 
@@ -19,7 +19,7 @@ export function Spot(props: SpotProps) {
   };
 
   return (
-    <div className={`${spotBase} ${spotVariants[variant]}`} onClick={clickHandler}>
+    <div className={spotVariants[variant]} onClick={clickHandler}>
       <span className={spotSpan}>{number}</span>
     </div>
   );

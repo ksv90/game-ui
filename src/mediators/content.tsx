@@ -21,9 +21,8 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
       totalBet: `${String(bet)} EUR`,
       variant: state === 'pending' ? 'default' : 'disabled',
       spots: numbers.map<ISpotData>((number) => {
-        const spotData: Writable<ISpotData> = { number, variant: 'default' };
+        const spotData: Writable<ISpotData> = { number, variant: 'disabled' };
         if (roundNumbers.includes(number)) spotData.variant = 'drawn';
-        else if (state === 'process') spotData.variant = 'disabled';
         return spotData;
       }),
     }));
