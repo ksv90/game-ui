@@ -1,8 +1,8 @@
 import { ServerTicket } from '@ui/schemes';
 
-import { Ticket } from './types';
+import { ITicket } from './types';
 
-export const ticketTransform = (serverTicket: ServerTicket): Ticket => ({
+export const ticketTransform = (serverTicket: ServerTicket): ITicket => ({
   ticketId: serverTicket.ticketId,
   bet: serverTicket.bet,
   numbers: serverTicket.numbers,

@@ -1,4 +1,4 @@
-import { IReceiver, PublicationContext, Ticket, ticketTransform } from '@ui/helpers';
+import { IReceiver, ITicket, PublicationContext, ticketTransform } from '@ui/helpers';
 import {
   RoomMessage,
   RoundCompleteMessage,
@@ -15,7 +15,7 @@ import { PropsWithChildren } from 'react';
 import { PublicationServiceProvider } from './publication-service';
 
 export interface RoomMessagesProviderGame {
-  addTickets(...tickets: Ticket[]): void;
+  addTickets(...tickets: ITicket[]): void;
   removeTickets(...ticketIds: string[]): void;
 
   roundStart(users: number): void;

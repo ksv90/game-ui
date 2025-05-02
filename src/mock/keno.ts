@@ -1,11 +1,11 @@
 import { Emitter, type IEmitter } from '@ksv90/decorators';
-import { Ticket } from '@ui/helpers';
+import { ITicket } from '@ui/helpers';
 import { TicketWinData, WinData } from '@ui/schemes';
 
 import { KenoGame, KenoGameEvents } from '../keno';
 
 export interface KenoEvents extends KenoGameEvents {
-  ticketWin: [Ticket: Ticket];
+  ticketWin: [ticket: ITicket];
 }
 
 export interface KenoMock extends IEmitter<KenoEvents> {}
@@ -17,7 +17,7 @@ class KenoMock implements KenoGame {
     balance: 0,
     totalBet: 0,
     countdown: 0,
-    tickets: new Map<string, Ticket>(),
+    tickets: new Map<string, ITicket>(),
     roundNumbers: new Set<number>(),
   };
 
@@ -39,7 +39,7 @@ class KenoMock implements KenoGame {
     this.emit('totalBetChanged', value);
   }
 
-  addTickets(...tickets: Ticket[]): void {
+  addTickets(...tickets: ITicket[]): void {
     for (const ticket of tickets) {
       this.#store.tickets.set(ticket.ticketId, ticket);
       this.emit('ticketAdded', ticket);
@@ -92,7 +92,7 @@ class KenoMock implements KenoGame {
       if (!ticket) {
         throw new Error(`Ticket ${ticketId} не найден`);
       }
-      const winTicket = { ...ticket, win, coincidences } satisfies Ticket;
+      const winTicket = { ...ticket, win, coincidences } satisfies ITicket;
       this.#store.tickets.set(ticketId, winTicket);
       this.emit('ticketWin', winTicket);
     }

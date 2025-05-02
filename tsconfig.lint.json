@@ -10,8 +10,9 @@
     "types": ["vitest/globals", "@testing-library/jest-dom"],
     "skipLibCheck": true,
     "paths": {
-      "@ui/helpers": ["./src/helpers"],
       "@ui/components": ["./src/components"],
+      "@ui/helpers": ["./src/helpers"],
+      "@ui/mediators": ["./src/mediators"],
       "@ui/providers": ["./src/providers"],
       "@ui/schemes": ["./src/schemes"]
     }

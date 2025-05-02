@@ -25,8 +25,8 @@ export class ConnectorMock {
     const response = this.#createResponse({
       balance: this.#server.balance,
       bet: this.#server.bet,
-      room_channel: ROOM_CHANNEL,
-      user_channel: USER_CHANNEL,
+      roomChannel: ROOM_CHANNEL,
+      userChannel: USER_CHANNEL,
       tickets: Array.from(this.#server.tickets),
       roundNumbers: Array.from(this.#server.roundNumbers),
     });

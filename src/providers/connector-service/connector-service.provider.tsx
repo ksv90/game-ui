@@ -1,5 +1,5 @@
-import { errorHandler, getJsonData, Ticket, ticketTransform, validateData } from '@ui/helpers';
-import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { errorHandler, getJsonData, ITicket, ticketTransform, validateData } from '@ui/helpers';
+import { ChannelData, SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { ConnectorService, ConnectorServiceContext } from './connector-service.context';
@@ -14,7 +14,7 @@ export interface ConnectorServiceGame {
   updateBalance(value: number): void;
   changeBet(value: number): void;
 
-  addTickets(...tickets: Ticket[]): void;
+  addTickets(...tickets: ITicket[]): void;
   removeTickets(...ticketIds: string[]): void;
 
   addRoundNumbers(...values: number[]): void;
@@ -23,7 +23,7 @@ export interface ConnectorServiceGame {
 export interface ConnectorServiceProviderProps {
   readonly connector: ConnectorServiceConnector;
   readonly game: ConnectorServiceGame;
-  readonly onStateChange?: (state: { room_channel: string; user_channel: string }) => void;
+  readonly onStateChange?: (state: ChannelData) => void;
 }
 
 export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServiceProviderProps>) => {
@@ -36,12 +36,12 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
           .then(getJsonData)
           .then(validateData(SessionResponse))
           .then((sessionData) => {
-            const { bet, balance, tickets, roundNumbers, room_channel, user_channel } = sessionData;
+            const { bet, balance, tickets, roundNumbers, roomChannel, userChannel } = sessionData;
             game.updateBalance(balance);
             game.changeBet(bet);
             game.addTickets(...tickets.map(ticketTransform));
             game.addRoundNumbers(...roundNumbers);
-            onStateChange?.({ room_channel, user_channel });
+            onStateChange?.({ roomChannel, userChannel });
           })
           .catch(errorHandler);
       },

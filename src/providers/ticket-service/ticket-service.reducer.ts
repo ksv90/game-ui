@@ -1,8 +1,8 @@
-import { Ticket } from '@ui/helpers';
+import { ITicket } from '@ui/helpers';
 
 export interface AddTicketAction {
   readonly type: 'add';
-  readonly payload: { readonly ticket: Ticket };
+  readonly payload: { readonly ticket: ITicket };
 }
 
 export interface RemoveTicketAction {
@@ -12,10 +12,10 @@ export interface RemoveTicketAction {
 
 export interface UpdateTicketsAction {
   readonly type: 'update';
-  readonly payload: { readonly tickets: readonly Ticket[] };
+  readonly payload: { readonly tickets: readonly ITicket[] };
 }
 
-export type TicketReducerState = readonly Ticket[];
+export type TicketReducerState = readonly ITicket[];
 
 export type TicketReducerAction = AddTicketAction | RemoveTicketAction | UpdateTicketsAction;
 

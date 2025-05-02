@@ -1,5 +1,5 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { IEmitterLite, IReceiver, Ticket } from '@ui/helpers';
+import { IEmitterLite, IReceiver, ITicket } from '@ui/helpers';
 import {
   BalanceServiceProvider,
   BetServiceProvider,
@@ -14,13 +14,13 @@ import {
   UserMessagesProvider,
   WinServiceProvider,
 } from '@ui/providers';
-import { TicketWinData, WinData } from '@ui/schemes';
+import { ChannelData, TicketWinData, WinData } from '@ui/schemes';
 import { JSX, useEffect, useState } from 'react';
 
 export interface KenoGameEvents {
   balanceUpdated: [value: number];
   totalBetChanged: [value: number];
-  ticketAdded: [ticket: Ticket];
+  ticketAdded: [ticket: ITicket];
   ticketRemoved: [ticketId: string];
   ticketsCleared: [];
   roundStarted: [{ users: number }];
@@ -38,7 +38,7 @@ export interface KenoGame extends IEmitterLite<KenoGameEvents> {
   updateBalance(value: number): void;
   changeBet(value: number): void;
 
-  addTickets(...tickets: Ticket[]): void;
+  addTickets(...tickets: ITicket[]): void;
   removeTickets(...ticketIds: string[]): void;
   ticketWins(...ticketWins: TicketWinData[]): void;
   clearTickets(): void;
@@ -83,10 +83,10 @@ export function KenoApp(props: KenoProps) {
     };
   }, [receiver]);
 
-  const stateChangeHandler = (state: { room_channel: string; user_channel: string }) => {
-    const { room_channel, user_channel } = state;
-    setRoomChannel(room_channel);
-    setUserChannel(user_channel);
+  const stateChangeHandler = (state: ChannelData) => {
+    const { roomChannel, userChannel } = state;
+    setRoomChannel(roomChannel);
+    setUserChannel(userChannel);
   };
 
   const errorHandler = () => {

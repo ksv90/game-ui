@@ -1,23 +1,22 @@
 import { FC } from 'react';
 
-import { Spot } from '../spot';
-import { SpotData } from '../spots-grid';
+import { ISpotData, Spot } from '../spots';
 import { betClass, spotRowClass, ticketVariants } from './tickets.css';
 
 export type TicketVariant = keyof typeof ticketVariants;
 
-export interface TicketComponentData {
+export interface ITicketData {
   readonly id: string;
   readonly variant: TicketVariant;
   readonly totalBet: string;
-  readonly spots: readonly SpotData[];
+  readonly spots: readonly ISpotData[];
 }
 
-export interface TicketProps extends TicketComponentData {
+export interface TicketProps extends ITicketData {
   readonly onClick?: (id: string) => void;
 }
 
-export const TicketComponent: FC<TicketProps> = (props) => {
+export const Ticket: FC<TicketProps> = (props) => {
   const { id, variant, totalBet, spots, onClick } = props;
 
   const clickHandler = () => {
@@ -28,8 +27,8 @@ export const TicketComponent: FC<TicketProps> = (props) => {
     <div className={ticketVariants[variant]} onClick={clickHandler}>
       <div className={betClass}>{totalBet}</div>
       <div className={spotRowClass}>
-        {spots.map(({ number, state }) => (
-          <Spot key={number} number={number} state={state} />
+        {spots.map(({ number, variant }) => (
+          <Spot key={number} number={number} variant={variant} />
         ))}
       </div>
     </div>

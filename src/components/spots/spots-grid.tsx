@@ -1,14 +1,9 @@
-import { Spot, SpotState } from '@ui/components';
+import { ISpotData, Spot } from '@ui/components';
 
-import { grid } from './spots-grid.css.ts';
-
-export interface SpotData {
-  readonly number: number;
-  readonly state: SpotState;
-}
+import { grid } from './spot.css';
 
 export interface SpotsGridProps {
-  readonly spots: readonly SpotData[];
+  readonly spots: readonly ISpotData[];
   readonly onClick?: (number: number) => void;
 }
 
@@ -22,7 +17,7 @@ export function SpotsGrid(props: SpotsGridProps) {
   return (
     <div className={grid}>
       {spots.map((spot) => (
-        <Spot key={spot.number} number={spot.number} state={spot.state} onClick={clickHandler} />
+        <Spot key={spot.number} number={spot.number} variant={spot.variant} onClick={clickHandler} />
       ))}
     </div>
   );
