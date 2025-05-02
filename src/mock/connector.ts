@@ -6,7 +6,7 @@ export interface ConnectorMockServer {
   get balance(): number;
   get bet(): number;
   get tickets(): Iterable<ServerTicket>;
-  get roundNumbers(): Iterable<number>;
+  get balls(): Iterable<number>;
   ticketCreate(bet: number, numbers: readonly number[]): ServerTicket;
   ticketCancel(ticketId: string): ServerTicket;
 }
@@ -28,7 +28,7 @@ export class ConnectorMock {
       roomChannel: ROOM_CHANNEL,
       userChannel: USER_CHANNEL,
       tickets: Array.from(this.#server.tickets),
-      roundNumbers: Array.from(this.#server.roundNumbers),
+      balls: Array.from(this.#server.balls),
     });
 
     return Promise.resolve(response);

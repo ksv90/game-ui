@@ -118,12 +118,12 @@ class MessengerMock implements IReceiver {
     this.#sendMessage(ROOM_CHANNEL, { type: 'round-start', users } satisfies RoundStartMessage);
   }
 
-  sendRoundComplete(numbers: number[], wins: RoundCompleteMessage['wins']): void {
-    this.#sendMessage(ROOM_CHANNEL, { type: 'round-complete', numbers, wins } satisfies RoundCompleteMessage);
+  sendRoundComplete(balls: number[], userWins: RoundCompleteMessage['userWins']): void {
+    this.#sendMessage(ROOM_CHANNEL, { type: 'round-complete', balls, userWins } satisfies RoundCompleteMessage);
   }
 
-  sendRoundProcess(added: number, numbers: number[]): void {
-    this.#sendMessage(ROOM_CHANNEL, { type: 'round-process', added, numbers } satisfies RoundProcessMessage);
+  sendRoundProcess(added: number, balls: number[]): void {
+    this.#sendMessage(ROOM_CHANNEL, { type: 'round-process', added, balls } satisfies RoundProcessMessage);
   }
 
   sendRoundCountdown(countdown: number): void {

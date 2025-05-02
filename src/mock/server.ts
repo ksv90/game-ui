@@ -15,7 +15,7 @@ interface ServerMockStore {
   bet: number;
   roundStarted: boolean;
   countdown: number;
-  roundNumbers: Set<number>;
+  balls: Set<number>;
   ticketMap: Map<string, ServerTicket>;
   payouts: Record<number, readonly number[]>;
 }
@@ -31,7 +31,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
       bet: 10,
       roundStarted: false,
       countdown: COUNTDOWN,
-      roundNumbers: new Set<number>(),
+      balls: new Set<number>(),
       ticketMap: new Map<string, ServerTicket>(),
     };
   }
@@ -56,8 +56,8 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
     return this.#store.ticketMap.values();
   }
 
-  get roundNumbers(): Iterable<number> {
-    return this.#store.roundNumbers.values();
+  get balls(): Iterable<number> {
+    return this.#store.balls.values();
   }
 
   countdownDecrement(): void {
@@ -71,36 +71,36 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
     if (!this.#store.roundStarted) {
       throw new Error('Нельзя добавить число в неактивный раунд');
     }
-    const currentSize = this.#store.roundNumbers.size;
+    const currentSize = this.#store.balls.size;
     let value = -1;
-    while (this.#store.roundNumbers.size === currentSize) {
+    while (this.#store.balls.size === currentSize) {
       value = Math.floor(Math.random() * TOP_NUMBER) + 1;
-      this.#store.roundNumbers.add(value);
+      this.#store.balls.add(value);
     }
     return value;
   }
 
   isRoundReady(): boolean {
-    return this.#store.roundNumbers.size === ROUND_NUMBERS;
+    return this.#store.balls.size === ROUND_NUMBERS;
   }
 
   winsCalculate(): { totalWin: number; ticketWins: TicketWinData[] } {
     let totalWin = 0;
     const ticketWins = new Array<TicketWinData>();
     for (const ticket of this.#store.ticketMap.values()) {
-      const payoutList = this.#store.payouts[ticket.numbers.length] ?? [];
-      const coincidences = new Array<number>();
-      for (let index = 0, len = ticket.numbers.length; index < len; index += 1) {
-        const value = ticket.numbers[index];
-        if (this.#store.roundNumbers.has(value)) coincidences.push(value);
+      const payoutList = this.#store.payouts[ticket.spots.length] ?? [];
+      const hits = new Array<number>();
+      for (let index = 0, len = ticket.spots.length; index < len; index += 1) {
+        const value = ticket.spots[index];
+        if (this.#store.balls.has(value)) hits.push(value);
       }
-      const value = payoutList[coincidences.length];
+      const value = payoutList[hits.length];
       if (typeof value !== 'number') {
         throw new Error('Непредвиденная ошибка в подсчетах');
       }
       const win = value * ticket.bet;
       totalWin += win;
-      ticketWins.push({ ticketId: ticket.ticketId, win, coincidences });
+      ticketWins.push({ ticketId: ticket.ticketId, win, hits });
     }
 
     return { totalWin, ticketWins };
@@ -113,7 +113,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
   roundClose(): void {
     this.#store.roundStarted = false;
     this.#store.countdown = COUNTDOWN;
-    this.#store.roundNumbers.clear();
+    this.#store.balls.clear();
     this.#store.ticketMap.clear();
   }
 
@@ -127,7 +127,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
 
     const ticket = {
       bet,
-      numbers: [...numbers],
+      spots: [...numbers],
       ticketId: String(Math.random() * 10),
     } satisfies ServerTicket;
 

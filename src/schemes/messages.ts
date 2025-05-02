@@ -25,15 +25,15 @@ export type RoundStartMessage = InferOutput<typeof RoundStartMessage>;
 
 export const RoundCompleteMessage = object({
   type: literal('round-complete'),
-  numbers: array(number()),
-  wins: array(WinData),
+  balls: array(number()),
+  userWins: array(WinData),
 });
 
 export type RoundCompleteMessage = InferOutput<typeof RoundCompleteMessage>;
 
 export const RoundProcessMessage = object({
   type: literal('round-process'),
-  numbers: array(number()),
+  balls: array(number()),
   added: number(),
 });
 

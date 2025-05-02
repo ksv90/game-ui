@@ -1,4 +1,4 @@
-import { array, InferOutput, number, object, optional, string } from '@valibot/valibot';
+import { array, InferOutput, number, object, string } from '@valibot/valibot';
 
 export const BalanceData = object({
   balance: number(),
@@ -24,7 +24,7 @@ export const BetData = object({
 });
 
 export const RoundNumbers = object({
-  roundNumbers: array(number()),
+  balls: array(number()),
 });
 
 export type BetData = InferOutput<typeof BetData>;
@@ -32,9 +32,7 @@ export type BetData = InferOutput<typeof BetData>;
 export const ServerTicket = object({
   ticketId: string(),
   bet: number(),
-  numbers: array(number()),
-  win: optional(number()),
-  coincidences: optional(array(number())),
+  spots: array(number()),
 });
 
 export type ServerTicket = InferOutput<typeof ServerTicket>;
@@ -53,7 +51,7 @@ export type TicketListData = InferOutput<typeof TicketListData>;
 
 export const WinData = object({
   userName: string(),
-  win: number(),
+  totalWin: number(),
 });
 
 export type WinData = InferOutput<typeof WinData>;
@@ -61,7 +59,7 @@ export type WinData = InferOutput<typeof WinData>;
 export const TicketWinData = object({
   ticketId: string(),
   win: number(),
-  coincidences: array(number()),
+  hits: array(number()),
 });
 
 export type TicketWinData = InferOutput<typeof TicketWinData>;

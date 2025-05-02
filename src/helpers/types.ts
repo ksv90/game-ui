@@ -14,6 +14,4 @@ export interface ITicket {
   readonly ticketId: string;
   readonly bet: number;
   readonly numbers: readonly number[];
-  readonly win: number;
-  readonly coincidences: readonly number[];
 }

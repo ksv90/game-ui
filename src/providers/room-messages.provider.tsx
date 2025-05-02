@@ -53,10 +53,10 @@ const messageHandlerMap: {
     game.roundStart(message.users);
   },
   'round-process': (game, message) => {
-    game.addRoundNumbers(...message.numbers);
+    game.addRoundNumbers(...message.balls);
   },
   'round-complete': (game, message) => {
-    game.roundComplete(message.numbers, message.wins);
+    game.roundComplete(message.balls, message.userWins);
   },
   'round-countdown': (game, message) => {
     game.setCountdown(message.countdown);

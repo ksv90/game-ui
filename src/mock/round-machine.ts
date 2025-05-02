@@ -10,7 +10,7 @@ export type RoundMachineEventType = 'NEXT' | 'COMPLETE';
 export interface RoundMachineContext {
   get mode(): number;
   get countdown(): number;
-  get roundNumbers(): Iterable<number>;
+  get balls(): Iterable<number>;
   countdownDecrement(): void;
   addRoundNumber(): number;
   isRoundReady(): boolean;
@@ -83,9 +83,9 @@ export const createRoundMachineConfig = <TContext extends RoundMachineContext>(
         entry: [log],
         job: async (ctx) => {
           const value = ctx.addRoundNumber();
-          const roundNumbers = Array.from(ctx.roundNumbers);
-          messenger.sendRoundProcess(value, roundNumbers);
-          await nextNumber(roundNumbers.length);
+          const balls = Array.from(ctx.balls);
+          messenger.sendRoundProcess(value, balls);
+          await nextNumber(balls.length);
         },
         on: {
           COMPLETE: [{ target: 'roundClose', cond: (ctx) => ctx.isRoundReady() }, { target: 'roundProcess' }],
@@ -98,7 +98,7 @@ export const createRoundMachineConfig = <TContext extends RoundMachineContext>(
           const { totalWin, ticketWins } = ctx.winsCalculate();
           ctx.roundClose();
           messenger.sendWin(totalWin, ticketWins);
-          messenger.sendRoundComplete(Array.from(ctx.roundNumbers), totalWin ? [{ userName: '', win: totalWin }] : []);
+          messenger.sendRoundComplete(Array.from(ctx.balls), totalWin ? [{ userName: '', totalWin }] : []);
         },
         on: {
           COMPLETE: [{ target: 'countdown' }],

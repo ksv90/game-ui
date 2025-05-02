@@ -36,11 +36,11 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
           .then(getJsonData)
           .then(validateData(SessionResponse))
           .then((sessionData) => {
-            const { bet, balance, tickets, roundNumbers, roomChannel, userChannel } = sessionData;
+            const { bet, balance, tickets, balls, roomChannel, userChannel } = sessionData;
             game.updateBalance(balance);
             game.changeBet(bet);
             game.addTickets(...tickets.map(ticketTransform));
-            game.addRoundNumbers(...roundNumbers);
+            game.addRoundNumbers(...balls);
             onStateChange?.({ roomChannel, userChannel });
           })
           .catch(errorHandler);

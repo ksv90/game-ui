@@ -5,7 +5,7 @@ import { TicketWinData, WinData } from '@ui/schemes';
 import { KenoGame, KenoGameEvents } from '../keno';
 
 export interface KenoEvents extends KenoGameEvents {
-  ticketWin: [ticket: ITicket];
+  ticketWin: [ticket: ITicket & TicketWinData];
 }
 
 export interface KenoMock extends IEmitter<KenoEvents> {}
@@ -87,14 +87,12 @@ class KenoMock implements KenoGame {
   }
 
   ticketWins(...ticketWins: TicketWinData[]): void {
-    for (const { ticketId, win, coincidences } of ticketWins) {
+    for (const { ticketId, win, hits } of ticketWins) {
       const ticket = this.#store.tickets.get(ticketId);
       if (!ticket) {
         throw new Error(`Ticket ${ticketId} не найден`);
       }
-      const winTicket = { ...ticket, win, coincidences } satisfies ITicket;
-      this.#store.tickets.set(ticketId, winTicket);
-      this.emit('ticketWin', winTicket);
+      this.emit('ticketWin', { ...ticket, win, hits });
     }
   }
 
