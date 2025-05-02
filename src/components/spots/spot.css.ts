@@ -16,6 +16,18 @@ export const spotSpan = style({
   zIndex: 1,
 });
 
+export const grid = style({
+  backgroundColor: '#1F2F3E',
+  borderRadius: '6px',
+  display: 'grid',
+  gap: '2px',
+  gridAutoRows: '48px',
+  gridTemplateColumns: 'repeat(10, 48px)',
+  justifyContent: 'center',
+  marginTop: '24px',
+  padding: '8px',
+});
+
 export const spotBase = style({
   alignItems: 'center',
   animationDuration: '0.4s',
@@ -46,7 +58,7 @@ export const spotVariants = styleVariants({
     {
       backgroundColor: '#284662',
       borderColor: '#000000',
-      color: '#ffffff',
+      color: '#FFFFFF',
 
       selectors: {
         '&:hover': {

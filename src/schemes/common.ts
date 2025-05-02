@@ -7,8 +7,8 @@ export const BalanceData = object({
 export type BalanceData = InferOutput<typeof BalanceData>;
 
 export const ChannelData = object({
-  user_channel: string(),
-  room_channel: string(),
+  userChannel: string(),
+  roomChannel: string(),
 });
 
 export type ChannelData = InferOutput<typeof ChannelData>;

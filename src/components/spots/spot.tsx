@@ -1,22 +1,25 @@
 import { spotSpan, spotVariants } from './spot.css.ts';
 
-export type SpotState = 'default' | 'picked' | 'disabled' | 'drawn';
+export type SpotVariant = keyof typeof spotVariants;
 
-export interface SpotProps {
+export interface ISpotData {
   readonly number: number;
-  readonly state: SpotState;
+  readonly variant: SpotVariant;
+}
+
+export interface SpotProps extends ISpotData {
   readonly onClick?: (number: number) => void;
 }
 
 export function Spot(props: SpotProps) {
-  const { number, state, onClick } = props;
+  const { number, variant, onClick } = props;
 
   const clickHandler = () => {
     onClick?.(number);
   };
 
   return (
-    <div className={spotVariants[state]} onClick={clickHandler}>
+    <div className={spotVariants[variant]} onClick={clickHandler}>
       <span className={spotSpan}>{number}</span>
     </div>
   );

@@ -1,9 +1,9 @@
-import { Ticket } from '@ui/helpers';
+import { ITicket } from '@ui/helpers';
 import { createContext, useContext } from 'react';
 
 export interface TicketService {
-  get tickets(): readonly Ticket[];
-  get addTickets(): (...tickets: Ticket[]) => void;
+  get tickets(): readonly ITicket[];
+  get addTickets(): (...tickets: ITicket[]) => void;
   get removeTickets(): (...ticketIds: string[]) => void;
   get clearTickets(): () => void;
 }

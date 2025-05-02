@@ -1,12 +1,8 @@
 import { Button, Flex } from '@chakra-ui/react';
+import { ISpotData, SpotsGrid } from '@ui/components';
+import { Writable } from '@ui/helpers';
 import { useRoundNumbersService, useStateService } from '@ui/providers';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
-
-import { SpotData, SpotsGrid } from '../spots-grid';
-
-type Writable<T> = {
-  -readonly [P in keyof T]: T[P];
-};
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -30,10 +26,10 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
   const spots = useMemo(
     () =>
       Array.from({ length: 80 }, (_, index) => {
-        const spotData: Writable<SpotData> = { number: index + 1, state: 'default' };
-        if (roundNumbers.includes(spotData.number)) spotData.state = 'drawn';
-        else if (state === 'process') spotData.state = 'disabled';
-        else if (checkedIdList.includes(spotData.number)) spotData.state = 'picked';
+        const spotData: Writable<ISpotData> = { number: index + 1, variant: 'default' };
+        if (roundNumbers.includes(spotData.number)) spotData.variant = 'drawn';
+        else if (state === 'process') spotData.variant = 'disabled';
+        else if (checkedIdList.includes(spotData.number)) spotData.variant = 'picked';
         return spotData;
       }),
     [checkedIdList, roundNumbers, state],
@@ -43,7 +39,7 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
     setCheckedIdList([]);
   }, [state]);
 
-  const ballClickHandler = (number: number) => {
+  const spotClickHandler = (number: number) => {
     if (checkedIdList.includes(number)) {
       setCheckedIdList((prevList) => prevList.filter((prevId) => prevId !== number));
     } else {
@@ -73,7 +69,7 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
 
   return (
     <Flex direction="column" margin={10} display="inline-flex">
-      <SpotsGrid spots={spots} onClick={ballClickHandler} />
+      <SpotsGrid spots={spots} onClick={spotClickHandler} />
       <Flex justifyContent="space-between">
         <Flex>
           <Button onClick={clearClickHandler} marginRight={1}>

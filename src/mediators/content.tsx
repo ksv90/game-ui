@@ -1,12 +1,10 @@
 import { Flex } from '@chakra-ui/react';
+import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList } from '@ui/components';
+import { Writable } from '@ui/helpers';
 import { useRoundNumbersService, useStateService, useTicketService } from '@ui/providers';
 import { PropsWithChildren, useMemo } from 'react';
 
-import { Balance } from './balance';
-import { Bet } from './bet';
-import { Countdown } from './countdown';
-import { TicketComponentData, TicketList } from './tickets';
-import { Win } from './win';
+import { Win } from '../components/win';
 
 export interface ContentProps {
   readonly onRemove: (ticketId: string) => void;
@@ -18,11 +16,15 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
   const { roundNumbers } = useRoundNumbersService();
 
   const ticketDataList = useMemo(() => {
-    return tickets.map<TicketComponentData>(({ ticketId, bet, numbers }) => ({
+    return tickets.map<ITicketData>(({ ticketId, bet, numbers }) => ({
       id: ticketId,
       totalBet: `${String(bet)} EUR`,
       variant: state === 'pending' ? 'default' : 'disabled',
-      spots: numbers.map((number) => ({ number, state: roundNumbers.includes(number) ? 'drawn' : 'default' })),
+      spots: numbers.map<ISpotData>((number) => {
+        const spotData: Writable<ISpotData> = { number, variant: 'disabled' };
+        if (roundNumbers.includes(number)) spotData.variant = 'drawn';
+        return spotData;
+      }),
     }));
   }, [roundNumbers, state, tickets]);
 

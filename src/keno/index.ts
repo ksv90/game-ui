@@ -3,5 +3,6 @@ export * from './keno.gui';
 export * from './keno.rules';
 export * from '@ui/components';
 export * from '@ui/helpers';
+export * from '@ui/mediators';
 export * from '@ui/providers';
 export * from '@ui/schemes';

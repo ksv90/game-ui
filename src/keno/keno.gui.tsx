@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import { Content, Scene } from '@ui/components';
+import { Content, Scene } from '@ui/mediators';
 import { useBetService, useConnectorService, useStateService } from '@ui/providers';
 import { PropsWithChildren, useEffect } from 'react';
 
@@ -17,6 +17,7 @@ export function KenoGui(_props: PropsWithChildren) {
   };
 
   const removeHandler = (ticketId: string) => {
+    if (state !== 'pending') return;
     ticketCancel(ticketId);
   };
 
