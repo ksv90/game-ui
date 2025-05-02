@@ -11,89 +11,105 @@ const scale = keyframes({
   '100%': { transform: 'translate(-50%, -50%) scale(1)' },
 });
 
-export const spotBase = style({
-  width: '48px',
-  height: '48px',
-  borderRadius: '6px',
-  border: '1px solid',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontWeight: 'bold',
-  fontSize: '16px',
-  transition: 'all 0.2s ease',
-  userSelect: 'none',
-  position: 'relative',
-  cursor: 'pointer',
-  animationName: fadeIn,
-  animationDuration: '0.4s',
-  animationTimingFunction: 'ease',
-  animationFillMode: 'both',
-});
-
-export const spotVariants = styleVariants({
-  default: {
-    backgroundColor: '#284662',
-    borderColor: '#0f1116',
-    color: '#ffffff',
-    border: '2px solid #000000',
-    selectors: {
-      '&:hover': {
-        background: '#1F3450',
-        border: '2px solid #275290',
-      },
-    },
-  },
-
-  picked: {
-    backgroundColor: '#284662',
-    color: '#78B7FF',
-    border: '2px solid rgb(0, 0, 0)',
-    selectors: {
-      '&:hover': {
-        background: '#1F3450',
-        color: '#78B7FF',
-        border: '2px solid #275290',
-      },
-    },
-  },
-  disabled: {
-    backgroundColor: '#1e2a38',
-    borderColor: '#0f1116',
-    color: '#C4CDD7',
-    opacity: 0.6,
-    cursor: 'not-allowed',
-    pointerEvents: 'none',
-    background: '#1F2F3E',
-  },
-  drawn: {
-    backgroundColor: '#1F2F3E',
-    borderColor: '#0f1116',
-    color: '#FFFEFF',
-    cursor: 'not-allowed',
-    pointerEvents: 'none',
-    selectors: {
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        width: '32px',
-        height: '32px',
-        borderRadius: '50%',
-        backgroundColor: '#0E5BA4',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 0,
-        animationName: scale,
-        animationDuration: '0.3s',
-        animationTimingFunction: 'ease',
-        animationFillMode: 'forwards',
-      },
-    },
-  },
-});
-
 export const spotSpan = style({
   position: 'relative',
   zIndex: 1,
+});
+
+export const spotBase = style({
+  alignItems: 'center',
+  animationDuration: '0.4s',
+  animationFillMode: 'both',
+  animationName: fadeIn,
+  animationTimingFunction: 'ease',
+  borderRadius: '6px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  boxSizing: 'border-box',
+  cursor: 'pointer',
+  display: 'flex',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  height: '48px',
+  justifyContent: 'center',
+  position: 'relative',
+  transitionBehavior: 'all',
+  transitionDuration: '0.2s',
+  transitionTimingFunction: 'ease',
+  userSelect: 'none',
+  width: '48px',
+});
+
+export const spotVariants = styleVariants({
+  default: [
+    spotBase,
+    {
+      backgroundColor: '#284662',
+      borderColor: '#000000',
+      color: '#ffffff',
+
+      selectors: {
+        '&:hover': {
+          backgroundColor: '#1F3450',
+          borderColor: '#275290',
+        },
+      },
+    },
+  ],
+
+  picked: [
+    spotBase,
+    {
+      backgroundColor: '#0E5BA4',
+      borderColor: '#000000',
+      color: '#78B7FF',
+
+      selectors: {
+        '&:hover': {
+          backgroundColor: '#1F3450',
+          borderColor: '#275290',
+          color: '#78B7FF',
+        },
+      },
+    },
+  ],
+  disabled: [
+    spotBase,
+    {
+      backgroundColor: '#1F2F3E',
+      border: 'none',
+      color: '#C4CDD7',
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+    },
+  ],
+  drawn: [
+    spotBase,
+    {
+      backgroundColor: '#1F2F3E',
+      border: 'none',
+      color: '#FFFEFF',
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+
+      selectors: {
+        '&::after': {
+          animationDuration: '0.3s',
+          animationFillMode: 'forwards',
+          animationName: scale,
+          animationTimingFunction: 'ease',
+          backgroundColor: '#0E5BA4',
+          borderRadius: '50%',
+          content: '""',
+          height: '32px',
+          left: '50%',
+          position: 'absolute',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '32px',
+          zIndex: 0,
+        },
+      },
+    },
+  ],
 });
