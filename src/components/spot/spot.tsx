@@ -1,4 +1,4 @@
-import { spotBase, spotSpan, spotVariants } from './spot.css.ts';
+import { spotSpan, spotVariants } from './spot.css.ts';
 
 export type SpotState = 'default' | 'picked' | 'disabled' | 'drawn';
 
@@ -16,7 +16,7 @@ export function Spot(props: SpotProps) {
   };
 
   return (
-    <div className={`${spotBase} ${spotVariants[state]}`} onClick={clickHandler}>
+    <div className={spotVariants[state]} onClick={clickHandler}>
       <span className={spotSpan}>{number}</span>
     </div>
   );
