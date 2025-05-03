@@ -1,5 +1,5 @@
-import { IReceiver, PublicationContext } from '@ui/helpers';
-import { BalanceUpdateMessage, BetChangeMessage, TicketWinData, UserMessage, WinMessage } from '@ui/schemes';
+import { IReceiver, ITicketWin, PublicationContext } from '@ui/helpers';
+import { BalanceUpdateMessage, BetChangeMessage, UserMessage, WinMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
 
@@ -8,7 +8,7 @@ import { PublicationServiceProvider } from './publication-service';
 export interface UserMessagesProviderGame {
   changeBet(value: number): void;
   updateBalance(value: number): void;
-  ticketWins(...ticketWins: TicketWinData[]): void;
+  ticketWins(...ticketWins: ITicketWin[]): void;
   setWin(value: number): void;
 }
 

@@ -1,11 +1,10 @@
 import { Emitter, type IEmitter } from '@ksv90/decorators';
-import { ITicket } from '@ui/helpers';
-import { TicketWinData, WinData } from '@ui/schemes';
+import { IBallList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
 
 import { KenoGame, KenoGameEvents } from '../keno';
 
 export interface KenoEvents extends KenoGameEvents {
-  ticketWin: [ticket: ITicket & TicketWinData];
+  ticketWin: [ticket: ITicket & ITicketWin];
 }
 
 export interface KenoMock extends IEmitter<KenoEvents> {}
@@ -18,7 +17,7 @@ class KenoMock implements KenoGame {
     totalBet: 0,
     countdown: 0,
     tickets: new Map<string, ITicket>(),
-    roundNumbers: new Set<number>(),
+    balls: new Set<number>(),
   };
 
   start(): void {
@@ -62,10 +61,10 @@ class KenoMock implements KenoGame {
     this.emit('roundStarted', { users });
   }
 
-  roundComplete(roundNumbers: readonly number[], wins: readonly WinData[]): void {
+  roundComplete(balls: IBallList, userWins: readonly IUserWin[]): void {
     this.clearTickets();
-    this.clearRoundNumbers();
-    this.emit('roundCompleted', { roundNumbers, wins });
+    this.clearBalls();
+    this.emit('roundCompleted', { balls, userWins });
   }
 
   setCountdown(value: number): void {
@@ -73,20 +72,20 @@ class KenoMock implements KenoGame {
     this.emit('countdown', value);
   }
 
-  addRoundNumbers(...values: number[]): void {
+  addBalls(...values: number[]): void {
     for (const value of values) {
-      if (this.#store.roundNumbers.has(value)) continue;
-      this.#store.roundNumbers.add(value);
-      this.emit('roundNumberAdded', value);
+      if (this.#store.balls.has(value)) continue;
+      this.#store.balls.add(value);
+      this.emit('ballAdded', value);
     }
   }
 
-  clearRoundNumbers(): void {
-    this.#store.roundNumbers.clear();
-    this.emit('roundNumberCleared');
+  clearBalls(): void {
+    this.#store.balls.clear();
+    this.emit('ballsCleared');
   }
 
-  ticketWins(...ticketWins: TicketWinData[]): void {
+  ticketWins(...ticketWins: ITicketWin[]): void {
     for (const { ticketId, win, hits } of ticketWins) {
       const ticket = this.#store.tickets.get(ticketId);
       if (!ticket) {

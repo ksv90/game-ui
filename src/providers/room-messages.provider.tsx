@@ -1,4 +1,4 @@
-import { IReceiver, ITicket, PublicationContext, ticketTransform } from '@ui/helpers';
+import { IReceiver, ISpotIdList, ITicket, IUserWin, PublicationContext, ticketTransform } from '@ui/helpers';
 import {
   RoomMessage,
   RoundCompleteMessage,
@@ -7,7 +7,6 @@ import {
   RoundStartMessage,
   TicketCancelMessage,
   TicketCreateMessage,
-  WinData,
 } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
@@ -19,10 +18,10 @@ export interface RoomMessagesProviderGame {
   removeTickets(...ticketIds: string[]): void;
 
   roundStart(users: number): void;
-  roundComplete(numbers: readonly number[], wins: readonly WinData[]): void;
+  roundComplete(spots: ISpotIdList, userWins: readonly IUserWin[]): void;
 
   setCountdown(countdown: number): void;
-  addRoundNumbers(...values: number[]): void;
+  addBalls(...values: number[]): void;
 }
 
 export interface RoomMessagesProviderProps {
@@ -53,7 +52,7 @@ const messageHandlerMap: {
     game.roundStart(message.users);
   },
   'round-process': (game, message) => {
-    game.addRoundNumbers(...message.balls);
+    game.addBalls(...message.balls);
   },
   'round-complete': (game, message) => {
     game.roundComplete(message.balls, message.userWins);

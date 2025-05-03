@@ -1,5 +1,4 @@
-import { ITicket, ticketTransform } from '@ui/helpers';
-import { ServerTicket } from '@ui/schemes';
+import { IServerTicket, ITicket, ticketTransform } from '@ui/helpers';
 import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
 import { TicketService, TicketServiceContext } from './ticket-service.context';
@@ -21,7 +20,7 @@ export interface TicketServiceGame {
 
 export interface TicketServiceProviderProps {
   readonly game: TicketServiceGame;
-  readonly tickets?: readonly ServerTicket[];
+  readonly tickets?: readonly IServerTicket[];
 }
 
 export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProviderProps>) => {

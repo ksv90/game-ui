@@ -1,8 +1,8 @@
 import { InferOutput, intersect } from '@valibot/valibot';
 
-import { BalanceData, BetData, ChannelData, RoundNumbers, TicketData, TicketIdData, TicketListData } from './common';
+import { BalanceData, BallListData, BetData, ChannelData, TicketData, TicketIdData, TicketListData } from './common';
 
-export const SessionResponse = intersect([BalanceData, ChannelData, BetData, TicketListData, RoundNumbers]);
+export const SessionResponse = intersect([BalanceData, ChannelData, BetData, TicketListData, BallListData]);
 
 export type SessionResponse = InferOutput<typeof SessionResponse>;
 

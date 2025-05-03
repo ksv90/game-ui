@@ -1,12 +1,12 @@
-import { errorHandler, getJsonData, ITicket, ticketTransform, validateData } from '@ui/helpers';
-import { ChannelData, SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { errorHandler, getJsonData, ISpotIdList, ITicket, ticketTransform, validateData } from '@ui/helpers';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { ConnectorService, ConnectorServiceContext } from './connector-service.context';
 
 export interface ConnectorServiceConnector {
   getSessionData(): Promise<Response>;
-  ticketCreate(bet: number, numbers: readonly number[]): Promise<Response>;
+  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response>;
   ticketCancel(ticketId: string): Promise<Response>;
 }
 
@@ -17,17 +17,22 @@ export interface ConnectorServiceGame {
   addTickets(...tickets: ITicket[]): void;
   removeTickets(...ticketIds: string[]): void;
 
-  addRoundNumbers(...values: number[]): void;
+  addBalls(...values: number[]): void;
+}
+
+export interface IConnectorServiceData {
+  readonly userChannel: string;
+  readonly roomChannel: string;
 }
 
 export interface ConnectorServiceProviderProps {
   readonly connector: ConnectorServiceConnector;
   readonly game: ConnectorServiceGame;
-  readonly onStateChange?: (state: ChannelData) => void;
+  readonly onDataChange?: (connectorServiceData: IConnectorServiceData) => void;
 }
 
 export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServiceProviderProps>) => {
-  const { children, connector, game, onStateChange } = props;
+  const { children, connector, game, onDataChange } = props;
   const connectorService = useMemo<ConnectorService>(
     () => ({
       getSessionData() {
@@ -40,14 +45,14 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
             game.updateBalance(balance);
             game.changeBet(bet);
             game.addTickets(...tickets.map(ticketTransform));
-            game.addRoundNumbers(...balls);
-            onStateChange?.({ roomChannel, userChannel });
+            game.addBalls(...balls);
+            onDataChange?.({ roomChannel, userChannel });
           })
           .catch(errorHandler);
       },
-      ticketCreate(bet, numbers) {
+      ticketCreate(bet, spots) {
         connector
-          .ticketCreate(bet, numbers)
+          .ticketCreate(bet, spots)
           .then(getJsonData)
           .then(validateData(TicketCreateResponse))
           .then(({ ticket, balance }) => {
@@ -68,7 +73,7 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
           .catch(errorHandler);
       },
     }),
-    [connector, game, onStateChange],
+    [connector, game, onDataChange],
   );
 
   return <ConnectorServiceContext.Provider value={connectorService}>{children}</ConnectorServiceContext.Provider>;

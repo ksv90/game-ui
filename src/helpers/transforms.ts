@@ -1,9 +1,7 @@
-import { ServerTicket } from '@ui/schemes';
+import { IServerTicket, ITicket } from './types';
 
-import { ITicket } from './types';
-
-export const ticketTransform = (serverTicket: ServerTicket): ITicket => ({
+export const ticketTransform = (serverTicket: IServerTicket): ITicket => ({
   ticketId: serverTicket.ticketId,
   bet: serverTicket.bet,
-  numbers: serverTicket.spots,
+  spots: serverTicket.spots,
 });

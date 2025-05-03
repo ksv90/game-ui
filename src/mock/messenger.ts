@@ -1,5 +1,5 @@
 import { Broadcaster, Emitter, IBroadcaster, IEmitter } from '@ksv90/decorators';
-import { IReceiver, ISubscription, ReceiverEvents, ReceiverState } from '@ui/helpers';
+import { IReceiver, IServerTicket, IServerTicketWin, IServerUserWin, ISubscription, ReceiverEvents, ReceiverState } from '@ui/helpers';
 import {
   BalanceUpdateMessage,
   BetChangeMessage,
@@ -7,10 +7,8 @@ import {
   RoundCountdownMessage,
   RoundProcessMessage,
   RoundStartMessage,
-  ServerTicket,
   TicketCancelMessage,
   TicketCreateMessage,
-  TicketWinData,
   WinMessage,
 } from '@ui/schemes';
 
@@ -102,11 +100,11 @@ class MessengerMock implements IReceiver {
     this.publish('totalBetChanged', value);
   }
 
-  sendWin(totalWin: number, ticketWins: TicketWinData[]) {
+  sendWin(totalWin: number, ticketWins: IServerTicketWin[]) {
     this.#sendMessage(USER_CHANNEL, { type: 'win', totalWin, ticketWins } satisfies WinMessage);
   }
 
-  sendCreatedTicket(ticket: ServerTicket): void {
+  sendCreatedTicket(ticket: IServerTicket): void {
     this.#sendMessage(ROOM_CHANNEL, { type: 'ticket-create', ticket } satisfies TicketCreateMessage);
   }
 
@@ -118,7 +116,7 @@ class MessengerMock implements IReceiver {
     this.#sendMessage(ROOM_CHANNEL, { type: 'round-start', users } satisfies RoundStartMessage);
   }
 
-  sendRoundComplete(balls: number[], userWins: RoundCompleteMessage['userWins']): void {
+  sendRoundComplete(balls: number[], userWins: IServerUserWin): void {
     this.#sendMessage(ROOM_CHANNEL, { type: 'round-complete', balls, userWins } satisfies RoundCompleteMessage);
   }
 

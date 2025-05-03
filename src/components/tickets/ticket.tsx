@@ -27,8 +27,8 @@ export const Ticket: FC<TicketProps> = (props) => {
     <div className={ticketVariants[variant]} onClick={clickHandler}>
       <div className={betClass}>{totalBet}</div>
       <div className={spotRowClass}>
-        {spots.map(({ number, variant }) => (
-          <Spot key={number} number={number} variant={variant} />
+        {spots.map(({ id, variant }) => (
+          <Spot key={id} id={id} variant={variant} />
         ))}
       </div>
     </div>

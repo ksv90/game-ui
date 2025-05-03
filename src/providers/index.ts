@@ -1,4 +1,5 @@
 export * from './balance-service';
+export * from './balls-service';
 export * from './bet-service';
 export * from './color-mode.provider';
 export * from './connector-service';
@@ -6,7 +7,6 @@ export * from './countdown-service';
 export * from './error-boundary';
 export * from './publication-service';
 export * from './room-messages.provider';
-export * from './round-numbers-service';
 export * from './state-service';
 export * from './ticket-service';
 export * from './user-messages.provider';

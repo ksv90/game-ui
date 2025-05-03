@@ -1,4 +1,5 @@
-import { ServerTicket, TicketWinData } from '@ui/schemes';
+import { IServerTicket, IServerTicketWin } from '@ui/helpers';
+import { TicketWinListData, TotalWinData } from '@ui/schemes';
 
 import { ConnectorMockServer } from './connector';
 import { RoundMachineContext } from './round-machine';
@@ -16,7 +17,7 @@ interface ServerMockStore {
   roundStarted: boolean;
   countdown: number;
   balls: Set<number>;
-  ticketMap: Map<string, ServerTicket>;
+  ticketMap: Map<string, IServerTicket>;
   payouts: Record<number, readonly number[]>;
 }
 
@@ -32,7 +33,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
       roundStarted: false,
       countdown: COUNTDOWN,
       balls: new Set<number>(),
-      ticketMap: new Map<string, ServerTicket>(),
+      ticketMap: new Map<string, IServerTicket>(),
     };
   }
 
@@ -52,7 +53,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
     return this.#store.countdown;
   }
 
-  get tickets(): Iterable<ServerTicket> {
+  get tickets(): Iterable<IServerTicket> {
     return this.#store.ticketMap.values();
   }
 
@@ -67,7 +68,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
     this.#store.countdown -= 1;
   }
 
-  addRoundNumber(): number {
+  addBall(): number {
     if (!this.#store.roundStarted) {
       throw new Error('Нельзя добавить число в неактивный раунд');
     }
@@ -84,9 +85,9 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
     return this.#store.balls.size === ROUND_NUMBERS;
   }
 
-  winsCalculate(): { totalWin: number; ticketWins: TicketWinData[] } {
+  winsCalculate(): TotalWinData & TicketWinListData {
     let totalWin = 0;
-    const ticketWins = new Array<TicketWinData>();
+    const ticketWins = new Array<IServerTicketWin>();
     for (const ticket of this.#store.ticketMap.values()) {
       const payoutList = this.#store.payouts[ticket.spots.length] ?? [];
       const hits = new Array<number>();
@@ -117,7 +118,7 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
     this.#store.ticketMap.clear();
   }
 
-  ticketCreate(bet: number, numbers: readonly number[]): ServerTicket {
+  ticketCreate(bet: number, spots: readonly number[]): IServerTicket {
     if (this.#store.balance < bet) {
       throw new Error('Не хватает средств, чтобы сделать ставку');
     }
@@ -127,15 +128,15 @@ export class ServerMock implements RoundMachineContext, ConnectorMockServer {
 
     const ticket = {
       bet,
-      spots: [...numbers],
+      spots: [...spots],
       ticketId: String(Math.random() * 10),
-    } satisfies ServerTicket;
+    } satisfies IServerTicket;
 
     this.#store.ticketMap.set(ticket.ticketId, ticket);
     return ticket;
   }
 
-  ticketCancel(ticketId: string): ServerTicket {
+  ticketCancel(ticketId: string): IServerTicket {
     const ticket = this.#store.ticketMap.get(ticketId);
     if (!ticket) {
       throw new Error('Ticket не найден');
