@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.0.13](https://github.com/ksv90/game-ui/compare/v0.0.12...v0.0.13) (2025-05-03)
+
+
+### Bug Fixes
+
+* mediators ([4c013d4](https://github.com/ksv90/game-ui/commit/4c013d4fd6f92c8f769666899b67cbfc09617329))
+* mediators ([c8549a0](https://github.com/ksv90/game-ui/commit/c8549a0f12cdc04b198093b886a5e3cd900b0816))
+* naming ([320b239](https://github.com/ksv90/game-ui/commit/320b239402f10c7a49ec8aece80e25c3f5094cf9))
+* spot ([0a6740e](https://github.com/ksv90/game-ui/commit/0a6740e5c79044b03001b8ac15a7315baf9af401))
+* spot ([3682839](https://github.com/ksv90/game-ui/commit/3682839f89fedb3db9bcdf9e6519da7cf0e63966))
+* spots added ([5e2cba9](https://github.com/ksv90/game-ui/commit/5e2cba9322d59754badb606ce6f35d386dd7efe8))
+* spots added ([95ff187](https://github.com/ksv90/game-ui/commit/95ff187c689ae03583be518f1b449b2e320f1f87))
+* styles changed ([30ce37e](https://github.com/ksv90/game-ui/commit/30ce37e86b7150d24f4c0988c9f6c6062b38eb8c))
+* ticket name fixed ([ada5478](https://github.com/ksv90/game-ui/commit/ada5478f53bdb380422453d0f6939df15d8b19cd))
+* tickets ([9f6df4a](https://github.com/ksv90/game-ui/commit/9f6df4a21ebb54c036e3b57ec38619ff8d874706))
+* tickets ([92c720f](https://github.com/ksv90/game-ui/commit/92c720fc906bcf048b77c1ca8a877b630dc61191))
+* types changed ([b0526aa](https://github.com/ksv90/game-ui/commit/b0526aafe16cafe159f518f271ea91b23c2b9a20))
+* window-apperance-customization ([13f562e](https://github.com/ksv90/game-ui/commit/13f562e3f75635eeaa4b5df935989fdb8db10f66))
+* window-apperance-customization ([646320f](https://github.com/ksv90/game-ui/commit/646320fba1234c3a24bc0db0d10d5fb966d9431a))
+* windows-customization ([11fc6d3](https://github.com/ksv90/game-ui/commit/11fc6d3bc0463d0aec627a2f214d25c5ba6b49e9))
+
 ## [0.0.12](https://github.com/ksv90/game-ui/compare/v0.0.11...v0.0.12) (2025-04-25)
 
 
