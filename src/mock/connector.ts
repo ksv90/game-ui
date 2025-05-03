@@ -1,14 +1,15 @@
-import { ServerTicket, SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { IServerTicket, ISpotIdList } from '@ui/helpers';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 
 import { MessengerMock, ROOM_CHANNEL, USER_CHANNEL } from './messenger';
 
 export interface ConnectorMockServer {
   get balance(): number;
   get bet(): number;
-  get tickets(): Iterable<ServerTicket>;
-  get roundNumbers(): Iterable<number>;
-  ticketCreate(bet: number, numbers: readonly number[]): ServerTicket;
-  ticketCancel(ticketId: string): ServerTicket;
+  get tickets(): Iterable<IServerTicket>;
+  get balls(): Iterable<number>;
+  ticketCreate(bet: number, spots: ISpotIdList): IServerTicket;
+  ticketCancel(ticketId: string): IServerTicket;
 }
 
 export class ConnectorMock {
@@ -28,14 +29,14 @@ export class ConnectorMock {
       roomChannel: ROOM_CHANNEL,
       userChannel: USER_CHANNEL,
       tickets: Array.from(this.#server.tickets),
-      roundNumbers: Array.from(this.#server.roundNumbers),
+      balls: Array.from(this.#server.balls),
     });
 
     return Promise.resolve(response);
   }
 
-  ticketCreate(bet: number, numbers: readonly number[]): Promise<Response> {
-    const ticket = this.#server.ticketCreate(bet, numbers);
+  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response> {
+    const ticket = this.#server.ticketCreate(bet, spots);
 
     const { balance } = this.#server;
 

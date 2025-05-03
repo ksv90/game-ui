@@ -1,20 +1,20 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { IEmitterLite, IReceiver, ITicket } from '@ui/helpers';
+import { IBallList, IEmitterLite, IReceiver, ISpotIdList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
 import {
   BalanceServiceProvider,
+  BallsServiceProvider,
   BetServiceProvider,
   ColorModeProvider,
   ConnectorServiceProvider,
   CountdownServiceProvider,
   ErrorBoundary,
+  IConnectorServiceData,
   RoomMessagesProvider,
-  RoundNumbersServiceProvider,
   StateServiceProvider,
   TicketServiceProvider,
   UserMessagesProvider,
   WinServiceProvider,
 } from '@ui/providers';
-import { ChannelData, TicketWinData, WinData } from '@ui/schemes';
 import { JSX, useEffect, useState } from 'react';
 
 export interface KenoGameEvents {
@@ -24,10 +24,10 @@ export interface KenoGameEvents {
   ticketRemoved: [ticketId: string];
   ticketsCleared: [];
   roundStarted: [{ users: number }];
-  roundCompleted: [{ roundNumbers: readonly number[]; wins: readonly WinData[] }];
+  roundCompleted: [{ balls: IBallList; userWins: readonly IUserWin[] }];
   countdown: [value: number];
-  roundNumberAdded: [value: number];
-  roundNumberCleared: [];
+  ballAdded: [value: number];
+  ballsCleared: [];
   totalWin: [value: number];
 }
 
@@ -40,20 +40,20 @@ export interface KenoGame extends IEmitterLite<KenoGameEvents> {
 
   addTickets(...tickets: ITicket[]): void;
   removeTickets(...ticketIds: string[]): void;
-  ticketWins(...ticketWins: TicketWinData[]): void;
+  ticketWins(...ticketWins: ITicketWin[]): void;
   clearTickets(): void;
 
   roundStart(users: number): void;
-  roundComplete(roundNumbers: readonly number[], wins: readonly WinData[]): void;
+  roundComplete(balls: IBallList, userWins: readonly IUserWin[]): void;
 
   setCountdown(countdown: number): void;
-  addRoundNumbers(...values: number[]): void;
+  addBalls(...values: number[]): void;
   setWin(value: number): void;
 }
 
 export interface KenoConnector {
   getSessionData(): Promise<Response>;
-  ticketCreate(bet: number, numbers: readonly number[]): Promise<Response>;
+  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response>;
   ticketCancel(ticketId: string): Promise<Response>;
 }
 
@@ -83,8 +83,8 @@ export function KenoApp(props: KenoProps) {
     };
   }, [receiver]);
 
-  const stateChangeHandler = (state: ChannelData) => {
-    const { roomChannel, userChannel } = state;
+  const dataChangeHandler = (data: IConnectorServiceData) => {
+    const { roomChannel, userChannel } = data;
     setRoomChannel(roomChannel);
     setUserChannel(userChannel);
   };
@@ -97,7 +97,7 @@ export function KenoApp(props: KenoProps) {
     <ErrorBoundary onError={errorHandler}>
       <ChakraProvider value={defaultSystem}>
         <ColorModeProvider>
-          <ConnectorServiceProvider game={game} connector={connector} onStateChange={stateChangeHandler}>
+          <ConnectorServiceProvider game={game} connector={connector} onDataChange={dataChangeHandler}>
             <RoomMessagesProvider game={game} receiver={receiver} channel={roomChannel}>
               <UserMessagesProvider game={game} receiver={receiver} channel={userChannel}>
                 <TicketServiceProvider game={game}>
@@ -105,12 +105,12 @@ export function KenoApp(props: KenoProps) {
                     <BetServiceProvider game={game}>
                       <WinServiceProvider game={game}>
                         <CountdownServiceProvider game={game}>
-                          <RoundNumbersServiceProvider game={game}>
+                          <BallsServiceProvider game={game}>
                             <StateServiceProvider game={game} state="pending">
                               {ui && <div>{ui}</div>}
                               {rules && rulesOpen && <div>{rules}</div>}
                             </StateServiceProvider>
-                          </RoundNumbersServiceProvider>
+                          </BallsServiceProvider>
                         </CountdownServiceProvider>
                       </WinServiceProvider>
                     </BetServiceProvider>

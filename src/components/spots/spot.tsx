@@ -3,24 +3,24 @@ import { spotSpan, spotVariants } from './spot.css.ts';
 export type SpotVariant = keyof typeof spotVariants;
 
 export interface ISpotData {
-  readonly number: number;
+  readonly id: number;
   readonly variant: SpotVariant;
 }
 
 export interface SpotProps extends ISpotData {
-  readonly onClick?: (number: number) => void;
+  readonly onClick?: (id: number) => void;
 }
 
 export function Spot(props: SpotProps) {
-  const { number, variant, onClick } = props;
+  const { id, variant, onClick } = props;
 
   const clickHandler = () => {
-    onClick?.(number);
+    onClick?.(id);
   };
 
   return (
     <div className={spotVariants[variant]} onClick={clickHandler}>
-      <span className={spotSpan}>{number}</span>
+      <span className={spotSpan}>{id}</span>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Button, Flex } from '@chakra-ui/react';
-import { ISpotData, SpotsGrid } from '@ui/components';
-import { Writable } from '@ui/helpers';
-import { useRoundNumbersService, useStateService } from '@ui/providers';
+import { ISpotData, SpotBoard } from '@ui/components';
+import { ISpotIdList, Writable } from '@ui/helpers';
+import { useBallsService, useStateService } from '@ui/providers';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 function getRandomValue(min: number, max: number): number {
@@ -14,71 +14,72 @@ function getRandomInt(min: number, max: number): number {
 
 export interface SceneProps {
   readonly betAvailable: boolean;
-  readonly bet: (checkedIdList: readonly number[]) => void;
+  readonly bet: (spots: ISpotIdList) => void;
 }
 
 export function Scene(props: PropsWithChildren<SceneProps>) {
   const { betAvailable, bet } = props;
-  const [checkedIdList, setCheckedIdList] = useState(new Array<number>());
+  const [spotList, setSpotList] = useState(new Array<number>());
   const { state } = useStateService();
-  const { roundNumbers } = useRoundNumbersService();
+  const { balls } = useBallsService();
 
   const spots = useMemo(
     () =>
       Array.from({ length: 80 }, (_, index) => {
-        const spotData: Writable<ISpotData> = { number: index + 1, variant: 'default' };
-        if (roundNumbers.includes(spotData.number)) spotData.variant = 'drawn';
+        const spotData: Writable<ISpotData> = { id: index + 1, variant: 'default' };
+        if (balls.includes(spotData.id)) spotData.variant = 'drawn';
         else if (state === 'process') spotData.variant = 'disabled';
-        else if (checkedIdList.includes(spotData.number)) spotData.variant = 'picked';
+        else if (spotList.includes(spotData.id)) spotData.variant = 'picked';
         return spotData;
       }),
-    [checkedIdList, roundNumbers, state],
+    [spotList, balls, state],
   );
 
   useEffect(() => {
-    setCheckedIdList([]);
+    setSpotList([]);
   }, [state]);
 
-  const spotClickHandler = (number: number) => {
-    if (checkedIdList.includes(number)) {
-      setCheckedIdList((prevList) => prevList.filter((prevId) => prevId !== number));
+  const spotClickHandler = (spot: number) => {
+    if (spotList.includes(spot)) {
+      setSpotList((prevList) => prevList.filter((prevId) => prevId !== spot));
     } else {
-      if (checkedIdList.length >= 10) return;
-      setCheckedIdList((prevList) => [...prevList, number]);
+      if (spotList.length >= 10) return;
+      setSpotList((prevList) => [...prevList, spot]);
     }
   };
 
   const clearClickHandler = () => {
-    setCheckedIdList([]);
+    setSpotList([]);
   };
 
   const randomClickHandler = () => {
-    const numbers = new Set<number>();
+    const spotSet = new Set<number>();
     const size = getRandomInt(4, 10);
-    while (numbers.size < size) {
-      numbers.add(getRandomInt(1, 80));
+    while (spotSet.size < size) {
+      spotSet.add(getRandomInt(1, 80));
     }
-    setCheckedIdList(Array.from(numbers));
+    setSpotList(Array.from(spotSet));
   };
 
-  const spinHandler = () => {
-    if (checkedIdList.length < 4) return;
-    bet(checkedIdList);
-    setCheckedIdList([]);
+  const betHandler = () => {
+    bet(spotList);
+    setSpotList([]);
   };
 
   return (
     <Flex direction="column" margin={10} display="inline-flex">
-      <SpotsGrid spots={spots} onClick={spotClickHandler} />
+      <SpotBoard spots={spots} onClick={spotClickHandler} />
       <Flex justifyContent="space-between">
         <Flex>
-          <Button onClick={clearClickHandler} marginRight={1}>
+          <Button disabled={!betAvailable} onClick={clearClickHandler} marginRight={1}>
             Clear
           </Button>
-          <Button onClick={randomClickHandler}>Random</Button>
+          <Button disabled={!betAvailable} onClick={randomClickHandler}>
+            Random
+          </Button>
         </Flex>
-        <Button disabled={!betAvailable || checkedIdList.length < 4} onClick={spinHandler}>
-          Make bet
+        <Button disabled={!betAvailable || spotList.length < 4} onClick={betHandler}>
+          Bet
         </Button>
       </Flex>
     </Flex>

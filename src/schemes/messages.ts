@@ -1,18 +1,33 @@
-import { array, InferOutput, literal, number, object, string, union } from '@valibot/valibot';
+import { InferOutput, intersect, literal, number, object, union } from '@valibot/valibot';
 
-import { ServerTicket, TicketWinData, WinData } from './common';
+import {
+  AddValueData,
+  BalanceData,
+  BallListData,
+  BetData,
+  CountdownData,
+  TicketData,
+  TicketIdData,
+  TicketWinListData,
+  TotalWinData,
+  UserWinListData,
+} from './common';
 
-export const TicketCreateMessage = object({
-  type: literal('ticket-create'),
-  ticket: ServerTicket,
-});
+export const TicketCreateMessage = intersect([
+  object({
+    type: literal('ticket-create'),
+  }),
+  TicketData,
+]);
 
 export type TicketCreateMessage = InferOutput<typeof TicketCreateMessage>;
 
-export const TicketCancelMessage = object({
-  type: literal('ticket-cancel'),
-  ticketId: string(),
-});
+export const TicketCancelMessage = intersect([
+  object({
+    type: literal('ticket-cancel'),
+  }),
+  TicketIdData,
+]);
 
 export type TicketCancelMessage = InferOutput<typeof TicketCancelMessage>;
 
@@ -23,48 +38,60 @@ export const RoundStartMessage = object({
 
 export type RoundStartMessage = InferOutput<typeof RoundStartMessage>;
 
-export const RoundCompleteMessage = object({
-  type: literal('round-complete'),
-  numbers: array(number()),
-  wins: array(WinData),
-});
+export const RoundCompleteMessage = intersect([
+  object({
+    type: literal('round-complete'),
+  }),
+  BallListData,
+  UserWinListData,
+]);
 
 export type RoundCompleteMessage = InferOutput<typeof RoundCompleteMessage>;
 
-export const RoundProcessMessage = object({
-  type: literal('round-process'),
-  numbers: array(number()),
-  added: number(),
-});
+export const RoundProcessMessage = intersect([
+  object({
+    type: literal('round-process'),
+  }),
+  BallListData,
+  AddValueData,
+]);
 
 export type RoundProcessMessage = InferOutput<typeof RoundProcessMessage>;
 
-export const RoundCountdownMessage = object({
-  type: literal('round-countdown'),
-  countdown: number(),
-});
+export const RoundCountdownMessage = intersect([
+  object({
+    type: literal('round-countdown'),
+  }),
+  CountdownData,
+]);
 
 export type RoundCountdownMessage = InferOutput<typeof RoundCountdownMessage>;
 
-export const BetChangeMessage = object({
-  type: literal('bet-change'),
-  bet: number(),
-});
+export const BetChangeMessage = intersect([
+  object({
+    type: literal('bet-change'),
+  }),
+  BetData,
+]);
 
 export type BetChangeMessage = InferOutput<typeof BetChangeMessage>;
 
-export const BalanceUpdateMessage = object({
-  type: literal('balance-update'),
-  balance: number(),
-});
+export const BalanceUpdateMessage = intersect([
+  object({
+    type: literal('balance-update'),
+  }),
+  BalanceData,
+]);
 
 export type BalanceUpdateMessage = InferOutput<typeof BalanceUpdateMessage>;
 
-export const WinMessage = object({
-  type: literal('win'),
-  totalWin: number(),
-  ticketWins: array(TicketWinData),
-});
+export const WinMessage = intersect([
+  object({
+    type: literal('win'),
+  }),
+  TotalWinData,
+  TicketWinListData,
+]);
 
 export type WinMessage = InferOutput<typeof WinMessage>;
 
