@@ -1,4 +1,4 @@
-import { IReceiver, ISpotIdList, ITicket, IUserWin, PublicationContext, ticketTransform } from '@ui/helpers';
+import { IKenoReceiver, ISpotIdList, ITicket, IUserWin, ReceiverPublicationContext, ticketTransform } from '@ui/helpers';
 import {
   RoomMessage,
   RoundCompleteMessage,
@@ -26,7 +26,7 @@ export interface RoomMessagesProviderGame {
 
 export interface RoomMessagesProviderProps {
   readonly game: RoomMessagesProviderGame;
-  readonly receiver: IReceiver;
+  readonly receiver: IKenoReceiver;
   readonly channel?: string;
 }
 
@@ -69,7 +69,7 @@ function messageHandler<T extends RoomMessage['type']>(type: T, message: RoomMes
 export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>) => {
   const { children, receiver, channel, game } = props;
 
-  const publicationHandler = ({ data }: PublicationContext) => {
+  const publicationHandler = ({ data }: ReceiverPublicationContext) => {
     const message = parse(RoomMessage, data);
     messageHandler(message.type, message, game);
   };

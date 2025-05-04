@@ -1,13 +1,13 @@
-import { errorHandler, getJsonData, ISpotIdList, ITicket, ticketTransform, validateData } from '@ui/helpers';
+import { errorHandler, ISpotIdList, ITicket, ticketTransform } from '@ui/helpers';
 import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { ConnectorService, ConnectorServiceContext } from './connector-service.context';
 
 export interface ConnectorServiceConnector {
-  getSessionData(): Promise<Response>;
-  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response>;
-  ticketCancel(ticketId: string): Promise<Response>;
+  getSessionData(): Promise<SessionResponse>;
+  ticketCreate(bet: number, spots: ISpotIdList): Promise<TicketCreateResponse>;
+  ticketCancel(ticketId: string): Promise<TicketCancelResponse>;
 }
 
 export interface ConnectorServiceGame {
@@ -38,8 +38,6 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
       getSessionData() {
         connector
           .getSessionData()
-          .then(getJsonData)
-          .then(validateData(SessionResponse))
           .then((sessionData) => {
             const { bet, balance, tickets, balls, roomChannel, userChannel } = sessionData;
             game.updateBalance(balance);
@@ -53,8 +51,6 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
       ticketCreate(bet, spots) {
         connector
           .ticketCreate(bet, spots)
-          .then(getJsonData)
-          .then(validateData(TicketCreateResponse))
           .then(({ ticket, balance }) => {
             game.updateBalance(balance);
             game.addTickets(ticketTransform(ticket));
@@ -64,8 +60,6 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
       ticketCancel(ticketId) {
         connector
           .ticketCancel(ticketId)
-          .then(getJsonData)
-          .then(validateData(TicketCancelResponse))
           .then(({ ticketId, balance }) => {
             game.updateBalance(balance);
             game.removeTickets(ticketId);

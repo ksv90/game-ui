@@ -1,5 +1,7 @@
 export * from './keno.app';
+export * from './keno.connector';
 export * from './keno.gui';
+export * from './keno.receiver';
 export * from './keno.rules';
 export * from '@ui/components';
 export * from '@ui/helpers';

@@ -1,10 +1,10 @@
-import { IReceiver, PublicationContext, StateContext } from '@ui/helpers';
+import { IKenoReceiver, ReceiverPublicationContext, ReceiverStateContext } from '@ui/helpers';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 export interface PublicationServiceProviderProps {
-  readonly receiver: IReceiver;
+  readonly receiver: IKenoReceiver;
   readonly channel?: string;
-  readonly onPublication: (ctx: PublicationContext) => void;
+  readonly onPublication: (ctx: ReceiverPublicationContext) => void;
 }
 
 export const PublicationServiceProvider = (props: PropsWithChildren<PublicationServiceProviderProps>) => {
@@ -12,7 +12,7 @@ export const PublicationServiceProvider = (props: PropsWithChildren<PublicationS
   const [connectionState, setConnectionState] = useState(receiver.state);
 
   useEffect(() => {
-    const stateChangeHandler = ({ newState }: StateContext) => {
+    const stateChangeHandler = ({ newState }: ReceiverStateContext) => {
       setConnectionState(newState);
     };
     receiver.on('state', stateChangeHandler);

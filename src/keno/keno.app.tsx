@@ -1,5 +1,5 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { IBallList, IEmitterLite, IReceiver, ISpotIdList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
+import { IBallList, IEmitterLite, IKenoConnector, IKenoReceiver, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
 import {
   BalanceServiceProvider,
   BallsServiceProvider,
@@ -17,7 +17,7 @@ import {
 } from '@ui/providers';
 import { JSX, useEffect, useState } from 'react';
 
-export interface KenoGameEvents {
+export interface IKenoGameEvents {
   balanceUpdated: [value: number];
   totalBetChanged: [value: number];
   ticketAdded: [ticket: ITicket];
@@ -31,7 +31,7 @@ export interface KenoGameEvents {
   totalWin: [value: number];
 }
 
-export interface KenoGame extends IEmitterLite<KenoGameEvents> {
+export interface IKenoGame extends IEmitterLite<IKenoGameEvents> {
   start(): void;
   stop(): void;
 
@@ -51,16 +51,10 @@ export interface KenoGame extends IEmitterLite<KenoGameEvents> {
   setWin(value: number): void;
 }
 
-export interface KenoConnector {
-  getSessionData(): Promise<Response>;
-  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response>;
-  ticketCancel(ticketId: string): Promise<Response>;
-}
-
 export interface KenoProps {
-  readonly game: KenoGame;
-  readonly connector: KenoConnector;
-  readonly receiver: IReceiver;
+  readonly game: IKenoGame;
+  readonly connector: IKenoConnector;
+  readonly receiver: IKenoReceiver;
   readonly ui?: JSX.Element;
   readonly rules?: JSX.Element;
 }
