@@ -2,25 +2,25 @@ import { IEmitterLite } from './types';
 
 export type ReceiverState = 'disconnected' | 'connecting' | 'connected';
 
-export interface PublicationContext {
+export interface ReceiverPublicationContext {
   channel: string;
   data: unknown;
 }
 
-export interface StateContext {
+export interface ReceiverStateContext {
   newState: ReceiverState;
   oldState: ReceiverState;
 }
 
-export interface SubscriptionEvents {
-  publication: [ctx: PublicationContext];
+export interface ReceiverSubscriptionEvents {
+  publication: [ctx: ReceiverPublicationContext];
 }
 
 export interface ReceiverEvents {
-  state: [ctx: StateContext];
+  state: [ctx: ReceiverStateContext];
 }
 
-export interface ISubscription extends IEmitterLite<SubscriptionEvents> {
+export interface IReceiverSubscription extends IEmitterLite<ReceiverSubscriptionEvents> {
   subscribe(): void;
   unsubscribe(): void;
 }
@@ -29,5 +29,7 @@ export interface IReceiver extends IEmitterLite<ReceiverEvents> {
   get state(): ReceiverState;
   connect(): void;
   disconnect(): void;
-  newSubscription(channel: string): ISubscription;
+  newSubscription(channel: string): IReceiverSubscription;
 }
+
+export interface IKenoReceiver extends IReceiver {}

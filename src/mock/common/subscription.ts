@@ -1,5 +1,5 @@
 import { Emitter, IEmitter } from '@ksv90/decorators';
-import { ISubscription, SubscriptionEvents } from '@ui/helpers';
+import { IReceiverSubscription, ReceiverSubscriptionEvents } from '@ui/helpers';
 
 export type PublishResultMock = object;
 
@@ -11,7 +11,7 @@ export interface UnsubscribedContextMock {
   channel: string;
 }
 
-export interface SubscriptionMockEvents extends SubscriptionEvents {
+export interface SubscriptionMockEvents extends ReceiverSubscriptionEvents {
   subscribed: [ctx: SubscribedContextMock];
   unsubscribed: [ctx: UnsubscribedContextMock];
 }
@@ -20,7 +20,7 @@ export interface SubscriptionMock extends IEmitter<SubscriptionMockEvents> {}
 
 export
 @Emitter()
-class SubscriptionMock implements ISubscription {
+class SubscriptionMock implements IReceiverSubscription {
   #unsubscribed = false;
 
   #channel: string;

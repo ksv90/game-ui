@@ -1,5 +1,5 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { IBallList, IEmitterLite, IReceiver, ISpotIdList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
+import { IKenoConnector, IKenoGame, IKenoReceiver } from '@ui/helpers';
 import {
   BalanceServiceProvider,
   BallsServiceProvider,
@@ -17,50 +17,10 @@ import {
 } from '@ui/providers';
 import { JSX, useEffect, useState } from 'react';
 
-export interface KenoGameEvents {
-  balanceUpdated: [value: number];
-  totalBetChanged: [value: number];
-  ticketAdded: [ticket: ITicket];
-  ticketRemoved: [ticketId: string];
-  ticketsCleared: [];
-  roundStarted: [{ users: number }];
-  roundCompleted: [{ balls: IBallList; userWins: readonly IUserWin[] }];
-  countdown: [value: number];
-  ballAdded: [value: number];
-  ballsCleared: [];
-  totalWin: [value: number];
-}
-
-export interface KenoGame extends IEmitterLite<KenoGameEvents> {
-  start(): void;
-  stop(): void;
-
-  updateBalance(value: number): void;
-  changeBet(value: number): void;
-
-  addTickets(...tickets: ITicket[]): void;
-  removeTickets(...ticketIds: string[]): void;
-  ticketWins(...ticketWins: ITicketWin[]): void;
-  clearTickets(): void;
-
-  roundStart(users: number): void;
-  roundComplete(balls: IBallList, userWins: readonly IUserWin[]): void;
-
-  setCountdown(countdown: number): void;
-  addBalls(...values: number[]): void;
-  setWin(value: number): void;
-}
-
-export interface KenoConnector {
-  getSessionData(): Promise<Response>;
-  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response>;
-  ticketCancel(ticketId: string): Promise<Response>;
-}
-
 export interface KenoProps {
-  readonly game: KenoGame;
-  readonly connector: KenoConnector;
-  readonly receiver: IReceiver;
+  readonly game: IKenoGame;
+  readonly connector: IKenoConnector;
+  readonly receiver: IKenoReceiver;
   readonly ui?: JSX.Element;
   readonly rules?: JSX.Element;
 }

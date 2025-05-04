@@ -1,8 +1,8 @@
 import { IServerTicket, IServerTicketWin } from '@ui/helpers';
 import { TicketWinListData, TotalWinData } from '@ui/schemes';
 
-import { ConnectorMockServer } from './connector';
-import { RoundMachineContext } from './round-machine';
+import { KenoConnectorMockServer } from './keno.connector';
+import { KenoMachineContext } from './keno.machine';
 
 const COUNTDOWN = 10;
 
@@ -10,7 +10,7 @@ const TOP_NUMBER = 80;
 
 const ROUND_NUMBERS = 20;
 
-interface ServerMockStore {
+interface KenoServerMockStore {
   mode: number;
   balance: number;
   bet: number;
@@ -21,8 +21,8 @@ interface ServerMockStore {
   payouts: Record<number, readonly number[]>;
 }
 
-export class ServerMock implements RoundMachineContext, ConnectorMockServer {
-  #store: ServerMockStore;
+export class KenoServerMock implements KenoMachineContext, KenoConnectorMockServer {
+  #store: KenoServerMockStore;
 
   constructor(payouts: Record<number, readonly number[]>) {
     this.#store = {

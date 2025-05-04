@@ -1,17 +1,15 @@
 import { Emitter, type IEmitter } from '@ksv90/decorators';
-import { IBallList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
+import { IBallList, IKenoGame, IKenoGameEvents, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
 
-import { KenoGame, KenoGameEvents } from '../keno';
-
-export interface KenoEvents extends KenoGameEvents {
+export interface IKenoGameMockEvents extends IKenoGameEvents {
   ticketWin: [ticket: ITicket & ITicketWin];
 }
 
-export interface KenoMock extends IEmitter<KenoEvents> {}
+export interface KenoGameMock extends IEmitter<IKenoGameMockEvents> {}
 
 export
 @Emitter()
-class KenoMock implements KenoGame {
+class KenoGameMock implements IKenoGame {
   #store = {
     balance: 0,
     totalBet: 0,

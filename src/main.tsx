@@ -1,13 +1,12 @@
-import { StateMachine } from '@ksv90/fsm';
 import { createRoot } from 'react-dom/client';
 
 import { KenoApp, KenoGui, KenoRules } from './keno';
-import { ConnectorMock, createRoundMachineConfig, KenoMock, MessengerMock, ServerMock } from './mock';
+import { createKenoMachine, getKenoMachineConfig, KenoConnectorMock, KenoGameMock, KenoMessengerMock, KenoServerMock } from './mock';
 
 const $root = document.getElementById('root');
 
 if (!$root) {
-  throw new Error(`Не найдено корневого элемента`);
+  throw new Error(`Корневой элемент не найден`);
 }
 
 const payouts = {
@@ -23,11 +22,11 @@ const payouts = {
   '10': [0, 0, 0, 0, 0, 1, 2, 10, 140, 1400, 20000],
 };
 
-const server = new ServerMock(payouts);
-const keno = new KenoMock();
-const messenger = new MessengerMock();
-const connector = new ConnectorMock(messenger, server);
-const roundMachine = new StateMachine(createRoundMachineConfig(messenger, server));
+const server = new KenoServerMock(payouts);
+const keno = new KenoGameMock();
+const messenger = new KenoMessengerMock();
+const connector = new KenoConnectorMock(messenger, server);
+const roundMachine = createKenoMachine(getKenoMachineConfig(messenger, server));
 
 const gui = <KenoGui />;
 const rules = <KenoRules />;

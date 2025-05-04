@@ -1,9 +1,9 @@
-import { IServerTicket, ISpotIdList } from '@ui/helpers';
+import { IKenoConnector, IServerTicket, ISpotIdList } from '@ui/helpers';
 import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 
-import { MessengerMock, ROOM_CHANNEL, USER_CHANNEL } from './messenger';
+import { KenoMessengerMock, ROOM_CHANNEL, USER_CHANNEL } from './keno.messenger';
 
-export interface ConnectorMockServer {
+export interface KenoConnectorMockServer {
   get balance(): number;
   get bet(): number;
   get tickets(): Iterable<IServerTicket>;
@@ -12,30 +12,30 @@ export interface ConnectorMockServer {
   ticketCancel(ticketId: string): IServerTicket;
 }
 
-export class ConnectorMock {
-  #messenger: MessengerMock;
+export class KenoConnectorMock implements IKenoConnector {
+  #messenger: KenoMessengerMock;
 
-  #server: ConnectorMockServer;
+  #server: KenoConnectorMockServer;
 
-  constructor(messenger: MessengerMock, server: ConnectorMockServer) {
+  constructor(messenger: KenoMessengerMock, server: KenoConnectorMockServer) {
     this.#messenger = messenger;
     this.#server = server;
   }
 
-  getSessionData(): Promise<Response> {
-    const response = this.#createResponse({
+  getSessionData(): Promise<SessionResponse> {
+    const sessionResponse = {
       balance: this.#server.balance,
       bet: this.#server.bet,
       roomChannel: ROOM_CHANNEL,
       userChannel: USER_CHANNEL,
       tickets: Array.from(this.#server.tickets),
       balls: Array.from(this.#server.balls),
-    });
+    } satisfies SessionResponse;
 
-    return Promise.resolve(response);
+    return Promise.resolve(sessionResponse);
   }
 
-  ticketCreate(bet: number, spots: ISpotIdList): Promise<Response> {
+  ticketCreate(bet: number, spots: ISpotIdList): Promise<TicketCreateResponse> {
     const ticket = this.#server.ticketCreate(bet, spots);
 
     const { balance } = this.#server;
@@ -44,12 +44,15 @@ export class ConnectorMock {
     this.#messenger.sendBalanceUpdate(balance);
     this.#messenger.sendBetChange(bet);
 
-    const response = this.#createResponse({ balance, ticket });
+    const ticketCancelResponse = {
+      ticket,
+      balance,
+    } satisfies TicketCreateResponse;
 
-    return Promise.resolve(response);
+    return Promise.resolve(ticketCancelResponse);
   }
 
-  ticketCancel(ticketId: string): Promise<Response> {
+  ticketCancel(ticketId: string): Promise<TicketCancelResponse> {
     this.#server.ticketCancel(ticketId);
 
     const { balance } = this.#server;
@@ -57,17 +60,11 @@ export class ConnectorMock {
     this.#messenger.sendCancelledTicket(ticketId);
     this.#messenger.sendBalanceUpdate(balance);
 
-    const response = this.#createResponse({ balance, ticketId });
+    const ticketCancelResponse = {
+      ticketId,
+      balance,
+    } satisfies TicketCancelResponse;
 
-    return Promise.resolve(response);
-  }
-
-  #createResponse(body: SessionResponse | TicketCreateResponse | TicketCancelResponse): Response {
-    return new Response(JSON.stringify(body), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return Promise.resolve(ticketCancelResponse);
   }
 }

@@ -1,10 +1,8 @@
 import { Flex } from '@chakra-ui/react';
-import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList } from '@ui/components';
+import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
 import { Writable } from '@ui/helpers';
 import { useBallsService, useStateService, useTicketService } from '@ui/providers';
 import { PropsWithChildren, useMemo } from 'react';
-
-import { Win } from '../components/win';
 
 export interface ContentProps {
   readonly onRemove: (ticketId: string) => void;

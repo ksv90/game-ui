@@ -1,13 +1,13 @@
-import { StateMachineConfig } from '@ksv90/fsm';
+import { StateMachine, StateMachineConfig } from '@ksv90/fsm';
 import { IServerTicketWin } from '@ui/helpers';
 
-import { MessengerMock } from './messenger';
+import { KenoMessengerMock } from './keno.messenger';
 
-export type RoundMachineStateName = 'init' | 'countdown' | 'roundStart' | 'roundProcess' | 'roundClose';
+export type KenoMachineStateName = 'init' | 'countdown' | 'roundStart' | 'roundProcess' | 'roundClose';
 
-export type RoundMachineEventType = 'NEXT' | 'COMPLETE';
+export type KenoMachineEventType = 'NEXT' | 'COMPLETE';
 
-export interface RoundMachineContext {
+export interface KenoMachineContext {
   get mode(): number;
   get countdown(): number;
   get balls(): Iterable<number>;
@@ -19,7 +19,7 @@ export interface RoundMachineContext {
   roundClose(): void;
 }
 
-function log({ mode }: RoundMachineContext, { stateName }: { stateName: RoundMachineStateName }) {
+function log({ mode }: KenoMachineContext, { stateName }: { stateName: KenoMachineStateName }) {
   // eslint-disable-next-line no-console
   if (mode) console.log(stateName);
 }
@@ -38,10 +38,16 @@ async function nextNumber(index: number) {
   await wait(500 + (250 / 100) * (index * 10));
 }
 
-export const createRoundMachineConfig = <TContext extends RoundMachineContext>(
-  messenger: MessengerMock,
+export const createKenoMachine = <TContext extends KenoMachineContext>(
+  config: StateMachineConfig<KenoMachineStateName, KenoMachineEventType, TContext>,
+) => {
+  return new StateMachine(config);
+};
+
+export const getKenoMachineConfig = <TContext extends KenoMachineContext>(
+  messenger: KenoMessengerMock,
   context: TContext,
-): StateMachineConfig<RoundMachineStateName, RoundMachineEventType, TContext> => {
+): StateMachineConfig<KenoMachineStateName, KenoMachineEventType, TContext> => {
   return {
     context,
     initState: 'init',
