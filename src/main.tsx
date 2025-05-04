@@ -1,12 +1,12 @@
 import { createRoot } from 'react-dom/client';
 
 import { KenoApp, KenoGui, KenoRules } from './keno';
-import { createKenoMachine, getKenoMachineConfig, KenoConnectorMock, KenoGameMock, KenoMessengerMock, KenoServerMock } from './mock/keno';
+import { createKenoMachine, getKenoMachineConfig, KenoConnectorMock, KenoGameMock, KenoMessengerMock, KenoServerMock } from './mock';
 
 const $root = document.getElementById('root');
 
 if (!$root) {
-  throw new Error(`Не найдено корневого элемента`);
+  throw new Error(`Корневой элемент не найден`);
 }
 
 const payouts = {

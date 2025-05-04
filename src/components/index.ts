@@ -3,3 +3,4 @@ export * from './bet';
 export * from './countdown';
 export * from './spots';
 export * from './tickets';
+export * from './win';

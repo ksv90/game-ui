@@ -1,2 +1,2 @@
-export * from './common/subscription';
+export * from './common';
 export * from './keno';

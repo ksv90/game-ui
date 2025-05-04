@@ -1,7 +1,5 @@
 import { Emitter, type IEmitter } from '@ksv90/decorators';
-import { IBallList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
-
-import { IKenoGame, IKenoGameEvents } from '../../keno';
+import { IBallList, IKenoGame, IKenoGameEvents, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
 
 export interface IKenoGameMockEvents extends IKenoGameEvents {
   ticketWin: [ticket: ITicket & ITicketWin];
