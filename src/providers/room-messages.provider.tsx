@@ -1,4 +1,5 @@
-import { IKenoReceiver, ISpotIdList, ITicket, IUserWin, ReceiverPublicationContext, ticketTransform } from '@ui/helpers';
+import { IPublicationContext, IReceiver } from '@ui/base';
+import { ITicket, IUserWin, SpotIdList, ticketTransform } from '@ui/helpers';
 import {
   RoomMessage,
   RoundCompleteMessage,
@@ -18,7 +19,7 @@ export interface RoomMessagesProviderGame {
   removeTickets(...ticketIds: string[]): void;
 
   roundStart(users: number): void;
-  roundComplete(spots: ISpotIdList, userWins: readonly IUserWin[]): void;
+  roundComplete(spots: SpotIdList, userWins: readonly IUserWin[]): void;
 
   setCountdown(countdown: number): void;
   addBalls(...values: number[]): void;
@@ -26,7 +27,7 @@ export interface RoomMessagesProviderGame {
 
 export interface RoomMessagesProviderProps {
   readonly game: RoomMessagesProviderGame;
-  readonly receiver: IKenoReceiver;
+  readonly receiver: IReceiver;
   readonly channel?: string;
 }
 
@@ -69,7 +70,7 @@ function messageHandler<T extends RoomMessage['type']>(type: T, message: RoomMes
 export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>) => {
   const { children, receiver, channel, game } = props;
 
-  const publicationHandler = ({ data }: ReceiverPublicationContext) => {
+  const publicationHandler = ({ data }: IPublicationContext) => {
     const message = parse(RoomMessage, data);
     messageHandler(message.type, message, game);
   };

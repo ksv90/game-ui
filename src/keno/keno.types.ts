@@ -1,4 +1,16 @@
-import { IBallList, IEmitterLite, ITicket, ITicketWin, IUserWin } from './types';
+import { IGame, IReceiver } from '@ui/base';
+import { BallList, ITicket, ITicketWin, IUserWin, SpotIdList } from '@ui/helpers';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+
+export interface IKenoConnector {
+  getSessionData(): Promise<SessionResponse>;
+
+  ticketCreate(bet: number, spots: SpotIdList): Promise<TicketCreateResponse>;
+
+  ticketCancel(ticketId: string): Promise<TicketCancelResponse>;
+}
+
+export interface IKenoReceiver extends IReceiver {}
 
 export interface IKenoGameEvents {
   balanceUpdated: [value: number];
@@ -7,17 +19,14 @@ export interface IKenoGameEvents {
   ticketRemoved: [ticketId: string];
   ticketsCleared: [];
   roundStarted: [{ users: number }];
-  roundCompleted: [{ balls: IBallList; userWins: readonly IUserWin[] }];
+  roundCompleted: [{ balls: BallList; userWins: readonly IUserWin[] }];
   countdown: [value: number];
   ballAdded: [value: number];
   ballsCleared: [];
   totalWin: [value: number];
 }
 
-export interface IKenoGame extends IEmitterLite<IKenoGameEvents> {
-  start(): void;
-  stop(): void;
-
+export interface IKenoGame extends IGame<IKenoGameEvents> {
   updateBalance(value: number): void;
   changeBet(value: number): void;
 
@@ -27,7 +36,7 @@ export interface IKenoGame extends IEmitterLite<IKenoGameEvents> {
   clearTickets(): void;
 
   roundStart(users: number): void;
-  roundComplete(balls: IBallList, userWins: readonly IUserWin[]): void;
+  roundComplete(balls: BallList, userWins: readonly IUserWin[]): void;
 
   setCountdown(countdown: number): void;
   addBalls(...values: number[]): void;

@@ -9,9 +9,6 @@
     "/dist/types"
   ],
   "exports": {
-    "./mock": {
-      "types": "./dist/types/mock/index.d.ts"
-    },
     "./keno": {
       "types": "./dist/types/keno/index.d.ts"
     }

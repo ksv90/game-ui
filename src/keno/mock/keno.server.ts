@@ -2,7 +2,7 @@ import { IServerTicket, IServerTicketWin } from '@ui/helpers';
 import { TicketWinListData, TotalWinData } from '@ui/schemes';
 
 import { KenoConnectorMockServer } from './keno.connector';
-import { KenoMachineContext } from './keno.machine';
+import { KenoMachineMockContext } from './keno.machine';
 
 const COUNTDOWN = 10;
 
@@ -21,7 +21,7 @@ interface KenoServerMockStore {
   payouts: Record<number, readonly number[]>;
 }
 
-export class KenoServerMock implements KenoMachineContext, KenoConnectorMockServer {
+export class KenoServerMock implements KenoMachineMockContext, KenoConnectorMockServer {
   #store: KenoServerMockStore;
 
   constructor(payouts: Record<number, readonly number[]>) {

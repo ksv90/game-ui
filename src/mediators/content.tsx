@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
+import { Writable } from '@ui/base';
 import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
-import { Writable } from '@ui/helpers';
 import { useBallsService, useStateService, useTicketService } from '@ui/providers';
 import { PropsWithChildren, useMemo } from 'react';
 

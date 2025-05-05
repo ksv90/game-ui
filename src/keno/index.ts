@@ -3,6 +3,8 @@ export * from './keno.connector';
 export * from './keno.gui';
 export * from './keno.receiver';
 export * from './keno.rules';
+export * from './keno.types';
+export * from './mock';
 export * from '@ui/components';
 export * from '@ui/helpers';
 export * from '@ui/mediators';

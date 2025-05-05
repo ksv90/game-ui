@@ -1,4 +1,5 @@
-import { errorHandler, ISpotIdList, ITicket, ticketTransform } from '@ui/helpers';
+import { errorHandler } from '@ui/base';
+import { ITicket, SpotIdList, ticketTransform } from '@ui/helpers';
 import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 import { PropsWithChildren, useMemo } from 'react';
 
@@ -6,7 +7,7 @@ import { ConnectorService, ConnectorServiceContext } from './connector-service.c
 
 export interface ConnectorServiceConnector {
   getSessionData(): Promise<SessionResponse>;
-  ticketCreate(bet: number, spots: ISpotIdList): Promise<TicketCreateResponse>;
+  ticketCreate(bet: number, spots: SpotIdList): Promise<TicketCreateResponse>;
   ticketCancel(ticketId: string): Promise<TicketCancelResponse>;
 }
 

@@ -1,4 +1,4 @@
-import { IBallList } from '@ui/helpers';
+import { BallList } from '@ui/helpers';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { BallsService, BallsServiceContext } from './balls-service.context';
@@ -15,7 +15,7 @@ export interface BallsServiceGame {
 
 export interface BallsServiceProviderProps {
   readonly game: BallsServiceGame;
-  readonly balls?: IBallList;
+  readonly balls?: BallList;
 }
 
 export const BallsServiceProvider = (props: PropsWithChildren<BallsServiceProviderProps>) => {

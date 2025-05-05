@@ -1,8 +1,8 @@
-import { IBallList } from '@ui/helpers';
+import { BallList } from '@ui/helpers';
 import { createContext, useContext } from 'react';
 
 export interface BallsService {
-  get balls(): IBallList;
+  get balls(): BallList;
   get addBalls(): (...balls: number[]) => void;
 }
 

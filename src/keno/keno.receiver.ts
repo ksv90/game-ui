@@ -1,5 +1,6 @@
-import { IKenoReceiver } from '@ui/helpers';
 import { Centrifuge } from 'centrifuge';
+
+import { IKenoReceiver } from './keno.types';
 
 export * from 'centrifuge';
 

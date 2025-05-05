@@ -1,5 +1,4 @@
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { IKenoConnector, IKenoGame, IKenoReceiver } from '@ui/helpers';
 import {
   BalanceServiceProvider,
   BallsServiceProvider,
@@ -16,6 +15,8 @@ import {
   WinServiceProvider,
 } from '@ui/providers';
 import { JSX, useEffect, useState } from 'react';
+
+import { IKenoConnector, IKenoGame, IKenoReceiver } from './keno.types';
 
 export interface KenoProps {
   readonly game: IKenoGame;

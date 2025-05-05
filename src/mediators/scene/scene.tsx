@@ -1,6 +1,7 @@
 import { Button, Flex } from '@chakra-ui/react';
+import { Writable } from '@ui/base';
 import { ISpotData, SpotBoard } from '@ui/components';
-import { ISpotIdList, Writable } from '@ui/helpers';
+import { SpotIdList } from '@ui/helpers';
 import { useBallsService, useStateService } from '@ui/providers';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
@@ -14,7 +15,7 @@ function getRandomInt(min: number, max: number): number {
 
 export interface SceneProps {
   readonly betAvailable: boolean;
-  readonly bet: (spots: ISpotIdList) => void;
+  readonly bet: (spots: SpotIdList) => void;
 }
 
 export function Scene(props: PropsWithChildren<SceneProps>) {

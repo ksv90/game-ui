@@ -11,7 +11,7 @@ export const config = defineConfig({
     minify: true,
     cssCodeSplit: false,
     rollupOptions: {
-      input: ['src/mock/index.ts', 'src/keno/index.ts'],
+      input: ['src/keno/index.ts'],
     },
   },
   server: {
@@ -32,7 +32,6 @@ export const config = defineConfig({
       name: 'game-ui',
       filename: 'index.js',
       exposes: {
-        './mock': './src/mock',
         './keno': './src/keno',
       },
       shared: ['react'],

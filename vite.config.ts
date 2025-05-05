@@ -19,6 +19,7 @@ export default defineConfig(async ({ mode }) => {
     resolve: {
       ...config.resolve,
       alias: {
+        '@ui/base': join(cwd, './src/base'),
         '@ui/components': join(cwd, './src/components'),
         '@ui/helpers': join(cwd, './src/helpers'),
         '@ui/mediators': join(cwd, './src/mediators'),
