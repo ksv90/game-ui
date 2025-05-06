@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.14](https://github.com/ksv90/game-ui/compare/v0.0.13...v0.0.14) (2025-05-06)
+
+
+### Bug Fixes
+
+* connectors ([b886499](https://github.com/ksv90/game-ui/commit/b8864994484921a50fae95c6e953ee27600e10e2))
+* connectors ([ac29ece](https://github.com/ksv90/game-ui/commit/ac29ece2e47ad6a82a33d833f5d6e9ab54e17ed2))
+* keno mock moved ([760ecc5](https://github.com/ksv90/game-ui/commit/760ecc5d400d78487397b19fdda4a12be4199b79))
+* keno mock moved ([ab143e9](https://github.com/ksv90/game-ui/commit/ab143e91b09a7b905d1f69e4724614687aad16e1))
+* typo ([592a798](https://github.com/ksv90/game-ui/commit/592a79876d682b6eaa8900e94573b83c2e6d35fc))
+
 ## [0.0.13](https://github.com/ksv90/game-ui/compare/v0.0.12...v0.0.13) (2025-05-03)
 
 
