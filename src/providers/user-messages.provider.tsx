@@ -1,4 +1,5 @@
-import { IKenoReceiver, ITicketWin, ReceiverPublicationContext } from '@ui/helpers';
+import { IPublicationContext, IReceiver } from '@ui/base';
+import { ITicketWin } from '@ui/helpers';
 import { BalanceUpdateMessage, BetChangeMessage, UserMessage, WinMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
 import { PropsWithChildren } from 'react';
@@ -14,7 +15,7 @@ export interface UserMessagesProviderGame {
 
 export interface UserMessagesProviderProps {
   readonly game: UserMessagesProviderGame;
-  readonly receiver: IKenoReceiver;
+  readonly receiver: IReceiver;
   readonly channel?: string;
 }
 
@@ -47,7 +48,7 @@ function messageHandler<T extends UserMessage['type']>(type: T, message: UserMes
 export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProviderProps>) => {
   const { children, receiver, channel, game } = props;
 
-  const publicationHandler = ({ data }: ReceiverPublicationContext) => {
+  const publicationHandler = ({ data }: IPublicationContext) => {
     const message = parse(UserMessage, data);
     messageHandler(message.type, message, game);
   };

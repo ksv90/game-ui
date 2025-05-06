@@ -1,6 +1,7 @@
-import { IKenoConnector, IServerTicket, ISpotIdList } from '@ui/helpers';
+import { IServerTicket, SpotIdList } from '@ui/helpers';
 import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
 
+import { IKenoConnector } from '../keno.types';
 import { KenoMessengerMock, ROOM_CHANNEL, USER_CHANNEL } from './keno.messenger';
 
 export interface KenoConnectorMockServer {
@@ -8,7 +9,7 @@ export interface KenoConnectorMockServer {
   get bet(): number;
   get tickets(): Iterable<IServerTicket>;
   get balls(): Iterable<number>;
-  ticketCreate(bet: number, spots: ISpotIdList): IServerTicket;
+  ticketCreate(bet: number, spots: SpotIdList): IServerTicket;
   ticketCancel(ticketId: string): IServerTicket;
 }
 
@@ -35,7 +36,7 @@ export class KenoConnectorMock implements IKenoConnector {
     return Promise.resolve(sessionResponse);
   }
 
-  ticketCreate(bet: number, spots: ISpotIdList): Promise<TicketCreateResponse> {
+  ticketCreate(bet: number, spots: SpotIdList): Promise<TicketCreateResponse> {
     const ticket = this.#server.ticketCreate(bet, spots);
 
     const { balance } = this.#server;

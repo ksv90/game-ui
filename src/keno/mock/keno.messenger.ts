@@ -1,5 +1,6 @@
 import { Broadcaster, Emitter } from '@ksv90/decorators';
-import { IKenoReceiver, IServerTicket, IServerTicketWin, IServerUserWin } from '@ui/helpers';
+import { MessengerMock } from '@ui/base';
+import { IServerTicket, IServerTicketWin, IServerUserWin } from '@ui/helpers';
 import {
   BalanceUpdateMessage,
   BetChangeMessage,
@@ -12,7 +13,7 @@ import {
   WinMessage,
 } from '@ui/schemes';
 
-import { MessengerMock } from '../common';
+import { IKenoReceiver } from '../keno.types';
 
 export const ROOM_CHANNEL = 'room-channel';
 

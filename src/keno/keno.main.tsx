@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
 
-import { KenoApp, KenoGui, KenoRules } from './keno';
-import { createKenoMachine, getKenoMachineConfig, KenoConnectorMock, KenoGameMock, KenoMessengerMock, KenoServerMock } from './mock';
+import { KenoApp } from './keno.app';
+import { KenoGui } from './keno.gui';
+import { KenoRules } from './keno.rules';
+import { createKenoMachineMock, getKenoMachineMockConfig, KenoConnectorMock, KenoGameMock, KenoMessengerMock, KenoServerMock } from './mock';
 
 const $root = document.getElementById('root');
 
@@ -26,7 +28,7 @@ const server = new KenoServerMock(payouts);
 const keno = new KenoGameMock();
 const messenger = new KenoMessengerMock();
 const connector = new KenoConnectorMock(messenger, server);
-const roundMachine = createKenoMachine(getKenoMachineConfig(messenger, server));
+const roundMachine = createKenoMachineMock(getKenoMachineMockConfig(messenger, server));
 
 const gui = <KenoGui />;
 const rules = <KenoRules />;

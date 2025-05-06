@@ -1,14 +1,15 @@
 import { Broadcaster, Emitter, IBroadcaster, IEmitter } from '@ksv90/decorators';
-import { errorHandler, IReceiver, IReceiverSubscription, ReceiverEvents, ReceiverState } from '@ui/helpers';
 
+import { IReceiver, IReceiverEvents, ISubscription, ReceiverState } from './interfaces';
 import { SubscriptionMock, UnsubscribedContextMock } from './subscription';
+import { errorHandler } from './utils';
 
-export interface MessengerMock<TBroadcastEvents extends object = object> extends IEmitter<ReceiverEvents>, IBroadcaster<TBroadcastEvents> {}
+export interface MessengerMock<TBroadcastEvents extends object = object> extends IEmitter<IReceiverEvents>, IBroadcaster<TBroadcastEvents> {}
 
 export
 @Emitter()
 @Broadcaster('messenger')
-class MessengerMock implements IReceiver {
+abstract class MessengerMock implements IReceiver {
   protected subscriptionMap_ = new Map<string, SubscriptionMock>();
 
   #state: ReceiverState = 'disconnected';
@@ -43,7 +44,7 @@ class MessengerMock implements IReceiver {
       .catch(errorHandler);
   }
 
-  newSubscription(channel: string): IReceiverSubscription {
+  newSubscription(channel: string): ISubscription {
     const subscription = new SubscriptionMock(channel);
     this.subscriptionMap_.set(channel, subscription);
     subscription.once('unsubscribed', this.#unsubscribeHandler);

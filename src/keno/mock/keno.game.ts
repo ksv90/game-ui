@@ -1,5 +1,7 @@
 import { Emitter, type IEmitter } from '@ksv90/decorators';
-import { IBallList, IKenoGame, IKenoGameEvents, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
+import { BallList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
+
+import { IKenoGame, IKenoGameEvents } from '../keno.types';
 
 export interface IKenoGameMockEvents extends IKenoGameEvents {
   ticketWin: [ticket: ITicket & ITicketWin];
@@ -59,7 +61,7 @@ class KenoGameMock implements IKenoGame {
     this.emit('roundStarted', { users });
   }
 
-  roundComplete(balls: IBallList, userWins: readonly IUserWin[]): void {
+  roundComplete(balls: BallList, userWins: readonly IUserWin[]): void {
     this.clearTickets();
     this.clearBalls();
     this.emit('roundCompleted', { balls, userWins });
