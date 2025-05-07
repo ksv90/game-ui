@@ -1,15 +1,15 @@
-import { Flex, Text } from '@chakra-ui/react';
-import { useBalanceService } from '@ui/providers';
+import { Box, Text } from '@chakra-ui/react';
 
-import styles from './balance.module.css';
+import { amount, container, label } from './balance.css';
 
-export function Balance() {
-  const { balance } = useBalanceService();
+export function Balance(props: { balance: number }) {
+  const { balance } = props;
+  const formattedBalance = balance.toLocaleString('fr-FR');
 
   return (
-    <Flex marginBottom="20px">
-      <Text className={styles['balance-text']}>Balance</Text>
-      <Text className={styles['balance-text-down']}>{balance}</Text>
-    </Flex>
+    <Box className={container}>
+      <Text className={label}>BALANCE</Text>
+      <Text className={amount}>{formattedBalance} EUR</Text>
+    </Box>
   );
 }

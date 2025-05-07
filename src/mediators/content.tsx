@@ -33,7 +33,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
       </Flex>
       <Flex justifyContent="center">
         <Win />
-        <Balance />
+        <Balance balance={1000000} />
       </Flex>
       <Flex justifyContent="center">{state === 'pending' ? <Countdown /> : <p>process</p>}</Flex>
       <TicketList tickets={ticketDataList} onClick={onRemove} />
