@@ -26,7 +26,7 @@ export interface KenoProps {
   readonly rules?: JSX.Element;
 }
 
-export function KenoApp(props: KenoProps) {
+export function KenoApp(props: KenoProps): JSX.Element {
   const { game, connector, receiver, ui, rules } = props;
 
   const [userChannel, setUserChannel] = useState('');
@@ -44,13 +44,12 @@ export function KenoApp(props: KenoProps) {
     };
   }, [receiver]);
 
-  const dataChangeHandler = (data: IConnectorServiceData) => {
-    const { roomChannel, userChannel } = data;
-    setRoomChannel(roomChannel);
-    setUserChannel(userChannel);
+  const dataChangeHandler = (data: IConnectorServiceData): void => {
+    setRoomChannel(data.roomChannel);
+    setUserChannel(data.userChannel);
   };
 
-  const errorHandler = () => {
+  const errorHandler = (): void => {
     game.stop();
   };
 

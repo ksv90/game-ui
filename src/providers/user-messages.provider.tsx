@@ -2,7 +2,7 @@ import { IPublicationContext, IReceiver } from '@ui/base';
 import { ITicketWin } from '@ui/helpers';
 import { BalanceUpdateMessage, BetChangeMessage, UserMessage, WinMessage } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
-import { PropsWithChildren } from 'react';
+import { JSX, PropsWithChildren } from 'react';
 
 import { PublicationServiceProvider } from './publication-service';
 
@@ -41,14 +41,14 @@ const messageHandlerMap: {
   },
 };
 
-function messageHandler<T extends UserMessage['type']>(type: T, message: UserMessageMap[T], game: UserMessagesProviderGame) {
+function messageHandler<T extends UserMessage['type']>(type: T, message: UserMessageMap[T], game: UserMessagesProviderGame): void {
   messageHandlerMap[type](game, message);
 }
 
-export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProviderProps>) => {
+export const UserMessagesProvider = (props: PropsWithChildren<UserMessagesProviderProps>): JSX.Element => {
   const { children, receiver, channel, game } = props;
 
-  const publicationHandler = ({ data }: IPublicationContext) => {
+  const publicationHandler = ({ data }: IPublicationContext): void => {
     const message = parse(UserMessage, data);
     messageHandler(message.type, message, game);
   };

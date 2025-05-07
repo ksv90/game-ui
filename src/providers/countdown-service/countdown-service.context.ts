@@ -7,7 +7,7 @@ export interface CountdownService {
 
 export const CountdownServiceContext = createContext<CountdownService | null>(null);
 
-export const useCountdownService = () => {
+export const useCountdownService = (): CountdownService => {
   const countdownService = useContext(CountdownServiceContext);
   if (!countdownService) {
     throw new Error('countdownService не определен');

@@ -7,7 +7,7 @@ export interface WinService {
 
 export const WinServiceContext = createContext<WinService | null>(null);
 
-export const useWinService = () => {
+export const useWinService = (): WinService => {
   const winService = useContext(WinServiceContext);
   if (!winService) {
     throw new Error('winService не определен');

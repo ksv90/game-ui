@@ -10,7 +10,7 @@ import {
   TicketCreateMessage,
 } from '@ui/schemes';
 import { parse } from '@valibot/valibot';
-import { PropsWithChildren } from 'react';
+import { JSX, PropsWithChildren } from 'react';
 
 import { PublicationServiceProvider } from './publication-service';
 
@@ -63,14 +63,14 @@ const messageHandlerMap: {
   },
 };
 
-function messageHandler<T extends RoomMessage['type']>(type: T, message: RoomMessageMap[T], game: RoomMessagesProviderGame) {
+function messageHandler<T extends RoomMessage['type']>(type: T, message: RoomMessageMap[T], game: RoomMessagesProviderGame): void {
   messageHandlerMap[type](game, message);
 }
 
-export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>) => {
+export const RoomMessagesProvider = (props: PropsWithChildren<RoomMessagesProviderProps>): JSX.Element => {
   const { children, receiver, channel, game } = props;
 
-  const publicationHandler = ({ data }: IPublicationContext) => {
+  const publicationHandler = ({ data }: IPublicationContext): void => {
     const message = parse(RoomMessage, data);
     messageHandler(message.type, message, game);
   };

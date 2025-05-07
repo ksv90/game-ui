@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { BalanceService, BalanceServiceContext } from './balance-service.context';
 
@@ -13,7 +13,7 @@ export interface BalanceProviderProps {
   readonly balance?: number;
 }
 
-export const BalanceServiceProvider = (props: PropsWithChildren<BalanceProviderProps>) => {
+export const BalanceServiceProvider = (props: PropsWithChildren<BalanceProviderProps>): JSX.Element => {
   const { children, game } = props;
   const [balance, setBalance] = useState(props.balance ?? 0);
 

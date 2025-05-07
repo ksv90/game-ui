@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import { Component, ErrorInfo, JSX, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
   readonly children: ReactNode;
@@ -7,7 +7,7 @@ interface ErrorBoundaryProps {
 
 interface BoundaryState {
   readonly error?: Error;
-  readonly errorInfo?: React.ErrorInfo;
+  readonly errorInfo?: ErrorInfo;
 }
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, BoundaryState> {
@@ -20,15 +20,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, BoundaryState> 
     return { error };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({ error, errorInfo });
   }
 
-  handleReload = () => {
+  handleReload = (): void => {
     window.location.reload();
   };
 
-  render() {
+  render(): string | number | boolean | Iterable<ReactNode> | JSX.Element | null | undefined {
     const { error, errorInfo } = this.state;
 
     if (!error) return this.props.children;

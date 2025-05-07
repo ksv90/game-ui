@@ -10,7 +10,7 @@ export interface TicketService {
 
 export const TicketServiceContext = createContext<TicketService | null>(null);
 
-export const useTicketService = () => {
+export const useTicketService = (): TicketService => {
   const ticketService = useContext(TicketServiceContext);
   if (!ticketService) {
     throw new Error('ticketService не определен');

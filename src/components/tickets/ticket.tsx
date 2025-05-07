@@ -19,7 +19,7 @@ export interface TicketProps extends ITicketData {
 export const Ticket: FC<TicketProps> = (props) => {
   const { id, variant, totalBet, spots, onClick } = props;
 
-  const clickHandler = () => {
+  const clickHandler = (): void => {
     onClick?.(id);
   };
 
@@ -27,8 +27,8 @@ export const Ticket: FC<TicketProps> = (props) => {
     <div className={ticketVariants[variant]} onClick={clickHandler}>
       <div className={betClass}>{totalBet}</div>
       <div className={spotRowClass}>
-        {spots.map(({ id, variant }) => (
-          <Spot key={id} id={id} variant={variant} />
+        {spots.map((data) => (
+          <Spot key={data.id} id={data.id} variant={data.variant} />
         ))}
       </div>
     </div>

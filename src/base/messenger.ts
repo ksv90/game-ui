@@ -1,6 +1,6 @@
 import { Broadcaster, Emitter, IBroadcaster, IEmitter } from '@ksv90/decorators';
 
-import { IReceiver, IReceiverEvents, ISubscription, ReceiverState } from './interfaces';
+import { IReceiver, IReceiverEvents, ReceiverState } from './interfaces';
 import { SubscriptionMock, UnsubscribedContextMock } from './subscription';
 import { errorHandler } from './utils';
 
@@ -14,7 +14,7 @@ abstract class MessengerMock implements IReceiver {
 
   #state: ReceiverState = 'disconnected';
 
-  #unsubscribeHandler = (context: UnsubscribedContextMock) => {
+  #unsubscribeHandler = (context: UnsubscribedContextMock): void => {
     const subscription = this.subscriptionMap_.get(context.channel);
     if (subscription) {
       this.removeSubscription(subscription);
@@ -44,7 +44,7 @@ abstract class MessengerMock implements IReceiver {
       .catch(errorHandler);
   }
 
-  newSubscription(channel: string): ISubscription {
+  newSubscription(channel: string): SubscriptionMock {
     const subscription = new SubscriptionMock(channel);
     this.subscriptionMap_.set(channel, subscription);
     subscription.once('unsubscribed', this.#unsubscribeHandler);

@@ -6,7 +6,7 @@ export interface StateService {
 
 export const StateServiceContext = createContext<StateService | null>(null);
 
-export const useStateService = () => {
+export const useStateService = (): StateService => {
   const stateService = useContext(StateServiceContext);
   if (!stateService) {
     throw new Error('stateService не определен');

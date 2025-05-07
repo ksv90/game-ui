@@ -1,5 +1,5 @@
 import { BallList } from '@ui/helpers';
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { BallsService, BallsServiceContext } from './balls-service.context';
 
@@ -18,7 +18,7 @@ export interface BallsServiceProviderProps {
   readonly balls?: BallList;
 }
 
-export const BallsServiceProvider = (props: PropsWithChildren<BallsServiceProviderProps>) => {
+export const BallsServiceProvider = (props: PropsWithChildren<BallsServiceProviderProps>): JSX.Element => {
   const { children, game } = props;
   const [balls, setBalls] = useState(props.balls ?? []);
 
@@ -33,11 +33,11 @@ export const BallsServiceProvider = (props: PropsWithChildren<BallsServiceProvid
   );
 
   useEffect(() => {
-    const ballAddHandler = (value: number) => {
+    const ballAddHandler = (value: number): void => {
       setBalls((prev) => [...prev, value]);
     };
 
-    const ballsClearHandler = () => {
+    const ballsClearHandler = (): void => {
       setBalls([]);
     };
 
