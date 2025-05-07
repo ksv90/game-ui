@@ -1,9 +1,10 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { useBalanceService } from '@ui/providers';
+import { JSX } from 'react';
 
 import styles from './balance.module.css';
 
-export function Balance() {
+export function Balance(): JSX.Element {
   const { balance } = useBalanceService();
 
   return (

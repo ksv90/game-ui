@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import { spotSpan, spotVariants } from './spot.css.ts';
 
 export type SpotVariant = keyof typeof spotVariants;
@@ -11,10 +13,10 @@ export interface SpotProps extends ISpotData {
   readonly onClick?: (id: number) => void;
 }
 
-export function Spot(props: SpotProps) {
+export function Spot(props: SpotProps): JSX.Element {
   const { id, variant, onClick } = props;
 
-  const clickHandler = () => {
+  const clickHandler = (): void => {
     onClick?.(id);
   };
 

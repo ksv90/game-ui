@@ -2,9 +2,9 @@ import { Flex } from '@chakra-ui/react';
 import { SpotIdList } from '@ui/helpers';
 import { Content, Scene } from '@ui/mediators';
 import { useBetService, useConnectorService, useStateService } from '@ui/providers';
-import { PropsWithChildren, useEffect } from 'react';
+import { JSX, PropsWithChildren, useEffect } from 'react';
 
-export function KenoGui(_props: PropsWithChildren) {
+export function KenoGui(_props: PropsWithChildren): JSX.Element {
   const { getSessionData, ticketCreate, ticketCancel } = useConnectorService();
   const { bet } = useBetService();
   const { state } = useStateService();
@@ -13,11 +13,11 @@ export function KenoGui(_props: PropsWithChildren) {
     getSessionData();
   }, [getSessionData]);
 
-  const betHandler = (spots: SpotIdList) => {
+  const betHandler = (spots: SpotIdList): void => {
     ticketCreate(bet, spots);
   };
 
-  const removeHandler = (ticketId: string) => {
+  const removeHandler = (ticketId: string): void => {
     if (state !== 'pending') return;
     ticketCancel(ticketId);
   };

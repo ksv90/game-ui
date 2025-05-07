@@ -8,7 +8,7 @@ export interface BallsService {
 
 export const BallsServiceContext = createContext<BallsService | null>(null);
 
-export const useBallsService = () => {
+export const useBallsService = (): BallsService => {
   const ballsService = useContext(BallsServiceContext);
   if (!ballsService) {
     throw new Error('ballsService не определен');

@@ -1,9 +1,11 @@
+// TODO: убрать отключение
+/* eslint-disable no-magic-numbers */
 import { Button, Flex } from '@chakra-ui/react';
 import { Writable } from '@ui/base';
 import { ISpotData, SpotBoard } from '@ui/components';
 import { SpotIdList } from '@ui/helpers';
 import { useBallsService, useStateService } from '@ui/providers';
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -18,7 +20,7 @@ export interface SceneProps {
   readonly bet: (spots: SpotIdList) => void;
 }
 
-export function Scene(props: PropsWithChildren<SceneProps>) {
+export function Scene(props: PropsWithChildren<SceneProps>): JSX.Element {
   const { betAvailable, bet } = props;
   const [spotList, setSpotList] = useState(new Array<number>());
   const { state } = useStateService();
@@ -40,7 +42,7 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
     setSpotList([]);
   }, [state]);
 
-  const spotClickHandler = (spot: number) => {
+  const spotClickHandler = (spot: number): void => {
     if (spotList.includes(spot)) {
       setSpotList((prevList) => prevList.filter((prevId) => prevId !== spot));
     } else {
@@ -49,11 +51,11 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
     }
   };
 
-  const clearClickHandler = () => {
+  const clearClickHandler = (): void => {
     setSpotList([]);
   };
 
-  const randomClickHandler = () => {
+  const randomClickHandler = (): void => {
     const spotSet = new Set<number>();
     const size = getRandomInt(4, 10);
     while (spotSet.size < size) {
@@ -62,7 +64,7 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
     setSpotList(Array.from(spotSet));
   };
 
-  const betHandler = () => {
+  const betHandler = (): void => {
     bet(spotList);
     setSpotList([]);
   };
