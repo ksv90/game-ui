@@ -21,11 +21,9 @@ export const grid = style({
   borderRadius: '6px',
   display: 'grid',
   gap: '2px',
-  gridAutoRows: '48px',
-  gridTemplateColumns: 'repeat(10, 48px)',
-  justifyContent: 'center',
-  marginTop: '24px',
-  padding: '8px',
+  gridTemplateColumns: 'repeat(10, 38px)',
+  justifyContent: 'space-around',
+  maxWidth: '400px',
 });
 
 export const spotBase = style({
@@ -42,14 +40,14 @@ export const spotBase = style({
   display: 'flex',
   fontSize: '16px',
   fontWeight: 'bold',
-  height: '48px',
+  height: '38px',
   justifyContent: 'center',
   position: 'relative',
   transitionBehavior: 'all',
   transitionDuration: '0.2s',
   transitionTimingFunction: 'ease',
   userSelect: 'none',
-  width: '48px',
+  width: '38px',
 });
 
 export const spotVariants = styleVariants({

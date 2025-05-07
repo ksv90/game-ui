@@ -5,9 +5,9 @@ import { Writable } from '@ui/base';
 import { ISpotData, SpotBoard } from '@ui/components';
 import { SpotIdList } from '@ui/helpers';
 import { useBallsService, useStateService } from '@ui/providers';
-import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, useEffect, useMemo, useState } from 'react';
 
-import * as styles from './scene.css';
+import { betButton, buttonMarginRight, buttonsGroup, controls, sceneClass } from './scene.css';
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -18,15 +18,16 @@ function getRandomInt(min: number, max: number): number {
 }
 
 export interface SceneProps {
-  readonly betAvailable: boolean;
-  readonly bet: (spots: SpotIdList) => void;
+  readonly makeBet: (spots: SpotIdList) => void;
 }
 
-export function Scene(props: PropsWithChildren<SceneProps>): JSX.Element {
-  const { betAvailable, bet } = props;
+export function SceneMediator(props: SceneProps): JSX.Element {
+  const { makeBet } = props;
   const [spotList, setSpotList] = useState(new Array<number>());
   const { state } = useStateService();
   const { balls } = useBallsService();
+
+  const betAvailable = state === 'pending';
 
   const spots = useMemo(
     () =>
@@ -67,26 +68,26 @@ export function Scene(props: PropsWithChildren<SceneProps>): JSX.Element {
   };
 
   const betHandler = (): void => {
-    bet(spotList);
+    makeBet(spotList);
     setSpotList([]);
   };
 
   return (
-    <Flex className={styles.wrapper}>
+    <div className={sceneClass}>
       <SpotBoard spots={spots} onClick={spotClickHandler} />
-      <Flex className={styles.controls}>
-        <Flex className={styles.buttonsGroup}>
-          <Button disabled={!betAvailable} onClick={clearClickHandler} className={styles.buttonMarginRight}>
+      <Flex className={controls}>
+        <Flex className={buttonsGroup}>
+          <Button disabled={!betAvailable} onClick={clearClickHandler} className={buttonMarginRight}>
             Clear
           </Button>
           <Button disabled={!betAvailable} onClick={randomClickHandler}>
             Random
           </Button>
         </Flex>
-        <Button disabled={!betAvailable || spotList.length < 4} onClick={betHandler} className={styles.betButton}>
+        <Button disabled={!betAvailable || spotList.length < 4} onClick={betHandler} className={betButton}>
           BET
         </Button>
       </Flex>
-    </Flex>
+    </div>
   );
 }

@@ -1,31 +1,34 @@
 /* eslint-disable no-magic-numbers */
 import { Button, Flex, Text } from '@chakra-ui/react';
-import { useBetService } from '@ui/providers';
 import { JSX } from 'react';
 
 import * as styles from './bet.css';
 
-const presetBets = [1, 5, 20, 100];
+export interface BetProps {
+  readonly bet: number;
+  readonly presets: readonly number[];
+  readonly onChangeBet: (bet: number) => void;
+}
 
-export function Bet(): JSX.Element {
-  const { bet, changeBet } = useBetService();
+export function Bet(props: BetProps): JSX.Element {
+  const { bet, presets, onChangeBet } = props;
 
   const increment = (): void => {
-    changeBet(bet + 10);
+    onChangeBet(bet + 10);
   };
   const decrement = (): void => {
     if (bet > 10) {
-      changeBet(bet - 10);
+      onChangeBet(bet - 10);
     }
   };
   const setBet = (value: number): void => {
-    changeBet(value);
+    onChangeBet(value);
   };
 
   return (
     <Flex className={styles.wrapper}>
       <Flex className={styles.presets}>
-        {presetBets.map((value) => (
+        {presets.map((value) => (
           <Button
             key={value}
             onClick={() => {

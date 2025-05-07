@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import { Writable } from '@ui/base';
-import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
+import { Balance, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
 import { useBalanceService, useBallsService, useStateService, useTicketService } from '@ui/providers';
 import { JSX, PropsWithChildren, useMemo } from 'react';
 
@@ -29,9 +29,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>): JSX.Elem
 
   return (
     <>
-      <Flex justifyContent="center">
-        <Bet />
-      </Flex>
+      <Flex justifyContent="center"></Flex>
       <Flex justifyContent="center">
         <Win />
         <Balance balance={balance} />

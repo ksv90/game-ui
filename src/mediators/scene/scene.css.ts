@@ -1,9 +1,10 @@
 import { style } from '@vanilla-extract/css';
 
-export const wrapper = style({
+export const sceneClass = style({
   display: 'inline-flex',
   flexDirection: 'column',
-  margin: '10px',
+  gridArea: 'scene-area',
+  alignItems: 'center',
 });
 
 export const controls = style({

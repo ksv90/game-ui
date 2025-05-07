@@ -11,3 +11,4 @@ export * from './state-service';
 export * from './ticket-service';
 export * from './user-messages.provider';
 export * from './win-service';
+export * from './window-service';
