@@ -1,6 +1,8 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { useBetService } from '@ui/providers';
 
+import * as styles from './bet.css';
+
 export function Bet() {
   const { bet, changeBet } = useBetService();
 
@@ -14,17 +16,13 @@ export function Bet() {
   };
 
   return (
-    <Flex marginBottom="20px">
-      <Text display="flex" width={200} alignItems="center">
-        Total bet
-      </Text>
-      <Text display="flex" flexBasis="50px" alignItems="center">
-        {bet}
-      </Text>
-      <Button type="button" margin="0 10px" onClick={decrement}>
+    <Flex className={styles.container}>
+      <Text className={styles.label}>Total bet</Text>
+      <Text className={styles.value}>{bet}</Text>
+      <Button type="button" onClick={decrement} className={styles.button}>
         Уменьшить
       </Button>
-      <Button type="button" margin="0 10px" onClick={increment}>
+      <Button type="button" onClick={increment} className={styles.button}>
         Увеличить
       </Button>
     </Flex>

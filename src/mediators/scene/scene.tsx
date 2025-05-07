@@ -5,6 +5,8 @@ import { SpotIdList } from '@ui/helpers';
 import { useBallsService, useStateService } from '@ui/providers';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
+import * as styles from './scene.css';
+
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
@@ -68,19 +70,19 @@ export function Scene(props: PropsWithChildren<SceneProps>) {
   };
 
   return (
-    <Flex direction="column" margin={10} display="inline-flex">
+    <Flex className={styles.wrapper}>
       <SpotBoard spots={spots} onClick={spotClickHandler} />
-      <Flex justifyContent="space-between">
-        <Flex>
-          <Button disabled={!betAvailable} onClick={clearClickHandler} marginRight={1}>
+      <Flex className={styles.controls}>
+        <Flex className={styles.buttonsGroup}>
+          <Button disabled={!betAvailable} onClick={clearClickHandler} className={styles.buttonMarginRight}>
             Clear
           </Button>
           <Button disabled={!betAvailable} onClick={randomClickHandler}>
             Random
           </Button>
         </Flex>
-        <Button disabled={!betAvailable || spotList.length < 4} onClick={betHandler}>
-          Bet
+        <Button disabled={!betAvailable || spotList.length < 4} onClick={betHandler} className={styles.betButton}>
+          BET
         </Button>
       </Flex>
     </Flex>
