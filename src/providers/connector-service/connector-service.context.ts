@@ -9,7 +9,7 @@ export interface ConnectorService {
 
 export const ConnectorServiceContext = createContext<ConnectorService | null>(null);
 
-export const useConnectorService = () => {
+export const useConnectorService = (): ConnectorService => {
   const connectorService = useContext(ConnectorServiceContext);
   if (!connectorService) {
     throw new Error('connectorService не определен');

@@ -1,5 +1,5 @@
 import { IPublicationContext, IReceiver, IStateContext } from '@ui/base';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 
 export interface PublicationServiceProviderProps {
   readonly receiver: IReceiver;
@@ -7,12 +7,12 @@ export interface PublicationServiceProviderProps {
   readonly onPublication: (ctx: IPublicationContext) => void;
 }
 
-export const PublicationServiceProvider = (props: PropsWithChildren<PublicationServiceProviderProps>) => {
+export const PublicationServiceProvider = (props: PropsWithChildren<PublicationServiceProviderProps>): JSX.Element => {
   const { children, receiver, channel, onPublication: handler } = props;
   const [connectionState, setConnectionState] = useState(receiver.state);
 
   useEffect(() => {
-    const stateChangeHandler = ({ newState }: IStateContext) => {
+    const stateChangeHandler = ({ newState }: IStateContext): void => {
       setConnectionState(newState);
     };
     receiver.on('state', stateChangeHandler);

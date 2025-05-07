@@ -7,7 +7,7 @@ export interface BalanceService {
 
 export const BalanceServiceContext = createContext<BalanceService | null>(null);
 
-export const useBalanceService = () => {
+export const useBalanceService = (): BalanceService => {
   const balanceService = useContext(BalanceServiceContext);
   if (!balanceService) {
     throw new Error('balanceService не определен');

@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { createRoot } from 'react-dom/client';
 
 import { KenoApp } from './keno.app';

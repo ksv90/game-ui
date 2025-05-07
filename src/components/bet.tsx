@@ -1,14 +1,16 @@
+/* eslint-disable no-magic-numbers */
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { useBetService } from '@ui/providers';
+import { JSX } from 'react';
 
-export function Bet() {
+export function Bet(): JSX.Element {
   const { bet, changeBet } = useBetService();
 
-  const increment = () => {
+  const increment = (): void => {
     changeBet(bet + 10);
   };
 
-  const decrement = () => {
+  const decrement = (): void => {
     if (bet <= 10) return;
     changeBet(bet - 10);
   };

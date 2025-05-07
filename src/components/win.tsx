@@ -1,7 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { useWinService } from '@ui/providers';
+import { JSX } from 'react';
 
-export function Win() {
+export function Win(): JSX.Element {
   const { win } = useWinService();
 
   return (

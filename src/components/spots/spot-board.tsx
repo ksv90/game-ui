@@ -1,4 +1,5 @@
 import { ISpotData, Spot } from '@ui/components';
+import { JSX } from 'react';
 
 import { grid } from './spot.css';
 
@@ -7,7 +8,7 @@ export interface SpotBoardProps {
   readonly onClick?: (id: number) => void;
 }
 
-export function SpotBoard(props: SpotBoardProps) {
+export function SpotBoard(props: SpotBoardProps): JSX.Element {
   const { spots, onClick } = props;
 
   return (

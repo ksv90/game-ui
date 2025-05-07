@@ -30,8 +30,8 @@ export function ticketServiceReducer(tickets: TicketReducerState, action: Ticket
       return tickets.filter((ticket) => ticket.ticketId !== ticketId);
     }
     case 'update': {
-      const { tickets } = action.payload;
-      return tickets;
+      const { tickets: ticketList } = action.payload;
+      return ticketList;
     }
   }
 }
