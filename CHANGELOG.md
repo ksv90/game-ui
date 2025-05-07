@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.15](https://github.com/ksv90/game-ui/compare/v0.0.14...v0.0.15) (2025-05-07)
+
+
+### Bug Fixes
+
+* balance ([562de66](https://github.com/ksv90/game-ui/commit/562de66adda2bf34f3f019108cadd7f31a69617c))
+* balance ([fed224c](https://github.com/ksv90/game-ui/commit/fed224c69a945f7315ad32e8341d6eecb55d9b67))
+* balance component ([0ded9c2](https://github.com/ksv90/game-ui/commit/0ded9c230e572c46ae00015ae6201d059697353b))
+* bet-style ([faa0528](https://github.com/ksv90/game-ui/commit/faa0528039150f75d6771ca466113c8789e7df4d))
+* bet-style-fix ([44e846d](https://github.com/ksv90/game-ui/commit/44e846d559cbbba2014dbdecc525ea50a6b3cc94))
+* lint rules ([910c828](https://github.com/ksv90/game-ui/commit/910c82829129c9cf07d5d3fef851183ac9d025ce))
+
 ## [0.0.14](https://github.com/ksv90/game-ui/compare/v0.0.13...v0.0.14) (2025-05-06)
 
 
