@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { BetService, BetServiceContext } from './bet-service.context';
 
@@ -13,7 +13,7 @@ export interface BetProviderProps {
   readonly bet?: number;
 }
 
-export const BetServiceProvider = (props: PropsWithChildren<BetProviderProps>) => {
+export const BetServiceProvider = (props: PropsWithChildren<BetProviderProps>): JSX.Element => {
   const { children, game } = props;
   const [bet, setBet] = useState(props.bet ?? 0);
 

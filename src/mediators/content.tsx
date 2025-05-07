@@ -2,13 +2,13 @@ import { Flex } from '@chakra-ui/react';
 import { Writable } from '@ui/base';
 import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
 import { useBalanceService, useBallsService, useStateService, useTicketService } from '@ui/providers';
-import { PropsWithChildren, useMemo } from 'react';
+import { JSX, PropsWithChildren, useMemo } from 'react';
 
 export interface ContentProps {
   readonly onRemove: (ticketId: string) => void;
 }
 
-export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
+export function Content({ onRemove }: PropsWithChildren<ContentProps>): JSX.Element {
   const { tickets } = useTicketService();
   const { state } = useStateService();
   const { balls } = useBallsService();

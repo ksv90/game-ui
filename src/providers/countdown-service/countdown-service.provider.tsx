@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { CountdownService, CountdownServiceContext } from './countdown-service.context';
 
@@ -13,7 +13,7 @@ export interface CountdownProviderProps {
   readonly countdown?: number;
 }
 
-export const CountdownServiceProvider = (props: PropsWithChildren<CountdownProviderProps>) => {
+export const CountdownServiceProvider = (props: PropsWithChildren<CountdownProviderProps>): JSX.Element => {
   const { children, game } = props;
   const [countdown, setCountdown] = useState(props.countdown ?? 0);
 

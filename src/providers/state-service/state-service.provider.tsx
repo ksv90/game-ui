@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { StateService, StateServiceContext } from './state-service.context';
 
@@ -12,7 +12,7 @@ export interface StateServiceProviderProps {
   readonly state: StateService['state'];
 }
 
-export const StateServiceProvider = (props: PropsWithChildren<StateServiceProviderProps>) => {
+export const StateServiceProvider = (props: PropsWithChildren<StateServiceProviderProps>): JSX.Element => {
   const { children, game } = props;
   const [state, setState] = useState(props.state);
 
@@ -28,11 +28,11 @@ export const StateServiceProvider = (props: PropsWithChildren<StateServiceProvid
   }, [props.state]);
 
   useEffect(() => {
-    const roundStartHandler = () => {
+    const roundStartHandler = (): void => {
       setState('process');
     };
 
-    const roundCompleteHandler = () => {
+    const roundCompleteHandler = (): void => {
       setState('pending');
     };
 

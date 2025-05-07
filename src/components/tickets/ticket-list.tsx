@@ -11,7 +11,7 @@ export interface TicketListProps {
 export const TicketList: FC<TicketListProps> = (props) => {
   const { tickets, onClick } = props;
 
-  const clickHandler = (id: string) => {
+  const clickHandler = (id: string): void => {
     onClick?.(id);
   };
 

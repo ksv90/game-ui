@@ -7,7 +7,7 @@ export interface BetService {
 
 export const BetServiceContext = createContext<BetService | null>(null);
 
-export const useBetService = () => {
+export const useBetService = (): BetService => {
   const betService = useContext(BetServiceContext);
   if (!betService) {
     throw new Error('betService не определен');

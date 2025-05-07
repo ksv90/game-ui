@@ -30,11 +30,11 @@ export
 @Emitter()
 @Broadcaster('messenger')
 class KenoMessengerMock extends MessengerMock<KenoMessengerMockBroadcastEvents> implements IKenoReceiver {
-  #balanceUpdateHandler = (balance: number) => {
+  #balanceUpdateHandler = (balance: number): void => {
     this.sendMessage_(USER_CHANNEL, { type: 'balance-update', balance } satisfies BalanceUpdateMessage);
   };
 
-  #betChangeHandler = (bet: number) => {
+  #betChangeHandler = (bet: number): void => {
     this.sendMessage_(USER_CHANNEL, { type: 'bet-change', bet } satisfies BetChangeMessage);
   };
 
@@ -52,7 +52,7 @@ class KenoMessengerMock extends MessengerMock<KenoMessengerMockBroadcastEvents> 
     this.publish('totalBetChanged', value);
   }
 
-  sendWin(totalWin: number, ticketWins: IServerTicketWin[]) {
+  sendWin(totalWin: number, ticketWins: IServerTicketWin[]): void {
     this.sendMessage_(USER_CHANNEL, { type: 'win', totalWin, ticketWins } satisfies WinMessage);
   }
 

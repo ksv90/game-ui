@@ -1,5 +1,5 @@
 import { IServerTicket, ITicket, ticketTransform } from '@ui/helpers';
-import { PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
 import { TicketService, TicketServiceContext } from './ticket-service.context';
 import { ticketServiceReducer } from './ticket-service.reducer';
@@ -23,7 +23,7 @@ export interface TicketServiceProviderProps {
   readonly tickets?: readonly IServerTicket[];
 }
 
-export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProviderProps>) => {
+export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProviderProps>): JSX.Element => {
   const { children, game } = props;
 
   const [tickets, dispatchTickets] = useReducer(ticketServiceReducer, props.tickets?.map(ticketTransform) ?? []);
@@ -31,8 +31,8 @@ export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProv
   const ticketService = useMemo<TicketService>(
     () => ({
       tickets,
-      addTickets(...tickets) {
-        game.addTickets(...tickets);
+      addTickets(...ticketList) {
+        game.addTickets(...ticketList);
       },
       removeTickets(...ticketIds) {
         game.removeTickets(...ticketIds);
@@ -50,15 +50,15 @@ export const TicketServiceProvider = (props: PropsWithChildren<TicketServiceProv
   }, [props.tickets]);
 
   useEffect(() => {
-    const ticketAddHandler = (ticket: ITicket) => {
+    const ticketAddHandler = (ticket: ITicket): void => {
       dispatchTickets({ type: 'add', payload: { ticket } });
     };
 
-    const ticketRemoveHandler = (ticketId: string) => {
+    const ticketRemoveHandler = (ticketId: string): void => {
       dispatchTickets({ type: 'remove', payload: { ticketId } });
     };
 
-    const ticketClearHandler = () => {
+    const ticketClearHandler = (): void => {
       dispatchTickets({ type: 'update', payload: { tickets: [] } });
     };
 

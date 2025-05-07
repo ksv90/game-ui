@@ -1,6 +1,7 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable @typescript-eslint/unbound-method */
 import { act, render } from '@testing-library/react';
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BalanceService, useBalanceService } from './balance-service.context';
@@ -9,12 +10,12 @@ import { BalanceServiceGame, BalanceServiceProvider } from './balance-service.pr
 let mockGame: BalanceServiceGame;
 let listeners: Record<'balanceUpdated', Set<(value: number) => void>>;
 
-const Consumer = () => {
+const Consumer = (): JSX.Element => {
   const { balance } = useBalanceService();
   return <div>Balance: {balance}</div>;
 };
 
-const ConsumerWithEffect = ({ value }: { value: number }) => {
+const ConsumerWithEffect = ({ value }: { value: number }): JSX.Element => {
   const { balance, updateBalance } = useBalanceService();
 
   useEffect(() => {
@@ -118,7 +119,7 @@ describe('BalanceServiceProvider', () => {
   });
 
   it('должен бросить ошибку, если service вызывается вне провайдера', () => {
-    const BrokenConsumer = () => {
+    const BrokenConsumer = (): JSX.Element | null => {
       useBalanceService();
       return null;
     };
@@ -129,7 +130,7 @@ describe('BalanceServiceProvider', () => {
   it('не должен пересоздавать service при одинаковых значениях', () => {
     const renders: BalanceService[] = [];
 
-    const Tracker = () => {
+    const Tracker = (): JSX.Element => {
       const service = useBalanceService();
       useEffect(() => {
         renders.push(service);
@@ -153,7 +154,7 @@ describe('BalanceServiceProvider', () => {
   it('не должен пересоздавать service при одинаковых пропсах', () => {
     const renders = new Array<BalanceService>();
 
-    const Tracker = () => {
+    const Tracker = (): JSX.Element => {
       const service = useBalanceService();
       useEffect(() => {
         renders.push(service);

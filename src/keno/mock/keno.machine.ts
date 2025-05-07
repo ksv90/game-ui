@@ -19,7 +19,7 @@ export interface KenoMachineMockContext {
   roundClose(): void;
 }
 
-function log({ mode }: KenoMachineMockContext, { stateName }: { stateName: KenoMachineMockStateName }) {
+function log({ mode }: KenoMachineMockContext, { stateName }: { stateName: KenoMachineMockStateName }): void {
   // eslint-disable-next-line no-console
   if (mode) console.log(stateName);
 }
@@ -31,16 +31,18 @@ function wait(time: number): Promise<void> {
 }
 
 async function sec(): Promise<void> {
+  // eslint-disable-next-line no-magic-numbers
   await wait(1_000);
 }
 
-async function nextNumber(index: number) {
+async function nextNumber(index: number): Promise<void> {
+  // eslint-disable-next-line no-magic-numbers
   await wait(500 + (250 / 100) * (index * 10));
 }
 
 export const createKenoMachineMock = <TContext extends KenoMachineMockContext>(
   config: StateMachineConfig<KenoMachineMockStateName, KenoMachineMockEventType, TContext>,
-) => {
+): StateMachine<KenoMachineMockStateName, KenoMachineMockEventType, TContext> => {
   return new StateMachine(config);
 };
 
@@ -78,6 +80,8 @@ export const getKenoMachineMockConfig = <TContext extends KenoMachineMockContext
         entry: [log],
         job: (ctx) => {
           ctx.roundStart();
+
+          // eslint-disable-next-line no-magic-numbers
           messenger.sendRoundStart(Math.floor(Math.random() * 10) + 1);
         },
         on: {

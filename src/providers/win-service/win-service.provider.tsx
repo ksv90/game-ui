@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { WinService, WinServiceContext } from './win-service.context';
 
@@ -13,7 +13,7 @@ export interface WinProviderProps {
   readonly win?: number;
 }
 
-export const WinServiceProvider = (props: PropsWithChildren<WinProviderProps>) => {
+export const WinServiceProvider = (props: PropsWithChildren<WinProviderProps>): JSX.Element => {
   const { children, game } = props;
   const [win, setWin] = useState(props.win ?? 0);
 

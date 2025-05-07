@@ -1,7 +1,7 @@
 import { errorHandler } from '@ui/base';
 import { ITicket, SpotIdList, ticketTransform } from '@ui/helpers';
 import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
-import { PropsWithChildren, useMemo } from 'react';
+import { JSX, PropsWithChildren, useMemo } from 'react';
 
 import { ConnectorService, ConnectorServiceContext } from './connector-service.context';
 
@@ -32,7 +32,7 @@ export interface ConnectorServiceProviderProps {
   readonly onDataChange?: (connectorServiceData: IConnectorServiceData) => void;
 }
 
-export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServiceProviderProps>) => {
+export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServiceProviderProps>): JSX.Element => {
   const { children, connector, game, onDataChange } = props;
   const connectorService = useMemo<ConnectorService>(
     () => ({
@@ -61,9 +61,9 @@ export const ConnectorServiceProvider = (props: PropsWithChildren<ConnectorServi
       ticketCancel(ticketId) {
         connector
           .ticketCancel(ticketId)
-          .then(({ ticketId, balance }) => {
-            game.updateBalance(balance);
-            game.removeTickets(ticketId);
+          .then((data) => {
+            game.updateBalance(data.balance);
+            game.removeTickets(data.ticketId);
           })
           .catch(errorHandler);
       },

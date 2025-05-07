@@ -107,7 +107,7 @@ export class KenoServerMock implements KenoMachineMockContext, KenoConnectorMock
     return { totalWin, ticketWins };
   }
 
-  roundStart() {
+  roundStart(): void {
     this.#store.roundStarted = true;
   }
 
@@ -129,6 +129,7 @@ export class KenoServerMock implements KenoMachineMockContext, KenoConnectorMock
     const ticket = {
       bet,
       spots: [...spots],
+      // eslint-disable-next-line no-magic-numbers
       ticketId: String(Math.random() * 10),
     } satisfies IServerTicket;
 
