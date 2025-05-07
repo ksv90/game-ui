@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 import { Writable } from '@ui/base';
 import { Balance, Bet, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
-import { useBallsService, useStateService, useTicketService } from '@ui/providers';
+import { useBalanceService, useBallsService, useStateService, useTicketService } from '@ui/providers';
 import { PropsWithChildren, useMemo } from 'react';
 
 export interface ContentProps {
@@ -12,6 +12,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
   const { tickets } = useTicketService();
   const { state } = useStateService();
   const { balls } = useBallsService();
+  const { balance } = useBalanceService();
 
   const ticketDataList = useMemo(() => {
     return tickets.map<ITicketData>(({ ticketId, bet, spots }) => ({
@@ -33,7 +34,7 @@ export function Content({ onRemove }: PropsWithChildren<ContentProps>) {
       </Flex>
       <Flex justifyContent="center">
         <Win />
-        <Balance balance={1000000} />
+        <Balance balance={balance} />
       </Flex>
       <Flex justifyContent="center">{state === 'pending' ? <Countdown /> : <p>process</p>}</Flex>
       <TicketList tickets={ticketDataList} onClick={onRemove} />
