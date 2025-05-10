@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.17](https://github.com/ksv90/game-ui/compare/v0.0.16...v0.0.17) (2025-05-10)
+
+
+### Bug Fixes
+
+* service account ([5f05857](https://github.com/ksv90/game-ui/commit/5f0585761cd0e6028ebb7f64bdd533c234e16b71))
+* service account ([95cb194](https://github.com/ksv90/game-ui/commit/95cb194e8865096365b5499c7c8c10fbb56c60de))
+
 ## [0.0.16](https://github.com/ksv90/game-ui/compare/v0.0.15...v0.0.16) (2025-05-10)
 
 
