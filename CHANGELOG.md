@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.19](https://github.com/ksv90/game-ui/compare/v0.0.18...v0.0.19) (2025-05-10)
+
+
+### Bug Fixes
+
+* id chanded ([2dc4cdf](https://github.com/ksv90/game-ui/commit/2dc4cdfb4214268157db5c7228a377fcd067baf0))
+* id chanded ([c059ee9](https://github.com/ksv90/game-ui/commit/c059ee90eebd12d7ba8a94cfd55fb0cedb14ecd1))
+
 ## [0.0.18](https://github.com/ksv90/game-ui/compare/v0.0.17...v0.0.18) (2025-05-10)
 
 
