@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.16](https://github.com/ksv90/game-ui/compare/v0.0.15...v0.0.16) (2025-05-10)
+
+
+### Bug Fixes
+
+* firebase deploy added ([1ba32fc](https://github.com/ksv90/game-ui/commit/1ba32fc6371ea1b80529b942db9dac92f6fd3ed3))
+* firebase deploy added ([0d55857](https://github.com/ksv90/game-ui/commit/0d55857ecff09a458b33baab521406b28bdd8bb1))
+* layout ([f3e2a80](https://github.com/ksv90/game-ui/commit/f3e2a8034f8ec6d9854aada08e58f1e88b28cac3))
+
 ## [0.0.15](https://github.com/ksv90/game-ui/compare/v0.0.14...v0.0.15) (2025-05-07)
 
 
