@@ -24,6 +24,6 @@ jobs:
 
       - name: Deploy to Firebase
         run: |
-          npx firebase-tools@latest deploy --only hosting --project game-ui-5db35
+          npx firebase-tools@latest deploy --only hosting --project game-ui-459206
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-key.json
