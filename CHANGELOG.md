@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.20](https://github.com/ksv90/game-ui/compare/v0.0.19...v0.0.20) (2025-05-11)
+
+
+### Bug Fixes
+
+* cors added ([5c892af](https://github.com/ksv90/game-ui/commit/5c892af6e9cc458d5e305556e92bcff742963e15))
+* cors added ([81c1c10](https://github.com/ksv90/game-ui/commit/81c1c102b5244afd412ab91e1b6744ca5f21f4f5))
+
 ## [0.0.19](https://github.com/ksv90/game-ui/compare/v0.0.18...v0.0.19) (2025-05-10)
 
 
