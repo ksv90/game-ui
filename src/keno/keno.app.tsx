@@ -24,15 +24,15 @@ export interface KenoProps {
   readonly connector: IKenoConnector;
   readonly receiver: IKenoReceiver;
   readonly ui?: JSX.Element;
-  readonly rules?: JSX.Element;
+  readonly rules?: JSX.Element; // не используется
 }
 
 export function KenoApp(props: KenoProps): JSX.Element {
-  const { game, connector, receiver, ui, rules } = props;
+  const { game, connector, receiver, ui } = props;
 
   const [userChannel, setUserChannel] = useState('');
   const [roomChannel, setRoomChannel] = useState('');
-  const [rulesOpen] = useState(false);
+  // const [rulesOpen] = useState(false);
 
   useEffect(() => {
     game.start();
@@ -70,7 +70,7 @@ export function KenoApp(props: KenoProps): JSX.Element {
                             <BallsServiceProvider game={game}>
                               <StateServiceProvider game={game} state="pending">
                                 {ui}
-                                {rulesOpen && rules}
+                                {/* {rulesOpen && rules} */}
                               </StateServiceProvider>
                             </BallsServiceProvider>
                           </CountdownServiceProvider>
