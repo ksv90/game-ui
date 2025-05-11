@@ -44,7 +44,7 @@ jobs:
 
           echo "$OUTPUT"
           URL=$(echo "$OUTPUT" | jq -r '.result[].url')
-          echo "::set-output name=preview_url::$URL"
+          echo "preview_url=$URL" >> "$GITHUB_OUTPUT"
 
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-key.json
