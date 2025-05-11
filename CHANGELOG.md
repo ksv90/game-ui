@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.21](https://github.com/ksv90/game-ui/compare/v0.0.20...v0.0.21) (2025-05-11)
+
+
+### Bug Fixes
+
+* key fix ([07bd993](https://github.com/ksv90/game-ui/commit/07bd99309bd3c1c250e6df6c9a6b02cea5ac6503))
+* key fix ([2880745](https://github.com/ksv90/game-ui/commit/2880745e93cea188cf4c4202afaf2d2b86f467f0))
+
 ## [0.0.20](https://github.com/ksv90/game-ui/compare/v0.0.19...v0.0.20) (2025-05-11)
 
 
