@@ -1,14 +1,13 @@
 import { SpotIdList } from '@ui/helpers';
 import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from '@ui/mediators';
-import { useBetService, useConnectorService, useWindowService } from '@ui/providers';
-import { JSX, PropsWithChildren, useEffect } from 'react';
+import { useBetService, useConnectorService } from '@ui/providers';
+import { JSX, useEffect } from 'react';
 
-import { layoutLandscape, layoutPortrait } from './keno.gui.css';
+import { layout } from './keno.gui.css';
 
-export function KenoGui(_props: PropsWithChildren): JSX.Element {
+export function KenoGui(): JSX.Element {
   const { getSessionData, ticketCreate } = useConnectorService();
   const { bet } = useBetService();
-  const { portrait } = useWindowService();
 
   useEffect(() => {
     getSessionData();
@@ -24,7 +23,7 @@ export function KenoGui(_props: PropsWithChildren): JSX.Element {
   // };
 
   return (
-    <div className={portrait ? layoutPortrait : layoutLandscape}>
+    <div className={layout}>
       <HeaderMediator />
       <BalanceMediator />
       <SceneMediator makeBet={betHandler} />
