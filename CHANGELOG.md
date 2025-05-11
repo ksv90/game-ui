@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.0.22](https://github.com/ksv90/game-ui/compare/v0.0.21...v0.0.22) (2025-05-11)
+
+
+### Bug Fixes
+
+* preview ([cf418ba](https://github.com/ksv90/game-ui/commit/cf418bac86955b8af0b0d961555a136bcb1e136f))
+* preview ([bb0d124](https://github.com/ksv90/game-ui/commit/bb0d124a244ffd5f12abe1248b7b7a2ac0a282f1))
+* preview wf changed ([1720e37](https://github.com/ksv90/game-ui/commit/1720e3789cf100bfddc4d97a1aeed2802020b03f))
+* preview wf changed ([af653f0](https://github.com/ksv90/game-ui/commit/af653f03c86e8be4f92cdc4137cc0f3d4b4c3431))
+* test ([3eb8b0c](https://github.com/ksv90/game-ui/commit/3eb8b0cca4eb675bbd81d2ee6bde633185f0be61))
+* test ([5f12662](https://github.com/ksv90/game-ui/commit/5f12662517f6d1ab784ca1951549f809d3840fa6))
+* test ([d8a28ce](https://github.com/ksv90/game-ui/commit/d8a28ce9147d90d0378bd308fadb7d85171597dd))
+* test ([9d4fde0](https://github.com/ksv90/game-ui/commit/9d4fde0a2d7999ace660256dc1c07f594dd8ea03))
+* test ([78e40e8](https://github.com/ksv90/game-ui/commit/78e40e817dc6304d3494cf960dd94ad5430af9f2))
+* test ([fe78e87](https://github.com/ksv90/game-ui/commit/fe78e87bedf68489fcecb5534032c9a0de036fa5))
+* token added ([512c5bd](https://github.com/ksv90/game-ui/commit/512c5bdf501d07ed53db8fe2fa527a2461bc7aa3))
+* token added ([faa4687](https://github.com/ksv90/game-ui/commit/faa46871e73283bdead86cd6420ea2438e24532e))
+* typo ([ec6d71b](https://github.com/ksv90/game-ui/commit/ec6d71be8fee524bc47da16e89556479bb4c2d0d))
+* typo ([ec3e4bc](https://github.com/ksv90/game-ui/commit/ec3e4bcbaddd684a722863cfec8731456c85a1b1))
+
 ## [0.0.21](https://github.com/ksv90/game-ui/compare/v0.0.20...v0.0.21) (2025-05-11)
 
 
