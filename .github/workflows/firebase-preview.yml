@@ -17,7 +17,7 @@ permissions:
 jobs:
   build_and_preview:
     if: |
-      startsWith(github.head_ref, 'release-please/') &&
+      startsWith(github.head_ref, 'release-please--') &&
       github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
