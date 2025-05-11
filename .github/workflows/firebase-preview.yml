@@ -35,7 +35,8 @@ jobs:
       - name: Deploy to Firebase preview channel
         id: firebase_preview
         run: |
-          OUTPUT=$(npx firebase-tools hosting:channel:deploy \
+          channel_id=preview-${{ steps.commit.outputs.sha_short }}
+          OUTPUT=$(npx firebase-tools hosting:channel:deploy $channel_id \
             --expires 2d \
             --project game-ui-459206 \
             --json \
