@@ -35,14 +35,16 @@ jobs:
       - name: Deploy to Firebase preview channel
         id: firebase_preview
         run: |
-          DEPLOY_OUTPUT=$(npx firebase-tools hosting:channel:deploy \
-          --expires 3d \
-          --project game-ui-459206
-          --json
-          --token "${{ secrets.FIREBASE_TOKEN }}" || true)
-          echo "$DEPLOY_OUTPUT"
-          URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.result[].url')
-          echo "preview_url=$URL" >> "$GITHUB_OUTPUT"
+          OUTPUT=$(npx firebase-tools hosting:channel:deploy \
+            --expires 2d \
+            --project game-ui-459206 \
+            --json \
+            --token "${{ secrets.FIREBASE_TOKEN }}" || true)
+
+          echo "$OUTPUT"
+          URL=$(echo "$OUTPUT" | jq -r '.result[].url')
+          echo "::set-output name=preview_url::$URL"
+
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-key.json
 
