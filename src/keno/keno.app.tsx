@@ -14,7 +14,7 @@ import {
   UserMessagesProvider,
   WindowServiceProvider,
   WinServiceProvider,
-} from '@ui/providers';
+} from '@game-ui/providers';
 import { JSX, useEffect, useState } from 'react';
 
 import { IKenoConnector, IKenoGame, IKenoReceiver } from './keno.types';

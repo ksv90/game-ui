@@ -1,6 +1,6 @@
-import { SpotIdList } from '@ui/helpers';
-import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from '@ui/mediators';
-import { useBetService, useConnectorService } from '@ui/providers';
+import { SpotIdList } from '@game-ui/helpers';
+import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from '@game-ui/mediators';
+import { useBetService, useConnectorService } from '@game-ui/providers';
 import { JSX, useEffect } from 'react';
 
 import { layout } from './keno.gui.css';

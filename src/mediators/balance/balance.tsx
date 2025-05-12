@@ -1,5 +1,5 @@
-import { Balance } from '@ui/components';
-import { useBalanceService } from '@ui/providers';
+import { Balance } from '@game-ui/components';
+import { useBalanceService } from '@game-ui/providers';
 import { JSX } from 'react';
 
 import { balanceClass } from './balance.css';

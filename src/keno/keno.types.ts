@@ -1,6 +1,6 @@
-import { IGame, IReceiver } from '@ui/base';
-import { BallList, ITicket, ITicketWin, IUserWin, SpotIdList } from '@ui/helpers';
-import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { IGame, IReceiver } from '@game-ui/base';
+import { BallList, ITicket, ITicketWin, IUserWin, SpotIdList } from '@game-ui/helpers';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@game-ui/schemes';
 
 export interface IKenoConnector {
   getSessionData(): Promise<SessionResponse>;

@@ -1,4 +1,4 @@
-import { TicketData, TicketWinData, UserWinListData } from '@ui/schemes';
+import { TicketData, TicketWinData, UserWinListData } from '@game-ui/schemes';
 
 export type IServerTicket = TicketData['ticket'];
 

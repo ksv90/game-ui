@@ -1,6 +1,5 @@
-import { Broadcaster, Emitter } from '@ksv90/decorators';
-import { MessengerMock } from '@ui/base';
-import { IServerTicket, IServerTicketWin, IServerUserWin } from '@ui/helpers';
+import { MessengerMock } from '@game-ui/base';
+import { IServerTicket, IServerTicketWin, IServerUserWin } from '@game-ui/helpers';
 import {
   BalanceUpdateMessage,
   BetChangeMessage,
@@ -11,7 +10,8 @@ import {
   TicketCancelMessage,
   TicketCreateMessage,
   WinMessage,
-} from '@ui/schemes';
+} from '@game-ui/schemes';
+import { Broadcaster, Emitter } from '@ksv90/decorators';
 
 import { IKenoReceiver } from '../keno.types';
 

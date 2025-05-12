@@ -1,4 +1,4 @@
-import { ISpotData, Spot } from '@ui/components';
+import { ISpotData, Spot } from '@game-ui/components';
 import { JSX } from 'react';
 
 import { grid } from './spot.css';

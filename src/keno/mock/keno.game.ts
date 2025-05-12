@@ -1,5 +1,5 @@
+import { BallList, ITicket, ITicketWin, IUserWin } from '@game-ui/helpers';
 import { Emitter, type IEmitter } from '@ksv90/decorators';
-import { BallList, ITicket, ITicketWin, IUserWin } from '@ui/helpers';
 
 import { IKenoGame, IKenoGameEvents } from '../keno.types';
 

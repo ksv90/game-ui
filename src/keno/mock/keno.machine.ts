@@ -1,5 +1,5 @@
+import { IServerTicketWin } from '@game-ui/helpers';
 import { StateMachine, StateMachineConfig } from '@ksv90/fsm';
-import { IServerTicketWin } from '@ui/helpers';
 
 import { KenoMessengerMock } from './keno.messenger';
 
