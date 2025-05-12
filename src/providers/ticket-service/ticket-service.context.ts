@@ -1,4 +1,4 @@
-import { ITicket } from '@ui/helpers';
+import { ITicket } from '@game-ui/helpers';
 import { createContext, useContext } from 'react';
 
 export interface TicketService {

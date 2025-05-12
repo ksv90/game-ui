@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
-import { Bet } from '@ui/components';
-import { useBetService } from '@ui/providers';
+import { Bet } from '@game-ui/components';
+import { useBetService } from '@game-ui/providers';
 import { JSX } from 'react';
 
 import { controlsClass } from './controls.css';

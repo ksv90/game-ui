@@ -1,5 +1,5 @@
-import { IPublicationContext, IReceiver } from '@ui/base';
-import { ITicket, IUserWin, SpotIdList, ticketTransform } from '@ui/helpers';
+import { IPublicationContext, IReceiver } from '@game-ui/base';
+import { ITicket, IUserWin, SpotIdList, ticketTransform } from '@game-ui/helpers';
 import {
   RoomMessage,
   RoundCompleteMessage,
@@ -8,7 +8,7 @@ import {
   RoundStartMessage,
   TicketCancelMessage,
   TicketCreateMessage,
-} from '@ui/schemes';
+} from '@game-ui/schemes';
 import { parse } from '@valibot/valibot';
 import { JSX, PropsWithChildren } from 'react';
 

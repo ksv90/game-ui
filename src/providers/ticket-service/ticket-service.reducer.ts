@@ -1,4 +1,4 @@
-import { ITicket } from '@ui/helpers';
+import { ITicket } from '@game-ui/helpers';
 
 export interface AddTicketAction {
   readonly type: 'add';

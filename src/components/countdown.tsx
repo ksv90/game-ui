@@ -1,4 +1,4 @@
-import { useCountdownService } from '@ui/providers';
+import { useCountdownService } from '@game-ui/providers';
 import { JSX } from 'react';
 
 export function Countdown(): JSX.Element {

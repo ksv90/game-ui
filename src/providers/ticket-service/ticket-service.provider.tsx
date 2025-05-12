@@ -1,4 +1,4 @@
-import { IServerTicket, ITicket, ticketTransform } from '@ui/helpers';
+import { IServerTicket, ITicket, ticketTransform } from '@game-ui/helpers';
 import { JSX, PropsWithChildren, useEffect, useMemo, useReducer } from 'react';
 
 import { TicketService, TicketServiceContext } from './ticket-service.context';

@@ -1,4 +1,4 @@
-import { IPublicationContext, IReceiver, IStateContext } from '@ui/base';
+import { IPublicationContext, IReceiver, IStateContext } from '@game-ui/base';
 import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 
 export interface PublicationServiceProviderProps {

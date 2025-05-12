@@ -1,5 +1,5 @@
+import { ISubscription, ISubscriptionEvents } from '@game-ui/base';
 import { Emitter, IEmitter } from '@ksv90/decorators';
-import { ISubscription, ISubscriptionEvents } from '@ui/base';
 
 export type PublishResultMock = object;
 

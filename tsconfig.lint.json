@@ -10,12 +10,12 @@
     "types": ["vitest/globals", "@testing-library/jest-dom"],
     "skipLibCheck": true,
     "paths": {
-      "@ui/base": ["./src/base"],
-      "@ui/components": ["./src/components"],
-      "@ui/helpers": ["./src/helpers"],
-      "@ui/mediators": ["./src/mediators"],
-      "@ui/providers": ["./src/providers"],
-      "@ui/schemes": ["./src/schemes"]
+      "@game-ui/base": ["./src/base"],
+      "@game-ui/components": ["./src/components"],
+      "@game-ui/helpers": ["./src/helpers"],
+      "@game-ui/mediators": ["./src/mediators"],
+      "@game-ui/providers": ["./src/providers"],
+      "@game-ui/schemes": ["./src/schemes"]
     },
     "plugins": [
       { "transform": "typescript-transform-paths" },

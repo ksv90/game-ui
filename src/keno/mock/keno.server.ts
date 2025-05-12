@@ -1,5 +1,5 @@
-import { IServerTicket, IServerTicketWin } from '@ui/helpers';
-import { TicketWinListData, TotalWinData } from '@ui/schemes';
+import { IServerTicket, IServerTicketWin } from '@game-ui/helpers';
+import { TicketWinListData, TotalWinData } from '@game-ui/schemes';
 
 import { KenoConnectorMockServer } from './keno.connector';
 import { KenoMachineMockContext } from './keno.machine';

@@ -1,4 +1,4 @@
-import { BallList } from '@ui/helpers';
+import { BallList } from '@game-ui/helpers';
 import { createContext, useContext } from 'react';
 
 export interface BallsService {

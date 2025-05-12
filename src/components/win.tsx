@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { useWinService } from '@ui/providers';
+import { useWinService } from '@game-ui/providers';
 import { JSX } from 'react';
 
 export function Win(): JSX.Element {

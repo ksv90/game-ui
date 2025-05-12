@@ -1,10 +1,10 @@
 // TODO: убрать отключение
 /* eslint-disable no-magic-numbers */
 import { Button, Flex } from '@chakra-ui/react';
-import { Writable } from '@ui/base';
-import { ISpotData, SpotBoard } from '@ui/components';
-import { SpotIdList } from '@ui/helpers';
-import { useBallsService, useStateService } from '@ui/providers';
+import { Writable } from '@game-ui/base';
+import { ISpotData, SpotBoard } from '@game-ui/components';
+import { SpotIdList } from '@game-ui/helpers';
+import { useBallsService, useStateService } from '@game-ui/providers';
 import { JSX, useEffect, useMemo, useState } from 'react';
 
 import { betButton, buttonMarginRight, buttonsGroup, controls, sceneClass } from './scene.css';

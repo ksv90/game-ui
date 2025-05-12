@@ -1,6 +1,6 @@
-import { IPublicationContext, IReceiver } from '@ui/base';
-import { ITicketWin } from '@ui/helpers';
-import { BalanceUpdateMessage, BetChangeMessage, UserMessage, WinMessage } from '@ui/schemes';
+import { IPublicationContext, IReceiver } from '@game-ui/base';
+import { ITicketWin } from '@game-ui/helpers';
+import { BalanceUpdateMessage, BetChangeMessage, UserMessage, WinMessage } from '@game-ui/schemes';
 import { parse } from '@valibot/valibot';
 import { JSX, PropsWithChildren } from 'react';
 
