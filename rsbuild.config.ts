@@ -26,6 +26,11 @@ const moduleFederationConfig = createModuleFederationConfig({
     react: { singleton: true },
     'react-dom': { singleton: true },
   },
+  dts: {
+    generateTypes: {
+      compilerInstance: 'tspc', // ts-patch pack cli
+    },
+  },
 });
 
 export default defineConfig({
