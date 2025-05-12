@@ -45,6 +45,9 @@ export default defineConfig({
   tools: {
     rspack: {
       plugins: [new VanillaExtractPlugin()],
+      output: {
+        publicPath: 'auto',
+      },
     },
   },
   server: {
