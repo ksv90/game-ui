@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.0](https://github.com/ksv90/game-ui/compare/v0.0.22...v0.1.0) (2025-05-12)
+
+
+### Features
+
+* builder changed ([3c6ac9c](https://github.com/ksv90/game-ui/commit/3c6ac9c40e56e8b913056bc6b65de9850c34d6ba))
+* builder changed ([dcad59f](https://github.com/ksv90/game-ui/commit/dcad59fa115c29e8c908c9e2f092e0067abf5c78))
+
+
+### Bug Fixes
+
+* add json files ([42eee7a](https://github.com/ksv90/game-ui/commit/42eee7a142192c239973421d3679c564b5cc9ae3))
+* add json files ([92da33e](https://github.com/ksv90/game-ui/commit/92da33e8fbe87d9c2193eaf9e5946236dc193956))
+* alias changed ([fb69c73](https://github.com/ksv90/game-ui/commit/fb69c73f1981cda1e80a3f13b8470a163908a90e))
+* alias changed ([101f77b](https://github.com/ksv90/game-ui/commit/101f77b06e3a9bdc78bfdfa4fdaaf5a19c5d6dd2))
+* alias type fixed ([c771f80](https://github.com/ksv90/game-ui/commit/c771f80854a31c496659544892305a89bdcc6be8))
+* alias type fixed ([a440b16](https://github.com/ksv90/game-ui/commit/a440b16e93489720004fbd26a15afd0cbfe76bd1))
+* settings public path added ([3e9620f](https://github.com/ksv90/game-ui/commit/3e9620f3c715061b7d6f117629eb4de2ceb664f7))
+* settings public path added ([d949af0](https://github.com/ksv90/game-ui/commit/d949af07c37ca1ae335974e27b1a420b3f1863f6))
+* typo ([ba5d70b](https://github.com/ksv90/game-ui/commit/ba5d70baef3a01821acb25713f5fa84ba1c31782))
+
 ## [0.0.22](https://github.com/ksv90/game-ui/compare/v0.0.21...v0.0.22) (2025-05-11)
 
 
