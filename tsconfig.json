@@ -1,5 +1,5 @@
 {
   "extends": ["./tsconfig.lint.json"],
-  "include": ["./src", "vite-env.d.ts"],
+  "include": ["./src"],
   "exclude": ["**/*.{spec,bench,test(-d)?}.*"]
 }

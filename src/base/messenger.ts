@@ -6,10 +6,9 @@ import { errorHandler } from './utils';
 
 export interface MessengerMock<TBroadcastEvents extends object = object> extends IEmitter<IReceiverEvents>, IBroadcaster<TBroadcastEvents> {}
 
-export
 @Emitter()
 @Broadcaster('messenger')
-abstract class MessengerMock implements IReceiver {
+export abstract class MessengerMock implements IReceiver {
   protected subscriptionMap_ = new Map<string, SubscriptionMock>();
 
   #state: ReceiverState = 'disconnected';
