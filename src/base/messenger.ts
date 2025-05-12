@@ -8,7 +8,7 @@ export interface MessengerMock<TBroadcastEvents extends object = object> extends
 
 @Emitter()
 @Broadcaster('messenger')
-export class MessengerMock implements IReceiver {
+export abstract class MessengerMock implements IReceiver {
   protected subscriptionMap_ = new Map<string, SubscriptionMock>();
 
   #state: ReceiverState = 'disconnected';
