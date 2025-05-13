@@ -8,6 +8,6 @@ export * from './keno.types';
 export * from './mock';
 export * from '@game-ui/components';
 export * from '@game-ui/helpers';
-export * from '@game-ui/mediators';
 export * from '@game-ui/providers';
 export * from '@game-ui/schemes';
+export * from 'src/panels';
