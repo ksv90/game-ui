@@ -4,7 +4,7 @@ import { JSX } from 'react';
 
 import { balanceClass } from './balance.css';
 
-export function BalanceMediator(): JSX.Element {
+export function BalancePanel(): JSX.Element {
   const { balance } = useBalanceService();
 
   return (
