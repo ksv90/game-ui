@@ -24,11 +24,11 @@ const moduleFederationConfig = createModuleFederationConfig({
   },
   shared: {
     react: { singleton: true },
-    'react-dom': { singleton: true },
   },
   dts: {
     generateTypes: {
       compilerInstance: 'tspc', // ts-patch pack cli
+      extractThirdParty: true,
     },
   },
 });
