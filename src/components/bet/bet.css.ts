@@ -60,7 +60,7 @@ export const controlButton = style({
   borderRadius: '50%',
   cursor: 'pointer',
   fontFamily: 'Roboto',
-  lineHeight: '100%',
+  lineHeight: '30px',
   letterSpacing: '100%',
   textAlign: 'center',
   verticalAlign: 'middle',
@@ -75,7 +75,7 @@ export const betButton = style({
   color: '#ffffff',
   fontWeight: 600,
   fontSize: '14px',
-  padding: '20px',
+  padding: '10px',
   borderRadius: '6px',
   transition: 'opacity 0.2s ease',
   selectors: {

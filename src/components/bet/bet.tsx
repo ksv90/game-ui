@@ -1,5 +1,4 @@
 /* eslint-disable no-magic-numbers */
-import { Button, Flex, Text } from '@chakra-ui/react';
 import { JSX } from 'react';
 
 import * as styles from './bet.css';
@@ -27,10 +26,10 @@ export function Bet(props: BetProps): JSX.Element {
   };
 
   return (
-    <Flex className={styles.wrapper}>
-      <Flex className={styles.presets}>
+    <div className={styles.wrapper}>
+      <div className={styles.presets}>
         {presets.map((value) => (
-          <Button
+          <div
             key={value}
             onClick={() => {
               setBet(value);
@@ -38,23 +37,23 @@ export function Bet(props: BetProps): JSX.Element {
             className={styles.presetButton}
           >
             {value}
-          </Button>
+          </div>
         ))}
-      </Flex>
-      <Flex className={styles.betControl}>
-        <Text className={styles.betValue}>{bet.toLocaleString('ru-RU')}</Text>
-        <Flex className={styles.controls}>
-          <Button onClick={decrement} className={styles.controlButton}>
+      </div>
+      <div className={styles.betControl}>
+        <div className={styles.betValue}>{bet.toLocaleString('ru-RU')}</div>
+        <div className={styles.controls}>
+          <div onClick={decrement} className={styles.controlButton}>
             −
-          </Button>
-          <Button onClick={increment} className={styles.controlButton}>
+          </div>
+          <div onClick={increment} className={styles.controlButton}>
             +
-          </Button>
-        </Flex>
-        <Button onClick={onBet} className={styles.betButton}>
+          </div>
+        </div>
+        <div onClick={onBet} className={styles.betButton}>
           BET
-        </Button>
-      </Flex>
-    </Flex>
+        </div>
+      </div>
+    </div>
   );
 }

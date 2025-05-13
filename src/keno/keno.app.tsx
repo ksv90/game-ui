@@ -1,4 +1,3 @@
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import {
   BalanceServiceProvider,
   BallsServiceProvider,
@@ -55,32 +54,30 @@ export function KenoApp(props: KenoProps): JSX.Element {
 
   return (
     <ErrorBoundary onError={errorHandler}>
-      <ChakraProvider value={defaultSystem}>
-        <WindowServiceProvider>
-          <ConnectorServiceProvider game={game} connector={connector} onDataChange={dataChangeHandler}>
-            <RoomMessagesProvider game={game} receiver={receiver} channel={roomChannel}>
-              <UserMessagesProvider game={game} receiver={receiver} channel={userChannel}>
-                <TicketServiceProvider game={game}>
-                  <BalanceServiceProvider game={game}>
-                    <BetServiceProvider game={game}>
-                      <WinServiceProvider game={game}>
-                        <CountdownServiceProvider game={game}>
-                          <BallsServiceProvider game={game}>
-                            <StateServiceProvider game={game} state="pending">
-                              {ui}
-                              {/* {rulesOpen && rules} */}
-                            </StateServiceProvider>
-                          </BallsServiceProvider>
-                        </CountdownServiceProvider>
-                      </WinServiceProvider>
-                    </BetServiceProvider>
-                  </BalanceServiceProvider>
-                </TicketServiceProvider>
-              </UserMessagesProvider>
-            </RoomMessagesProvider>
-          </ConnectorServiceProvider>
-        </WindowServiceProvider>
-      </ChakraProvider>
+      <WindowServiceProvider>
+        <ConnectorServiceProvider game={game} connector={connector} onDataChange={dataChangeHandler}>
+          <RoomMessagesProvider game={game} receiver={receiver} channel={roomChannel}>
+            <UserMessagesProvider game={game} receiver={receiver} channel={userChannel}>
+              <TicketServiceProvider game={game}>
+                <BalanceServiceProvider game={game}>
+                  <BetServiceProvider game={game}>
+                    <WinServiceProvider game={game}>
+                      <CountdownServiceProvider game={game}>
+                        <BallsServiceProvider game={game}>
+                          <StateServiceProvider game={game} state="pending">
+                            {ui}
+                            {/* {rulesOpen && rules} */}
+                          </StateServiceProvider>
+                        </BallsServiceProvider>
+                      </CountdownServiceProvider>
+                    </WinServiceProvider>
+                  </BetServiceProvider>
+                </BalanceServiceProvider>
+              </TicketServiceProvider>
+            </UserMessagesProvider>
+          </RoomMessagesProvider>
+        </ConnectorServiceProvider>
+      </WindowServiceProvider>
     </ErrorBoundary>
   );
 }
