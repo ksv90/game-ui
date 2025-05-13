@@ -28,7 +28,7 @@ export class KenoServerMock implements KenoMachineMockContext, KenoConnectorMock
     this.#store = {
       payouts,
       mode: 0,
-      balance: 1_000,
+      balance: 1_000_000,
       bet: 10,
       roundStarted: false,
       countdown: COUNTDOWN,

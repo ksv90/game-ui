@@ -9,6 +9,8 @@ export const container = style({
   height: '60px',
   borderRadius: '8px',
   padding: '15px 50px',
+  marginTop: '60px',
+  marginRight: '10px',
 });
 
 export const label = style({

@@ -8,10 +8,11 @@ export interface BetProps {
   readonly bet: number;
   readonly presets: readonly number[];
   readonly onChangeBet: (bet: number) => void;
+  readonly onBet: () => void;
 }
 
 export function Bet(props: BetProps): JSX.Element {
-  const { bet, presets, onChangeBet } = props;
+  const { bet, presets, onChangeBet, onBet } = props;
 
   const increment = (): void => {
     onChangeBet(bet + 10);
@@ -50,6 +51,9 @@ export function Bet(props: BetProps): JSX.Element {
             +
           </Button>
         </Flex>
+        <Button onClick={onBet} className={styles.betButton}>
+          BET
+        </Button>
       </Flex>
     </Flex>
   );
