@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.1](https://github.com/ksv90/game-ui/compare/v0.1.0...v0.1.1) (2025-05-13)
+
+
+### Bug Fixes
+
+* adaptive completed ([66a78d4](https://github.com/ksv90/game-ui/commit/66a78d4637481946ca2611f5ff83accef1b12512))
+* adaptive completed ([7f94ade](https://github.com/ksv90/game-ui/commit/7f94ade9f5bea78e01edd32c4be03673ee46c1a8))
+* bet-bottom ([d1e58a3](https://github.com/ksv90/game-ui/commit/d1e58a38242e91b85abf9a36a72a3f65afc45655))
+* bet-bottom ([acf25c1](https://github.com/ksv90/game-ui/commit/acf25c1d8ed26aa5a4e162ce171c86eb2d832d31))
+* bet-buttom ([3bbcb8f](https://github.com/ksv90/game-ui/commit/3bbcb8f1565c90640e93541cf7f6bfc7686e30a2))
+* mediators rename to panels ([4e79a10](https://github.com/ksv90/game-ui/commit/4e79a109dbc83d5bf202c1a1145f243d36eb8785))
+* mediators rename to panels ([b86391f](https://github.com/ksv90/game-ui/commit/b86391fca03c7b2c0cf56f3ea11f49ef8c3bca05))
+* panels styles changed ([6363e2c](https://github.com/ksv90/game-ui/commit/6363e2c045937af91031088a801938db2de0780a))
+* panels styles changed ([a5065fb](https://github.com/ksv90/game-ui/commit/a5065fb1e63975add6115e7b74bfd1c21dad6b7a))
+
 ## [0.1.0](https://github.com/ksv90/game-ui/compare/v0.0.22...v0.1.0) (2025-05-12)
 
 
