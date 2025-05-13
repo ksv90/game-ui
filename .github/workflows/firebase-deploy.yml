@@ -1,0 +1,29 @@
+name: Deploy to Firebase Hosting
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/install
+
+      - run: pnpm build
+
+      - name: Set up Firebase credentials
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}' > ${{ runner.temp }}/firebase-key.json
+        shell: bash
+
+      - name: Deploy to Firebase
+        run: |
+          npx firebase-tools@latest deploy --only hosting --project game-ui-459206
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase-key.json

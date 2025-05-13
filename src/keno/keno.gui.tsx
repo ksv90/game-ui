@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
 import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from '@ui/mediators';
-import { useBetService, useConnectorService, useStateService, useWindowService } from '@ui/providers';
+import { useBetService, useConnectorService, useStateService } from '@ui/providers';
 import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 
-import { layoutLandscape, layoutPortrait } from './keno.gui.css';
+import { layout } from './keno.gui.css';
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -16,7 +16,6 @@ function getRandomInt(min: number, max: number): number {
 export function KenoGui(_props: PropsWithChildren): JSX.Element {
   const { getSessionData, ticketCreate } = useConnectorService();
   const { bet } = useBetService();
-  const { portrait } = useWindowService();
   const [spotList, setSpotList] = useState(new Array<number>());
   const { state } = useStateService();
 
@@ -61,7 +60,7 @@ export function KenoGui(_props: PropsWithChildren): JSX.Element {
   };
 
   return (
-    <div className={portrait ? layoutPortrait : layoutLandscape}>
+    <div className={layout}>
       <HeaderMediator />
       <BalanceMediator />
       <SceneMediator onSpotsChange={spotClickHandler} spotList={spotList} onClear={clearClickHandler} onRandom={randomClickHandler} />

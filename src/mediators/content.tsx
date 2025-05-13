@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
-import { Writable } from '@ui/base';
-import { Balance, Countdown, ISpotData, ITicketData, TicketList, Win } from '@ui/components';
-import { useBalanceService, useBallsService, useStateService, useTicketService } from '@ui/providers';
+import { Writable } from '@game-ui/base';
+import { Balance, Countdown, ISpotData, ITicketData, TicketList, Win } from '@game-ui/components';
+import { useBalanceService, useBallsService, useStateService, useTicketService } from '@game-ui/providers';
 import { JSX, PropsWithChildren, useMemo } from 'react';
 
 export interface ContentProps {

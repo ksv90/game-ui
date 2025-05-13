@@ -1,4 +1,4 @@
-import { BallList } from '@ui/helpers';
+import { BallList } from '@game-ui/helpers';
 import { JSX, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { BallsService, BallsServiceContext } from './balls-service.context';

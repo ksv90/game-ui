@@ -1,5 +1,5 @@
-import { IServerTicket, SpotIdList } from '@ui/helpers';
-import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { IServerTicket, SpotIdList } from '@game-ui/helpers';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@game-ui/schemes';
 
 import { IKenoConnector } from '../keno.types';
 import { KenoMessengerMock, ROOM_CHANNEL, USER_CHANNEL } from './keno.messenger';

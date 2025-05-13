@@ -1,4 +1,4 @@
-import { SpotIdList } from '@ui/helpers';
+import { SpotIdList } from '@game-ui/helpers';
 import { createContext, useContext } from 'react';
 
 export interface ConnectorService {

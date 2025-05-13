@@ -1,6 +1,6 @@
-import { errorHandler } from '@ui/base';
-import { ITicket, SpotIdList, ticketTransform } from '@ui/helpers';
-import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { errorHandler } from '@game-ui/base';
+import { ITicket, SpotIdList, ticketTransform } from '@game-ui/helpers';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@game-ui/schemes';
 import { JSX, PropsWithChildren, useMemo } from 'react';
 
 import { ConnectorService, ConnectorServiceContext } from './connector-service.context';

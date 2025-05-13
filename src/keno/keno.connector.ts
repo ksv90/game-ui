@@ -1,5 +1,5 @@
-import { Connector } from '@ui/base';
-import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@ui/schemes';
+import { Connector } from '@game-ui/base';
+import { SessionResponse, TicketCancelResponse, TicketCreateResponse } from '@game-ui/schemes';
 import { parse } from '@valibot/valibot';
 
 import { IKenoConnector } from './keno.types';
