@@ -20,8 +20,9 @@ export const grid = style({
   display: 'grid',
   gap: '2px',
   gridTemplateColumns: 'repeat(10, 1fr)',
+  gridTemplateRows: 'repeat(8, 1fr)',
   justifyContent: 'space-around',
-  maxHeight: '100%',
+  height: '100%',
 });
 
 export const spotBase = style({
@@ -38,13 +39,11 @@ export const spotBase = style({
   display: 'flex',
   fontSize: '16px',
   fontWeight: 'bold',
-  height: '38px',
   justifyContent: 'center',
   position: 'relative',
   transitionBehavior: 'all',
   transitionDuration: '0.2s',
   transitionTimingFunction: 'ease',
-  userSelect: 'none',
 });
 
 export const spotVariants = styleVariants({
@@ -108,12 +107,12 @@ export const spotVariants = styleVariants({
           backgroundColor: '#0E5BA4',
           borderRadius: '50%',
           content: '""',
-          height: '32px',
+          width: '80%',
+          height: '80%',
           left: '50%',
           position: 'absolute',
           top: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '32px',
           zIndex: 0,
         },
       },

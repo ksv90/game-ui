@@ -4,7 +4,7 @@ import { Bet } from '@game-ui/components';
 import { useBetService, useStateService } from '@game-ui/providers';
 import { JSX } from 'react';
 
-import { buttonMarginRight, buttonsGroup, controlsClass } from './controls.css';
+import { buttonsGroup, buttonTemp, controlsClass } from './controls.css';
 
 const presetBets = [1, 5, 20, 50, 70, 100];
 
@@ -30,10 +30,10 @@ export function ControlsPanel(props: ControlsMediatorProps): JSX.Element {
     <div className={controlsClass}>
       <Bet bet={bet} presets={presetBets} onChangeBet={changeBetHandler} onBet={makeBet} />
       <Flex className={buttonsGroup}>
-        <Button disabled={!betAvailable} onClick={onClear} className={buttonMarginRight}>
+        <Button disabled={!betAvailable} onClick={onClear} className={buttonTemp}>
           Clear
         </Button>
-        <Button disabled={!betAvailable} onClick={onRandom}>
+        <Button disabled={!betAvailable} onClick={onRandom} className={buttonTemp}>
           Random
         </Button>
       </Flex>

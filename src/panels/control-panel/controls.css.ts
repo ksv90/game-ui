@@ -11,6 +11,7 @@ export const buttonsGroup = style({
   display: 'flex',
 });
 
-export const buttonMarginRight = style({
-  marginRight: '4px',
+export const buttonTemp = style({
+  height: '5vmin',
+  margin: '0 5px',
 });

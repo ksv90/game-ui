@@ -34,6 +34,14 @@ const moduleFederationConfig = createModuleFederationConfig({
 });
 
 export default defineConfig({
+  html: {
+    title: 'Game UI',
+    meta: {
+      viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
+      google: 'notranslate',
+      'theme-color': '#233548',
+    },
+  },
   plugins: [
     pluginReact({
       reactRefreshOptions: {

@@ -1,0 +1,16 @@
+html,
+body {
+  background-color: #233548;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  isolation: isolate;
+}
