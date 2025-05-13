@@ -17,13 +17,11 @@ export const spotSpan = style({
 });
 
 export const grid = style({
-  backgroundColor: '#1F2F3E',
-  borderRadius: '6px',
   display: 'grid',
   gap: '2px',
-  gridTemplateColumns: 'repeat(10, 38px)',
+  gridTemplateColumns: 'repeat(10, 1fr)',
   justifyContent: 'space-around',
-  maxWidth: '400px',
+  maxHeight: '100%',
 });
 
 export const spotBase = style({
@@ -47,7 +45,6 @@ export const spotBase = style({
   transitionDuration: '0.2s',
   transitionTimingFunction: 'ease',
   userSelect: 'none',
-  width: '38px',
 });
 
 export const spotVariants = styleVariants({

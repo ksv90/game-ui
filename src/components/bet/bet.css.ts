@@ -5,9 +5,7 @@ export const wrapper = style({
   flexDirection: 'column',
   gap: '12px',
   alignItems: 'center',
-  backgroundColor: '#0D1B2A',
   padding: '16px',
-  borderRadius: '8px',
   color: '#FFFFFF',
 });
 
@@ -38,10 +36,6 @@ export const betControl = style({
   backgroundColor: '#1B263B',
   padding: '8px 16px',
   borderRadius: '8px',
-  width: '1150',
-  height: '380',
-  top: '1380px',
-  left: '2500px',
 });
 
 export const betValue = style({

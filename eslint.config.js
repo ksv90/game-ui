@@ -87,7 +87,7 @@ export default tsConfig(
       'symbol-description': 'warn',
       yoda: 'warn',
       '@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array-simple' }],
-      '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'with-single-extends' }],
+      '@typescript-eslint/no-empty-object-type': ['warn', { allowInterfaces: 'with-single-extends' }],
       '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
       '@typescript-eslint/no-invalid-void-type': 'warn',
       '@typescript-eslint/no-unsafe-declaration-merging': 'off',

@@ -1,28 +1,18 @@
 import { style } from '@vanilla-extract/css';
 
 export const sceneClass = style({
-  display: 'inline-flex',
-  flexDirection: 'column',
   gridArea: 'scene-area',
-  alignItems: 'center',
-});
-
-export const controls = style({
   display: 'flex',
-  justifyContent: 'space-between',
-  marginTop: '12px',
-});
-
-export const buttonsGroup = style({
-  display: 'flex',
-});
-
-export const buttonMarginRight = style({
-  marginRight: '4px',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  boxSizing: 'border-box',
+  backgroundColor: '#1F2F3E',
+  borderRadius: '15px',
+  padding: '2vmin',
 });
 
 export const betButton = style({
-  backgroundColor: '#84D531',
+  backgroundColor: '#1F2F3E',
   color: '#ffffff',
   fontWeight: 600,
   fontSize: '14px',

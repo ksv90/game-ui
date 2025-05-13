@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
+import { BalancePanel, ControlsPanel, HeaderPanel, InfoPanel, ScenePanel } from '@game-ui/panels';
 import { useBetService, useConnectorService, useStateService } from '@game-ui/providers';
 import { JSX, PropsWithChildren, useEffect, useState } from 'react';
-import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from 'src/panels';
 
 import { layout } from './keno.gui.css';
 
@@ -61,10 +61,11 @@ export function KenoGui(_props: PropsWithChildren): JSX.Element {
 
   return (
     <div className={layout}>
-      <HeaderMediator />
-      <BalanceMediator />
-      <SceneMediator onSpotsChange={spotClickHandler} spotList={spotList} onClear={clearClickHandler} onRandom={randomClickHandler} />
-      <ControlsMediator makeBet={makeBetHandler} />
+      <HeaderPanel />
+      <BalancePanel />
+      <ScenePanel onSpotsChange={spotClickHandler} spotList={spotList} />
+      <InfoPanel />
+      <ControlsPanel makeBet={makeBetHandler} onClear={clearClickHandler} onRandom={randomClickHandler} />
     </div>
   );
 }

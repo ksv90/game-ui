@@ -8,7 +8,7 @@ export interface ContentProps {
   readonly onRemove: (ticketId: string) => void;
 }
 
-export function Content({ onRemove }: PropsWithChildren<ContentProps>): JSX.Element {
+export function ContentPanel({ onRemove }: PropsWithChildren<ContentProps>): JSX.Element {
   const { tickets } = useTicketService();
   const { state } = useStateService();
   const { balls } = useBallsService();

@@ -1,26 +1,19 @@
-// TODO: убрать отключение
-
-import { Button, Flex } from '@chakra-ui/react';
 import { Writable } from '@game-ui/base';
 import { ISpotData, SpotBoard } from '@game-ui/components';
 import { useBallsService, useStateService } from '@game-ui/providers';
 import { JSX, useMemo } from 'react';
 
-import { buttonMarginRight, buttonsGroup, controls, sceneClass } from './scene.css';
+import { sceneClass } from './scene.css';
 
 export interface SceneProps {
   readonly onSpotsChange: (spotId: number) => void;
   readonly spotList: number[];
-  readonly onClear: () => void;
-  readonly onRandom: () => void;
 }
 
-export function SceneMediator(props: SceneProps): JSX.Element {
-  const { spotList, onSpotsChange, onClear, onRandom } = props;
+export function ScenePanel(props: SceneProps): JSX.Element {
+  const { spotList, onSpotsChange } = props;
   const { state } = useStateService();
   const { balls } = useBallsService();
-
-  const betAvailable = state === 'pending';
 
   const spots = useMemo(
     () =>
@@ -37,16 +30,6 @@ export function SceneMediator(props: SceneProps): JSX.Element {
   return (
     <div className={sceneClass}>
       <SpotBoard spots={spots} onClick={onSpotsChange} />
-      <Flex className={controls}>
-        <Flex className={buttonsGroup}>
-          <Button disabled={!betAvailable} onClick={onClear} className={buttonMarginRight}>
-            Clear
-          </Button>
-          <Button disabled={!betAvailable} onClick={onRandom}>
-            Random
-          </Button>
-        </Flex>
-      </Flex>
     </div>
   );
 }
