@@ -1,9 +1,9 @@
 // TODO: убрать отключение
 
 import { Button, Flex } from '@chakra-ui/react';
-import { Writable } from '@ui/base';
-import { ISpotData, SpotBoard } from '@ui/components';
-import { useBallsService, useStateService } from '@ui/providers';
+import { Writable } from '@game-ui/base';
+import { ISpotData, SpotBoard } from '@game-ui/components';
+import { useBallsService, useStateService } from '@game-ui/providers';
 import { JSX, useMemo } from 'react';
 
 import { buttonMarginRight, buttonsGroup, controls, sceneClass } from './scene.css';

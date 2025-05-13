@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
-import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from '@ui/mediators';
-import { useBetService, useConnectorService, useStateService } from '@ui/providers';
+import { BalanceMediator, ControlsMediator, HeaderMediator, SceneMediator } from '@game-ui/mediators';
+import { useBetService, useConnectorService, useStateService } from '@game-ui/providers';
 import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 
 import { layout } from './keno.gui.css';
