@@ -1,18 +1,11 @@
 import { style } from '@vanilla-extract/css';
 
-export const headerClass = style({
-  gridArea: 'header-area',
+export const ticketClass = style({
+  gridArea: 'ticket-area',
   boxSizing: 'border-box',
   backgroundColor: '#1F2F3E',
   borderRadius: '15px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-});
-
-export const textClass = style({
-  fontFamily: 'Roboto',
-  fontSize: '1.5rem',
-  textTransform: 'uppercase',
-  textAlign: 'center',
 });

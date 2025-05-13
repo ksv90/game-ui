@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
-import { BalancePanel, ControlsPanel, HeaderPanel, InfoPanel, ScenePanel } from '@game-ui/panels';
-import { useBetService, useConnectorService, useStateService } from '@game-ui/providers';
+import { BalancePanel, ControlsPanel, HeaderPanel, InfoPanel, ScenePanel, TicketPanel } from '@game-ui/panels';
+import { useBetService, useConnectorService, useStateService, useWindowService } from '@game-ui/providers';
 import { JSX, PropsWithChildren, useEffect, useState } from 'react';
 
-import { layout } from './keno.gui.css';
+import { DESKTOP_WIDTH, layout } from './keno.gui.css';
 
 function getRandomValue(min: number, max: number): number {
   return Math.random() * (max - min) + min;
@@ -18,6 +18,9 @@ export function KenoGui(_props: PropsWithChildren): JSX.Element {
   const { bet } = useBetService();
   const [spotList, setSpotList] = useState(new Array<number>());
   const { state } = useStateService();
+  const { innerWidth } = useWindowService();
+
+  const desktop = innerWidth >= DESKTOP_WIDTH;
 
   useEffect(() => {
     getSessionData();
@@ -64,6 +67,7 @@ export function KenoGui(_props: PropsWithChildren): JSX.Element {
       <HeaderPanel />
       <BalancePanel />
       <ScenePanel onSpotsChange={spotClickHandler} spotList={spotList} />
+      {desktop && <TicketPanel />}
       <InfoPanel />
       <ControlsPanel makeBet={makeBetHandler} onClear={clearClickHandler} onRandom={randomClickHandler} />
     </div>

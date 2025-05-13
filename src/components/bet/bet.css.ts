@@ -3,19 +3,19 @@ import { style } from '@vanilla-extract/css';
 export const wrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '1vmin',
   alignItems: 'center',
-  padding: '16px',
+  padding: '5px',
   color: '#FFFFFF',
 });
 
 export const presets = style({
   display: 'flex',
-  gap: '12px',
+  gap: '1vmin',
 });
 
 export const presetButton = style({
-  padding: '8px 12px',
+  padding: '5px',
   fontSize: '14px',
   fontWeight: 'bold',
   background: '#0D1B2A',
@@ -32,29 +32,29 @@ export const presetButton = style({
 export const betControl = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '16px',
+  gap: '1vmin',
   backgroundColor: '#1B263B',
-  padding: '8px 16px',
+  padding: '5px',
   borderRadius: '8px',
+  width: '100%',
+  justifyContent: 'center',
 });
 
 export const betValue = style({
-  fontSize: '20px',
+  fontSize: '1em',
   fontWeight: 600,
-  minWidth: '80px',
   textAlign: 'center',
 });
 
 export const controls = style({
   display: 'flex',
-  gap: '8px',
+  gap: '1vmin',
 });
 
 export const controlButton = style({
-  width: '25px',
-  height: '35px',
-  fontSize: '25px',
-  fontWeight: 'bold',
+  width: '30px',
+  height: '30px',
+  fontSize: '1em',
   background: '#1F2F3E',
   color: '#C4CDD7',
   borderRadius: '50%',
@@ -75,7 +75,7 @@ export const betButton = style({
   color: '#ffffff',
   fontWeight: 600,
   fontSize: '14px',
-  padding: '20px 50px',
+  padding: '20px',
   borderRadius: '6px',
   transition: 'opacity 0.2s ease',
   selectors: {
