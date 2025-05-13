@@ -1,5 +1,4 @@
 /* eslint-disable no-magic-numbers */
-import { Button, Flex } from '@chakra-ui/react';
 import { Bet } from '@game-ui/components';
 import { useBetService, useStateService } from '@game-ui/providers';
 import { JSX } from 'react';
@@ -29,14 +28,14 @@ export function ControlsPanel(props: ControlsMediatorProps): JSX.Element {
   return (
     <div className={controlsClass}>
       <Bet bet={bet} presets={presetBets} onChangeBet={changeBetHandler} onBet={makeBet} />
-      <Flex className={buttonsGroup}>
-        <Button disabled={!betAvailable} onClick={onClear} className={buttonTemp}>
+      <div className={buttonsGroup}>
+        <button disabled={!betAvailable} onClick={onClear} className={buttonTemp}>
           Clear
-        </Button>
-        <Button disabled={!betAvailable} onClick={onRandom} className={buttonTemp}>
+        </button>
+        <button disabled={!betAvailable} onClick={onRandom} className={buttonTemp}>
           Random
-        </Button>
-      </Flex>
+        </button>
+      </div>
     </div>
   );
 }

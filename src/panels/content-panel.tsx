@@ -1,6 +1,5 @@
-import { Flex } from '@chakra-ui/react';
 import { Writable } from '@game-ui/base';
-import { Balance, Countdown, ISpotData, ITicketData, TicketList, Win } from '@game-ui/components';
+import { Balance, Countdown, ISpotData, ITicketData, TicketList } from '@game-ui/components';
 import { useBalanceService, useBallsService, useStateService, useTicketService } from '@game-ui/providers';
 import { JSX, PropsWithChildren, useMemo } from 'react';
 
@@ -29,12 +28,11 @@ export function ContentPanel({ onRemove }: PropsWithChildren<ContentProps>): JSX
 
   return (
     <>
-      <Flex justifyContent="center"></Flex>
-      <Flex justifyContent="center">
-        <Win />
+      <div></div>
+      <div>
         <Balance balance={balance} />
-      </Flex>
-      <Flex justifyContent="center">{state === 'pending' ? <Countdown /> : <p>process</p>}</Flex>
+      </div>
+      <div>{state === 'pending' ? <Countdown /> : <p>process</p>}</div>
       <TicketList tickets={ticketDataList} onClick={onRemove} />
     </>
   );
