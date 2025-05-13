@@ -57,22 +57,39 @@ export const controls = style({
 });
 
 export const controlButton = style({
-  width: '30px',
+  width: '25px',
   height: '35px',
   fontSize: '25px',
-  fontWeight: '500',
+  fontWeight: 'bold',
   background: '#1F2F3E',
   color: '#C4CDD7',
   borderRadius: '50%',
   cursor: 'pointer',
-
   fontFamily: 'Roboto',
   lineHeight: '100%',
-  letterSpacing: '0%',
+  letterSpacing: '100%',
   textAlign: 'center',
   verticalAlign: 'middle',
 
   ':hover': {
     backgroundColor: '#778DA9',
+  },
+});
+
+export const betButton = style({
+  backgroundColor: '#84D531',
+  color: '#ffffff',
+  fontWeight: 600,
+  fontSize: '14px',
+  padding: '20px 50px',
+  borderRadius: '6px',
+  transition: 'opacity 0.2s ease',
+  selectors: {
+    '&:disabled': {
+      backgroundColor: '#1f2d3d',
+      color: '#aab8c2',
+      opacity: 0.4,
+      cursor: 'not-allowed',
+    },
   },
 });

@@ -9,4 +9,5 @@ export const headerClass = style({
 export const textClass = style({
   fontFamily: 'Roboto',
   fontSize: 40,
+  marginTop: '60px',
 });

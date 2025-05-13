@@ -1,29 +1,22 @@
 // TODO: убрать отключение
-/* eslint-disable no-magic-numbers */
+
 import { Button, Flex } from '@chakra-ui/react';
 import { Writable } from '@ui/base';
 import { ISpotData, SpotBoard } from '@ui/components';
-import { SpotIdList } from '@ui/helpers';
 import { useBallsService, useStateService } from '@ui/providers';
-import { JSX, useEffect, useMemo, useState } from 'react';
+import { JSX, useMemo } from 'react';
 
-import { betButton, buttonMarginRight, buttonsGroup, controls, sceneClass } from './scene.css';
-
-function getRandomValue(min: number, max: number): number {
-  return Math.random() * (max - min) + min;
-}
-
-function getRandomInt(min: number, max: number): number {
-  return Math.round(getRandomValue(min, max));
-}
+import { buttonMarginRight, buttonsGroup, controls, sceneClass } from './scene.css';
 
 export interface SceneProps {
-  readonly makeBet: (spots: SpotIdList) => void;
+  readonly onSpotsChange: (spotId: number) => void;
+  readonly spotList: number[];
+  readonly onClear: () => void;
+  readonly onRandom: () => void;
 }
 
 export function SceneMediator(props: SceneProps): JSX.Element {
-  const { makeBet } = props;
-  const [spotList, setSpotList] = useState(new Array<number>());
+  const { spotList, onSpotsChange, onClear, onRandom } = props;
   const { state } = useStateService();
   const { balls } = useBallsService();
 
@@ -41,52 +34,18 @@ export function SceneMediator(props: SceneProps): JSX.Element {
     [spotList, balls, state],
   );
 
-  useEffect(() => {
-    setSpotList([]);
-  }, [state]);
-
-  const spotClickHandler = (spot: number): void => {
-    if (spotList.includes(spot)) {
-      setSpotList((prevList) => prevList.filter((prevId) => prevId !== spot));
-    } else {
-      if (spotList.length >= 10) return;
-      setSpotList((prevList) => [...prevList, spot]);
-    }
-  };
-
-  const clearClickHandler = (): void => {
-    setSpotList([]);
-  };
-
-  const randomClickHandler = (): void => {
-    const spotSet = new Set<number>();
-    const size = getRandomInt(4, 10);
-    while (spotSet.size < size) {
-      spotSet.add(getRandomInt(1, 80));
-    }
-    setSpotList(Array.from(spotSet));
-  };
-
-  const betHandler = (): void => {
-    makeBet(spotList);
-    setSpotList([]);
-  };
-
   return (
     <div className={sceneClass}>
-      <SpotBoard spots={spots} onClick={spotClickHandler} />
+      <SpotBoard spots={spots} onClick={onSpotsChange} />
       <Flex className={controls}>
         <Flex className={buttonsGroup}>
-          <Button disabled={!betAvailable} onClick={clearClickHandler} className={buttonMarginRight}>
+          <Button disabled={!betAvailable} onClick={onClear} className={buttonMarginRight}>
             Clear
           </Button>
-          <Button disabled={!betAvailable} onClick={randomClickHandler}>
+          <Button disabled={!betAvailable} onClick={onRandom}>
             Random
           </Button>
         </Flex>
-        <Button disabled={!betAvailable || spotList.length < 4} onClick={betHandler} className={betButton}>
-          BET
-        </Button>
       </Flex>
     </div>
   );
